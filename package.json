@@ -1,22 +1,30 @@
 {
-  "name": "portfolio-backend",
+  "name": "portfolio-chatbot-api",
   "version": "1.0.0",
   "type": "module",
-  "description": "Portfolio chatbot backend",
+  "description": "Portfolio Chatbot API with AI integration",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js",
-    "test": "node test-chat.js"
+    "dev": "nodemon server.js",
+    "build": "echo 'No build step required'"
   },
-  "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5",
-    "body-parser": "^1.20.2",
-    "node-fetch": "^3.3.2",
-    "dotenv": "^16.3.1"
-  },
-  "keywords": ["portfolio", "chatbot", "backend"],
+  "keywords": [
+    "portfolio",
+    "chatbot",
+    "ai",
+    "api"
+  ],
   "author": "Elayabarathi M V",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }
