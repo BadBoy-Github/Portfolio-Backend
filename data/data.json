@@ -1,0 +1,373 @@
+
+
+{
+  "name": "Elayabarathi M V",
+  "headline": "Frontend Web Developer",
+  "about": "Welcome! I'm Elayabarathi M V, a professional biotechnologist with expertise in microbiology, genetics, and bioinformatics. Innovated cancer treatments via nanobiotechnology. Accomplished frontend web developer. Passionate about integrating biology and technology for innovation. Strong collaborator and problem-solver, dedicated to continuous learning and interdisciplinary success.",
+  "oneline": "Enthusiast in Scientific & Technological Innovations",
+  "contact": {
+    "email": "elayabarathiedison@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/elayabarathi/",
+    "github": "https://github.com/BadBoy-Github",
+    "portfolio": "https://elayabarathimv-portfolio.vercel.app/"
+  },
+  "skills": [
+    {
+        "fullstack web developer": {
+            "languages": ["HTML", "CSS", "JavaScript", "SQL", "Python", "Java"],
+            "frameworks": ["React JS", "Tailwind CSS", "Bootstrap", "Flask"],
+            "libraries": ["Pandas", "Turtle", "BeautifulSoup", "Selenium", "Requests", "Tkinter", "Twilio", "Smtplib"],
+            "deployments": ["Vercel", "Render", "Netlify"],
+            "dev tools": ["Visual Studio Code", "Postman", "PyCharm", "Jupyter Notebook", "Git", "GitHub", "PostgreSQL", "SQLite", "MongoDB"],
+            "others": ["Clerk", "Stripe", "REST API", "Responsive Design", "Fluid Animation"]
+        },
+        "biotechnologist": {
+            "wetlab": ["Bacterial/Fungal Culturing", "Maintaining Culture", "Primary & Secondary Metabolites Extraction", "Pre and Post Culturing Methods (Media Preparation, Centrifugation, Lyophilization)"],
+            "drylab": ["Documentation", "Graph Plotting", "Statistical Analysis"],
+            "analysis": ["Antioxidant (DPPH, H2O2, FRAP, PM)", "Antibacterial", "Antifungal"]
+        },
+        "other skills": {
+            "graphic design": ["Canva", "Adobe Express", "Adobe Photoshop"],
+            "cad design": ["AutoCAD"],
+            "video editing": ["Adobe Premiere Pro", "CapCut", "CyberLink PowerDirector"],
+            "soft skills": ["Effective Communication", "Team Collaboration", "Problem-Solving", "Adaptability", "Time Management", "Critical Thinking", "Creativity", "Leadership" ]
+        }
+    }
+  ],
+  "projects": [
+  {
+    "name": "Portfolio Website",
+    "description": "A personal portfolio website designed to showcase my skills, projects, and professional background in a clean, modern, and responsive interface. This single-page application (SPA) serves as my digital business card. It features smooth animations, a project gallery, and a contact section, all built with React for a dynamic user experience and styled with Tailwind CSS for rapid, utility-first development.",
+    "link": "https://elayabarathimv-portfolio.vercel.app/",
+    "github": "https://github.com/BadBoy-Github/Portfolio",
+    "skills": [
+      "react",
+      "tailwind css",
+      "html",
+      "css",
+      "javascript",
+      "portfolio",
+      "showcase",
+      "profile",
+      "personal website",
+      "responsive",
+      "web app"
+    ]
+  },
+  {
+    "name": "Bamboo Blogs",
+    "description": "A full-stack, minimalist blog platform that allows users to create, read, update, and delete articles. A robust web application built with the Python Flask framework on the backend. It uses PostgreSQL (or SQLite for development) for data persistence, demonstrating a solid understanding of backend development, RESTful routing, and database management with SQL.",
+    "link": "https://bamboo-blogs-sample.onrender.com/",
+    "github": "https://github.com/BadBoy-Github/Bamboo-Blogs-Sample",
+    "skills": [
+      "python",
+      "flask",
+      "postgresql",
+      "sql",
+      "database",
+      "sqlite",
+      "html",
+      "css",
+      "blog",
+      "crud",
+      "web app"
+    ]
+  },
+  {
+    "name": "LinkedIn Profile Clone",
+    "description": "A functional front-end clone of the LinkedIn user profile page, replicating its layout and core UI components. This project showcases my ability to reverse-engineer and recreate complex, professional user interfaces. Built with React and Tailwind CSS, it accurately mimics the structure, styling, and responsive behavior of a real LinkedIn profile.",
+    "link": "https://linkedin-profile-clone.vercel.app/",
+    "github": "https://github.com/BadBoy-Github/Linkedin-Profile-Clone",
+    "skills": [
+      "react",
+      "tailwind css",
+      "html",
+      "css",
+      "javascript",
+      "clone",
+      "linkedin",
+      "social",
+      "network",
+      "profile",
+      "web app"
+    ]
+  },
+  {
+    "name": "Budget Map",
+    "description": "An AI-assisted financial visualization tool that helps users map and track their budget using interactive charts and graphs. A modern web app built with Next.js and React, focusing on data visualization for personal finance. The 'AI Made' aspect highlights the use of AI in its conceptualization or development, providing an intuitive way to understand income and expenses.",
+    "link": "https://budget-map-website.vercel.app/",
+    "github": "https://github.com/BadBoy-Github/Budget-Map",
+    "skills": [
+      "ai made",
+      "next js",
+      "react",
+      "tailwind css",
+      "html",
+      "css",
+      "javascript",
+      "bidget",
+      "finance",
+      "map",
+      "ai",
+      "chart",
+      "graph",
+      "web app"
+    ]
+  },
+  {
+    "name": "Spotify Clone",
+    "description": "A feature-rich clone of the Spotify music streaming application's user interface. This project replicates the core look and feel of Spotify, including a music player interface and library view. It integrates Clerk for user authentication, demonstrating how to handle user sessions in a front-end application. You will also find a surprice feature if you login!!",
+    "link": "https://spotify-clone-6rda.onrender.com/",
+    "github": "https://github.com/BadBoy-Github/spotify-clone",
+    "skills": [
+      "react",
+      "tailwind css",
+      "html",
+      "css",
+      "javascript",
+      "spotify",
+      "music",
+      "stream",
+      "clerk",
+      "clone",
+      "web app"
+    ]
+  },
+  {
+    "name": "eCommerce website",
+    "description": "A complete full-stack eCommerce platform with product listings, a shopping cart, and integrated payments. A comprehensive project showcasing full-stack JavaScript development. It includes product management, user cart functionality, and integrates the Stripe API to handle secure payment processing, simulating a real-world online store.",
+    "link": "https://full-stack-ecommerce-h47u.vercel.app/",
+    "github": "https://github.com/BadBoy-Github/Full-Stack-Ecommerce",
+    "skills": [
+      "javascript",
+      "tailwind css",
+      "html",
+      "css",
+      "ecommerce",
+      "shop",
+      "store",
+      "shopping",
+      "crud",
+      "stripe",
+      "web app"
+    ]
+  },
+  {
+    "name": "Stellar AI Chatbot",
+    "description": "An interactive web-based chatbot powered by the Gemini AI, providing intelligent and dynamic conversations. This application bridges the gap between a modern React front-end and a powerful large language model (Gemini AI). It features a sleek chat interface where users can ask questions and receive AI-generated responses in real-time.",
+    "link": "https://stellar-steel-tau.vercel.app/",
+    "github": "https://github.com/BadBoy-Github/stellar",
+    "skills": [
+      "react",
+      "tailwind css",
+      "html",
+      "css",
+      "javascript",
+      "ai",
+      "bot",
+      "chat",
+      "chatbot",
+      "gemini",
+      "web app"
+    ]
+  },
+  {
+    "name": "ToDo App",
+    "description": "A classic task management application for creating, updating, and deleting to-do items. A fundamental CRUD (Create, Read, Update, Delete) application built with React. It demonstrates core front-end development concepts like state management, handling user input, and persisting data locally.",
+    "link": "https://to-do-app-se8u.onrender.com/",
+    "github": "https://github.com/BadBoy-Github/To_Do-App",
+    "skills": [
+      "react",
+      "tailwind css",
+      "html",
+      "css",
+      "javascript",
+      "todo",
+      "list",
+      "crud",
+      "web app"
+    ]
+  },
+  {
+    "name": "Shopping List",
+    "description": "A simple and intuitive front-end application for managing a shopping list. A vanilla JavaScript project that focuses on DOM manipulation and event handling. It allows users to add, remove, and check off items, showcasing pure JavaScript skills without relying on external frameworks.",
+    "link": "https://frontend-shopping-list-app.vercel.app/",
+    "github": "https://github.com/BadBoy-Github/Frontend-Shopping-List-App",
+    "skills": ["html", "css", "javascript", "shopping", "cart", "items", "list", "web app"]
+  },
+  {
+    "name": "Profile Card",
+    "description": "A clean and visually appealing UI component to display user profile information. A front-end focused project that highlights skills in HTML and CSS to create a responsive and aesthetically pleasing profile card, a common element in social media and dashboards.",
+    "link": "https://profile-card-001.netlify.app/",
+    "github": "https://github.com/BadBoy-Github/Profile-Card-1",
+    "skills": ["html", "css", "profile", "card", "ui", "web app"]
+  },
+  {
+    "name": "Speed Snitch Bot",
+    "description": "A Python automation bot that monitors internet speed and automatically files complaints on Twitter if the speed falls below a defined threshold. This project uses Selenium for browser automation to interact with Twitter. It combines web scraping, automated testing tools for real-world tasks, and API integration (for speed testing) to create a practical utility for monitoring service quality.",
+    "link": "#",
+    "github": "https://github.com/BadBoy-Github/Twitter-Complaint-Automation",
+    "skills": ["python", "selenium", "automation", "twitter", "complaint", "bot", "net", "speed", "monitor", "tweet"]
+  },
+  {
+    "name": "Tune Back",
+    "description": "A 'Musical Time Machine' that creates Spotify playlists based on the Billboard Hot 100 charts from a specific date in the past. This script uses web scraping (BeautifulSoup) to extract song data from Billboard's archives. It then interacts with the Spotify API to automatically search for these songs and generate a nostalgic playlist, showcasing skills in API integration and data parsing.",
+    "link": "#",
+    "github": "https://github.com/BadBoy-Github/Musically-Time-Machine",
+    "skills": ["python", "beautifulsoup", "musical", "time", "machine", "spotify", "music", "retro"]
+  },
+  {
+    "name": "Brey Bytes API",
+    "description": "A RESTful API backend for a cafe directory, providing data about various cafes with their amenities like WiFi and power outlets. A backend-focused project built with Flask and SQLite. It implements all fundamental REST API methods (GET, POST, PATCH, DELETE) and was tested using Postman, demonstrating a strong understanding of server-side logic and API design.",
+    "link": "#",
+    "github":
+      "https://github.com/BadBoy-Github/Restful-API--Flask-SQLite-Postman-Cafe-Wifi-",
+    "skills": ["python", "flask", "restful", "api", "cafe", "data"]
+  },
+  {
+    "name": "Snake Game",
+    "description": "A classic arcade-style Snake game built using Python. This project utilizes the Python Turtle graphics library to handle game rendering and user input. It demonstrates understanding of game loops, collision detection, and score tracking in a simple, fun package.",
+    "link": "#",
+    "github": "https://github.com/BadBoy-Github/Snake-game",
+    "skills": ["python", "turtle", "snake", "game", "retro", "arcade"]
+  },
+  {
+    "name": "Pong Game",
+    "description": "A recreation of the legendary Pong arcade game for two players. Another project using the Python Turtle library, this game focuses on object movement, paddle control, and scoring mechanics. It's a testament to the fundamentals of video game programming.",
+    "link": "#",
+    "github": "https://github.com/BadBoy-Github/Pong-game",
+    "skills": ["python", "turtle", "pong", "game", "retro", "arcade"]
+  },
+  {
+    "name": "CRUD App",
+    "description": "A fundamental web application that demonstrates the core principles of data management by allowing users to Create, Read, Update, and Delete records. This project is a classic exercise in full-stack functionality, built with vanilla JavaScript, HTML, and CSS. It focuses on the essential operations of persistent data storage and manipulation, providing a clean interface for users to interact with a dataset. It serves as an excellent foundation for understanding how data-driven applications work before moving to more complex frameworks and databases.",
+    "link": "#",
+    "github": "https://github.com/BadBoy-Github/CRUD-App",
+    "skills": ["javascript", "html", "css", "crud", "web app", "data"]
+  },
+  {
+    "name": "AI Portfolio",
+    "description": "An experimental, futuristic portfolio website with 3D elements, conceptualized and built with AI assistance. This project explores the cutting edge of web design by incorporating 3D visuals and AI-driven development. It demonstrates a willingness to experiment with new technologies to create immersive and unique user experiences.",
+    "link": "https://elayabarathi-ai.netlify.app/",
+    "github": "https://github.com/BadBoy-Github/AI-3D-Portfolio",
+    "skills": [
+      "ai made",
+      "react",
+      "tailwind css",
+      "html",
+      "css",
+      "javascript",
+      "portfolio",
+      "web app",
+      "ai",
+      "3d"
+    ]
+  },
+  {
+    "name": "Iron vs Cancer",
+    "description": "A research project investigating the synthesis and application of iron oxide nanoparticles (FeNPs) for targeted anticancer therapies. This project involved the synthesis and encapsulation of iron oxide nanoparticles to evaluate their efficacy and specificity in destroying cancer cells. It represents hands-on experience in nanobiotechnology, material characterization, and in-vitro biological testing.",
+    "link": "",
+    "github": "",
+    "skills": [
+      "feNps",
+      "iron",
+      "ironoxide",
+      "nano",
+      "nanoparticle",
+      "encapsule",
+      "cancer",
+      "anticancer",
+      "biotech",
+      "research"
+    ]
+  },
+  {
+    "name": "Silver vs Bacteria",
+    "description": "A published research study on the green synthesis of silver nanoparticles (AgNPs) and their potent antimicrobial properties against various pathogenic bacteria. This work focused on an eco-friendly synthesis method for silver nanoparticles and their characterization. The research successfully demonstrated significant antimicrobial activity, contributing to the field of alternative treatments for microbial infections. The published paper is a testament to the scientific rigor and successful outcomes of the project.",
+    "link":
+      "https://journals.innovareacademics.in/index.php/ijap/article/view/51711",
+    "github": "#",
+    "skills": [
+      "agNps",
+      "silver",
+      "nano",
+      "nanoparticle",
+      "bacteria",
+      "microbes",
+      "antimicrobial",
+      "biotech",
+      "research"
+    ]
+  }
+],
+  "experience": [
+    {
+      "position": "Java Fullstack Developer Trainee",
+      "company": "QSpider - Software Testing Training Institute",
+      "duration": "August 2025 - Present",
+      "details": "Plan the direction and future for IT in accordance to the business continuity plan.",
+      "skills": []
+    },
+    {
+      "position": "Fullstack Web Developer Intern",
+      "company": "Corizo Edutech",
+      "duration": "November 2024 - December 2024",
+      "details": "Built real-world projects like a CRUD user management app and an eCommerce site while learning both front-end and back-end development. Gained practical experience in coding best practices, debugging, and problem-solving.",
+      "skills": ["JavaScript", "React JS", "Node JS", "Express JS", "Mongo DB", "HTML", "CSS"]
+    },
+    {
+      "position": "Fullstack Web Developer Trainee",
+      "company": "Corizo Edutech",
+      "duration": "October 2024 - November 2024",
+      "details": "Gained hands-on experience with HTML, CSS, JavaScript, MongoDB, Express.js, Node.js, APIs, and more. Built real-world projects like a shopping list app and user management system, strengthening technical and analytical skills.",
+      "skills": ["HTML", "CSS", "JavaScript"]
+    },
+    {
+      "position": "Applied Microbiology abd Agricultural Biotechnology Intern",
+      "company": "Elies Biotech",
+      "duration": "July 2022 - August 2022",
+      "details": "Gained practical skills in microbial characterization, biofertilizer production, mushroom tissue culture, and Black Soldier Fly Larvae rearing. Built a strong foundation in applied microbiology and agricultural biotechnology.",
+      "skills": []
+    },
+    {
+      "position": "Biorith Millet Products Intern",
+      "company": "Biorith Techno Products",
+      "duration": "June 2022 - July 2022",
+      "details": "Operated advanced machinery and contributed to eco-friendly packaging solutions. Gained valuable experience in sustainable agriculture and food processing, applying theory to real-world practice",
+      "skills": []
+    }
+  ],
+  "education": [
+    {
+        "education": "Degree - Bachelor of Technology - Biotechnology",
+        "institution": "K. S. Rangasamy College of Technology (Autonomous)",
+        "year": "2020-2024",
+        "percentage": "88.10%",
+        "description": "Gaining a strong foundation in core principles and practical lab skills. Beyond academics, active participation in extracurricular and cultural events helped me develop leadership and interpersonal abilities. This experience nurtured my passion for continuous learning and innovation in biotechnology.",
+        "skills": ["Microbiology", "Genetic Engineering", "Nanobiotechnology", "Plant Tissue Culture", "Bioinformatics"]
+    },
+    {
+        "education": "Higher Secondary Certificate (HSC) - Biology-Mathematics - State Board",
+        "institution": "U. R. Palaniammal Matric Higher Secondary School",
+        "year": "2019-2020",
+        "percentage": "76.33%",
+        "description": "I built a strong academic foundation while growing both personally and socially. Guided by dedicated teachers, I developed critical thinking and a disciplined approach to learning. Involvement in sports, clubs, and cultural events helped strengthen my leadership and teamwork skills.",
+        "skills": ["Human Anatomy", "Plant Biology", "Mathematics", "Quantitative Aptitude Mathematics"]
+    },
+    {
+        "education": "Secondary School Leaving Certificate (SSLC) - State Board",
+        "institution": "U. R. Palaniammal Matric Higher Secondary School",
+        "year": "2017-2018",
+        "percentage": "90.20%",
+        "description": "Throughout my school years, I built a strong foundation in my studies. With the help of my teachers, I learned to study with discipline and think carefully.",
+        "skills": ["Science", "Social Science", "Mathematics", "English"]
+    }
+  ],
+"more contact info": [
+    {
+        "Twitter": "https://x.com/_Elayabarathi_",
+        "Instagram": "https://www.instagram.com/_elayabarathi_/",
+        "whatsapp": "https://wa.me/919842852121"
+    }
+]
+}
