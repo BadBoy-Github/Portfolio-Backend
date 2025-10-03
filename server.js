@@ -4,6 +4,9 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import fetch from "node-fetch";
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
@@ -11,13 +14,24 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    methods: ["GET", "POST"],
+    credentials: true
+}));
 app.use(bodyParser.json());
 
 // Load portfolio data
 let portfolioData;
 try {
-    const rawData = fs.readFileSync('./data/data.json', 'utf8');
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+
+    const dataPath = path.join(__dirname, "data", "data.json");
+    const rawData = fs.readFileSync(dataPath, "utf8");
+
+    
+    portfolioData = JSON.parse(rawData);
     portfolioData = JSON.parse(rawData);
     console.log('✅ Portfolio data loaded successfully');
 } catch (error) {
@@ -305,3 +319,4 @@ app.listen(PORT, () => {
         console.log('✅ Hugging Face token loaded');
     }
 });
+
