@@ -32,7 +32,6 @@ try {
 
     
     portfolioData = JSON.parse(rawData);
-    portfolioData = JSON.parse(rawData);
     console.log('✅ Portfolio data loaded successfully');
 } catch (error) {
     console.error('❌ Error loading data.json:', error.message);
