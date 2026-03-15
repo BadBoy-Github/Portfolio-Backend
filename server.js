@@ -7,6 +7,11 @@ import dotenv from 'dotenv';
 import fetch from "node-fetch";
 import path from "path";
 import { fileURLToPath } from "url";
+import { startAutoSync, stopAutoSync, syncData } from './dataSync.js';
+
+// ES Module __dirname equivalent
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -23,20 +28,33 @@ app.use(bodyParser.json());
 
 // Load portfolio data
 let portfolioData;
-try {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
+let trainingData;
 
-    const dataPath = path.join(__dirname, "data", "data.json");
-    const rawData = fs.readFileSync(dataPath, "utf8");
+function loadData() {
+    try {
+        const dataPath = path.join(__dirname, "data", "data.json");
+        const rawData = fs.readFileSync(dataPath, "utf8");
 
-    
-    portfolioData = JSON.parse(rawData);
-    console.log('✅ Portfolio data loaded successfully');
-} catch (error) {
-    console.error('❌ Error loading data.json:', error.message);
-    process.exit(1);
+        portfolioData = JSON.parse(rawData);
+        console.log('✅ Portfolio data loaded successfully');
+
+        // Also load training data
+        const trainingPath = path.join(__dirname, "data", "training.json");
+        try {
+            const trainingRaw = fs.readFileSync(trainingPath, "utf8");
+            trainingData = JSON.parse(trainingRaw);
+            console.log('✅ Training data loaded successfully');
+        } catch (e) {
+            console.log('⚠️  Training data not found, will be generated on first sync');
+        }
+    } catch (error) {
+        console.error('❌ Error loading data.json:', error.message);
+        process.exit(1);
+    }
 }
+
+// Initial data load
+loadData();
 
 // Hugging Face API function
 async function queryHuggingFace(data) {
@@ -161,16 +179,53 @@ app.post('/api/chat', async (req, res) => {
         let answer;
         let source = 'local';
 
-        try {
-            // Prepare context for the AI model
-            const context = `
-            Your name is Portfolio-GPT, let the user to interact with Elayabarathi M V's portfolio and CV. 
+        // Build enhanced context from training data
+        let context = `
+        Your name is Portfolio-GPT, let the user to interact with Elayabarathi M V's portfolio and CV. 
+        You are a helpful assistant for Elayabarathi M V's portfolio. 
+        Here's some information about him:
+        
+        Name: ${portfolioData.name}
+        Headline: ${portfolioData.headline}
+        About: ${portfolioData.about}
+        
+        Contact Information:
+        - Email: ${portfolioData.contact.email}
+        - LinkedIn: ${portfolioData.contact.linkedin}
+        - GitHub: ${portfolioData.contact.github}
+        - Portfolio: ${portfolioData.contact.portfolio}
+        
+        Skills: Full-stack web development, Biotechnology, Python, React, JavaScript, Flask, etc.
+        
+        Please answer questions about Elayabarathi professionally and helpfully. 
+        Use clear formatting with bullet points, headings, and proper spacing.
+        If you don't know something specific, suggest asking about his projects, skills, or experience.
+        `;
+
+        // Override with training data context if available
+        if (trainingData && trainingData.context) {
+            // Build featured projects info
+            const featuredProjectsInfo = portfolioData.featuredProjects ?
+                portfolioData.featuredProjects.map(fp =>
+                    `- ${fp.name}: ${fp.description || 'Featured project'} - Link: ${fp.link || 'N/A'}`
+                ).join('\n') : 'No featured projects';
+
+            context = `
+            Your name is Portfolio-GPT. You are a friendly chatbot that lets users interact with Elayabarathi M V's portfolio and CV. 
             You are a helpful assistant for Elayabarathi M V's portfolio. 
+            
+            STRICT INSTRUCTIONS: When answering questions, you MUST prioritize web technology, software development, and tech-related information by default. 
+            Only mention biotech, bioinformatics, or other non-tech backgrounds if the user explicitly asks for that. 
+            Focus on web development skills, projects, and technologies. Do not give long explanations about biotech unless asked.
+            
             Here's some information about him:
             
-            Name: ${portfolioData.name}
-            Headline: ${portfolioData.headline}
-            About: ${portfolioData.about}
+            Name: ${trainingData.context.name || portfolioData.name}
+            Headline: Full Stack Web Developer (This is his PRIMARY focus - always lead with this)
+            About: ${trainingData.context.about || portfolioData.about}
+            
+            Featured Projects (THESE ARE HIS BEST WORKS - mention these when asked about featured projects):
+            ${featuredProjectsInfo}
             
             Contact Information:
             - Email: ${portfolioData.contact.email}
@@ -178,13 +233,16 @@ app.post('/api/chat', async (req, res) => {
             - GitHub: ${portfolioData.contact.github}
             - Portfolio: ${portfolioData.contact.portfolio}
             
-            Skills: Full-stack web development, Biotechnology, Python, React, JavaScript, Flask, etc.
+            Skills: ${trainingData.context.skills || 'Full-stack web development, Python, React, JavaScript, Flask, etc.'}
             
             Please answer questions about Elayabarathi professionally and helpfully. 
             Use clear formatting with bullet points, headings, and proper spacing.
+            When asked about "featured projects" or "best projects", ONLY mention the 2 featured projects: Portfolio Website and Card Vault.
             If you don't know something specific, suggest asking about his projects, skills, or experience.
             `;
+        }
 
+        try {
             const aiResponse = await queryHuggingFace({
                 messages: [
                     {
@@ -280,8 +338,88 @@ app.get('/api/test', (req, res) => {
             chat: 'POST /api/chat',
             health: 'GET /api/health',
             test: 'GET /api/test',
-            testAI: 'GET /api/test-ai'
+            testAI: 'GET /api/test-ai',
+            sync: 'POST /api/sync - Trigger manual data sync',
+            syncStatus: 'GET /api/sync-status - Check sync status'
         }
+    });
+});
+
+// Manual sync endpoint
+app.post('/api/sync', async (req, res) => {
+    try {
+        console.log('🔄 Manual sync triggered...');
+        const success = await syncData();
+
+        if (success) {
+            // Reload data after sync
+            loadData();
+            res.json({
+                success: true,
+                message: 'Data synchronized successfully from frontend to backend',
+                timestamp: new Date().toISOString()
+            });
+        } else {
+            res.status(500).json({
+                success: false,
+                message: 'Data sync failed',
+                timestamp: new Date().toISOString()
+            });
+        }
+    } catch (error) {
+        console.error('❌ Sync error:', error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
+// Get sync status
+app.get('/api/sync-status', (req, res) => {
+    const dataPath = path.join(__dirname, "data", "data.json");
+    const trainingPath = path.join(__dirname, "data", "training.json");
+
+    let dataLastModified = null;
+    let trainingLastModified = null;
+
+    try {
+        const dataStats = fs.statSync(dataPath);
+        dataLastModified = dataStats.mtime.toISOString();
+    } catch (e) { }
+
+    try {
+        const trainingStats = fs.statSync(trainingPath);
+        trainingLastModified = trainingStats.mtime.toISOString();
+    } catch (e) { }
+
+    res.json({
+        status: 'active',
+        autoSyncEnabled: true,
+        syncIntervalMinutes: 30,
+        lastDataUpdate: portfolioData?.lastUpdated || dataLastModified,
+        lastTrainingUpdate: trainingData?.lastTrained || trainingLastModified,
+        dataFileModified: dataLastModified,
+        trainingFileModified: trainingLastModified,
+        timestamp: new Date().toISOString()
+    });
+});
+
+// Stop auto-sync (for maintenance)
+app.post('/api/sync/stop', (req, res) => {
+    stopAutoSync();
+    res.json({
+        success: true,
+        message: 'Auto-sync stopped'
+    });
+});
+
+// Start auto-sync
+app.post('/api/sync/start', (req, res) => {
+    startAutoSync();
+    res.json({
+        success: true,
+        message: 'Auto-sync started (every 30 minutes)'
     });
 });
 
@@ -313,6 +451,9 @@ app.listen(PORT, () => {
     console.log(`💬 Chat endpoint: POST http://localhost:${PORT}/api/chat`);
     console.log(`🤖 AI test: http://localhost:${PORT}/api/test-ai`);
     console.log(`🎯 Test endpoint: http://localhost:${PORT}/api/test`);
+
+    // Start auto-sync (every 30 minutes)
+    startAutoSync();
 
     if (!process.env.HF_TOKEN) {
         console.warn('⚠️  HF_TOKEN not found in environment variables. AI features may not work.');
