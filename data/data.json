@@ -340,6 +340,7 @@
   "education": [
     {
         "education": "Degree - Bachelor of Technology - Biotechnology",
+        "board": "College - Anna University",
         "institution": "K. S. Rangasamy College of Technology (Autonomous)",
         "year": "2020-2024",
         "percentage": "88.10%",
@@ -347,7 +348,8 @@
         "skills": ["Microbiology", "Genetic Engineering", "Nanobiotechnology", "Plant Tissue Culture", "Bioinformatics"]
     },
     {
-        "education": "Higher Secondary Certificate (HSC) - Biology-Mathematics - State Board",
+        "education": "Higher Secondary Certificate (HSC) - Biology-Mathematics",
+        "board": "School - Tamilnadu State Board",
         "institution": "U. R. Palaniammal Matric Higher Secondary School",
         "year": "2019-2020",
         "percentage": "76.33%",
@@ -355,8 +357,9 @@
         "skills": ["Human Anatomy", "Plant Biology", "Mathematics", "Quantitative Aptitude Mathematics"]
     },
     {
-        "education": "Secondary School Leaving Certificate (SSLC) - State Board",
+        "education": "Secondary School Leaving Certificate (SSLC)",
         "institution": "U. R. Palaniammal Matric Higher Secondary School",
+        "board": "School - Tamilnadu State Board",
         "year": "2017-2018",
         "percentage": "90.20%",
         "description": "Throughout my school years, I built a strong foundation in my studies. With the help of my teachers, I learned to study with discipline and think carefully.",

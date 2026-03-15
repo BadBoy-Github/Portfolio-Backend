@@ -120,7 +120,6 @@ function generateLocalResponse(question) {
 }
 
 // Enhanced chat endpoint with AI integration
-// Add this function to your server.js (before the chat endpoint)
 function formatAIResponse(text) {
     if (!text) return text;
 
@@ -137,7 +136,9 @@ function formatAIResponse(text) {
         // Multiple newlines to single newline
         .replace(/\n\s*\n/g, '\n')
         // Ensure proper line breaks
-        .replace(/\n/g, '<br/>');
+        .replace(/\n/g, '<br/>')
+        // Ensure proper link formating
+        .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
 
     return formatted;
 }
@@ -163,6 +164,7 @@ app.post('/api/chat', async (req, res) => {
         try {
             // Prepare context for the AI model
             const context = `
+            Your name is Portfolio-GPT, let the user to interact with Elayabarathi M V's portfolio and CV. 
             You are a helpful assistant for Elayabarathi M V's portfolio. 
             Here's some information about him:
             
