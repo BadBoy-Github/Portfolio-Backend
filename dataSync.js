@@ -239,7 +239,7 @@ async function syncData() {
                 email: "elayabarathiedison@gmail.com",
                 linkedin: "https://www.linkedin.com/in/elayabarathi/",
                 github: "https://github.com/BadBoy-Github",
-                portfolio: "https://elayabarathimv-portfolio.vercel.app/"
+                portfolio: "https://elayabarathimv.vercel.app/"
             },
             skills: formatSkills(skillData),
             projects: formatProjects(projectData),

@@ -7,7 +7,7 @@
     "email": "elayabarathiedison@gmail.com",
     "linkedin": "https://www.linkedin.com/in/elayabarathi/",
     "github": "https://github.com/BadBoy-Github",
-    "portfolio": "https://elayabarathimv-portfolio.vercel.app/"
+    "portfolio": "https://elayabarathimv.vercel.app/"
   },
   "skills": {
     "technical skills": {
@@ -1178,7 +1178,7 @@
     {
       "name": "Portfolio Website",
       "description": "",
-      "link": "https://elayabarathimv-portfolio.vercel.app/",
+      "link": "https://elayabarathimv.vercel.app/",
       "github": "https://github.com/BadBoy-Github/Portfolio",
       "image": "/img/projects/featured/portfolio.webp",
       "tags": [
