@@ -210,6 +210,12 @@ app.post('/api/chat', async (req, res) => {
                     `- ${fp.name}: ${fp.description || 'Featured project'} - Link: ${fp.link || 'N/A'}`
                 ).join('\n') : 'No featured projects';
 
+            // Build blogs info
+            const blogsInfo = portfolioData.blogs ?
+                portfolioData.blogs.map(blog =>
+                    `- ${blog.title}: ${blog.subtitle || 'Blog post'} (${blog.readTime || 'N/A'})`
+                ).join('\n') : 'No blogs';
+
             context = `
             Your name is Portfolio-GPT. You are a friendly chatbot that lets users interact with Elayabarathi M V's portfolio and CV. 
             You are a helpful assistant for Elayabarathi M V's portfolio. 
@@ -226,6 +232,9 @@ app.post('/api/chat', async (req, res) => {
             
             Featured Projects (THESE ARE HIS BEST WORKS - mention these when asked about featured projects):
             ${featuredProjectsInfo}
+            
+            Blog Posts (He writes technical articles - mention when asked about blogs):
+            ${blogsInfo}
             
             Contact Information:
             - Email: ${portfolioData.contact.email}

@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Paths
-const FRONTEND_DATA_PATH = path.join(__dirname, '..', 'frontend', 'src', 'components', 'data');
+const FRONTEND_DATA_PATH = path.join(__dirname, '..', 'frontend', 'src', 'data');
 const BACKEND_DATA_PATH = path.join(__dirname, 'data');
 const DATA_JSON_PATH = path.join(BACKEND_DATA_PATH, 'data.json');
 const TRAINING_JSON_PATH = path.join(BACKEND_DATA_PATH, 'training.json');
@@ -202,6 +202,22 @@ function formatFeaturedProjects(featuredData) {
     }));
 }
 
+// Format blogs for backend
+function formatBlogs(blogData) {
+    if (!blogData || !Array.isArray(blogData)) return [];
+
+    return blogData.map(blog => ({
+        id: blog.id || '',
+        title: blog.title || '',
+        subtitle: blog.subtitle || '',
+        date: blog.date || '',
+        readTime: blog.readTime || '',
+        tags: blog.tags || [],
+        image: blog.imageSrc || blog.image || '',
+        content: blog.content || ''
+    }));
+}
+
 // Main sync function
 async function syncData() {
     console.log('\n🔄 Starting data synchronization...');
@@ -216,7 +232,10 @@ async function syncData() {
         const certificateData = readJsDataFile('CertificateData.js');
         const achievementData = readJsDataFile('AchievementData.js');
         const reviewData = readJsDataFile('ReviewData.js');
-        const featuredProjectData = readJsDataFile('FeaturedProjectData.js');
+        const blogData = readJsDataFile('BlogData.js');
+
+        // Extract featured projects from ProjectData.js (type: "featured")
+        const featuredProjectData = projectData?.filter(p => p.type === 'featured') || [];
 
         console.log('📊 Data loaded:', {
             skills: skillData?.length || 0,
@@ -226,8 +245,12 @@ async function syncData() {
             certificates: certificateData?.length || 0,
             achievements: achievementData?.length || 0,
             reviews: reviewData?.length || 0,
-            featuredProjects: featuredProjectData?.length || 0
+            featuredProjects: featuredProjectData?.length || 0,
+            blogs: blogData?.length || 0
         });
+
+        // Log featured projects extracted from ProjectData.js
+        console.log('⭐ Featured projects (from ProjectData.js):', featuredProjectData.map(p => p.title).join(', ') || 'None');
 
         // Build the portfolio data object
         const portfolioData = {
@@ -249,6 +272,7 @@ async function syncData() {
             achievements: formatAchievements(achievementData),
             reviews: formatReviews(reviewData),
             featuredProjects: formatFeaturedProjects(featuredProjectData),
+            blogs: formatBlogs(blogData),
             lastUpdated: new Date().toISOString()
         };
 
@@ -347,6 +371,23 @@ function generateTrainingData(data) {
         trainingExamples.push({
             input: "What are your featured projects?",
             output: fpStr
+        });
+    }
+
+    // Blogs
+    if (data.blogs && data.blogs.length > 0) {
+        const blogStr = data.blogs.map(blog =>
+            `${blog.title}: ${blog.subtitle || 'Blog post'} (${blog.readTime || 'N/A'})`
+        ).join('. ');
+
+        trainingExamples.push({
+            input: "What blogs have you written?",
+            output: blogStr
+        });
+
+        trainingExamples.push({
+            input: "Do you have a blog?",
+            output: `Yes! Elayabarathi writes technical blogs. Here are some: ${blogStr}`
         });
     }
 
