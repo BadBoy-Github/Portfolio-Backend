@@ -1153,103 +1153,7 @@
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774353565/snake_v68xow.webp"
     }
   ],
-  "experience": [
-    {
-      "title": "React JS Developer Intern",
-      "company": "The Skybrisk",
-      "period": "Jan 2026 - Current",
-      "description": "Developing scalable web applications using React.js. Creating reusable components, optimizing performance, and integrating RESTful APIs for seamless user experiences.",
-      "skills": [
-        "React JS",
-        "State Management",
-        "API Integration",
-        "Performance Optimization",
-        "UI/UX Implementation"
-      ],
-      "link": "https://www.theskybrisk.com/"
-    },
-    {
-      "title": "Java Full Stack Developer Trainee",
-      "company": "QSpiders Software Testing & Development Institute",
-      "period": "Aug 2025 - Current",
-      "description": "Full-stack Java training covering front-end, back-end, and middleware. Strengthening problem-solving skills through dedicated aptitude training.",
-      "skills": [
-        "SQL",
-        "Aptitude",
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "Java"
-      ],
-      "link": "https://qspiders.com/"
-    },
-    {
-      "title": "Web Developer Intern",
-      "company": "Hex Softwares",
-      "period": "Feb - Mar 2026",
-      "description": "Hands-on web development using HTML5, CSS3, and JavaScript. Creating responsive landing pages with Tailwind CSS for client websites.",
-      "skills": [
-        "HTML",
-        "CSS",
-        "JS"
-      ],
-      "link": "https://hexsoftwares.com/"
-    },
-    {
-      "title": "React JS Developer Intern",
-      "company": "The Coding Samurai",
-      "period": "Jan - Feb 2026",
-      "description": "Building high-quality React interfaces and interactive features. Translating wireframes into code with cross-browser compatibility and mobile responsiveness.",
-      "skills": [
-        "React JS",
-        "Tailwind CSS"
-      ],
-      "link": "https://codingsamurai.vercel.app/"
-    },
-    {
-      "title": "Software Developer Intern",
-      "company": "Cognifyz Technologies Pvt Ltd",
-      "period": "Nov - Dec 2025",
-      "description": "Engaged in various Java programming tasks to enhance learning and problem-solving skills. Continuously acquiring new knowledge and practical experience in Java development through hands-on projects and challenges.",
-      "skills": [
-        "Java",
-        "Problem Solving"
-      ],
-      "link": "https://cognifyz.com/"
-    },
-    {
-      "title": "",
-      "company": "Corizo Edutech Pvt Ltd",
-      "period": "Oct - Dec 2024",
-      "description": "",
-      "skills": [],
-      "link": "https://corizo.in/"
-    },
-    {
-      "title": "Applied Microbiology and Agricultural Biotechnology",
-      "company": "Elies Biotech Pvt Ltd",
-      "period": "Jul - Aug 2022",
-      "description": "Practical skills in microbial characterization, biofertilizer production, and mushroom tissue culture. Building foundation in applied microbiology.",
-      "skills": [
-        "Microbiology",
-        "Mushroom Cultivation",
-        "BSFL Rearing"
-      ],
-      "link": "https://eliesbiotech.co.in/"
-    },
-    {
-      "title": "Millets Processing and Production",
-      "company": "Biorith Techno Products Pvt Ltd",
-      "period": "Jun - Jul 2022",
-      "description": "Operating advanced machinery for eco-friendly packaging. Gaining experience in sustainable agriculture and food processing.",
-      "skills": [
-        "Food Science",
-        "Food Processing",
-        "Quality Checking"
-      ],
-      "link": "https://biorith.in/"
-    }
-  ],
+  "experience": [],
   "education": [
     {
       "institution": "",
@@ -1525,55 +1429,55 @@
       "title": "SIP 2023 Coordinator",
       "description": "",
       "date": "2023",
-      "image": "/img/achievements/sip.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423111/sip_nrqi1f.webp"
     },
     {
       "title": "Expo Stall Organizer",
       "description": "",
       "date": "2023",
-      "image": "/img/achievements/madurai.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423106/madurai_vtzo3i.webp"
     },
     {
       "title": "Dakshaa T23 Coordinator",
       "description": "",
       "date": "2023",
-      "image": "/img/achievements/dakshaa.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423101/dakshaa_w3chzb.webp"
     },
     {
       "title": "Certified Public Speaker",
       "description": "",
       "date": "2023",
-      "image": "/img/achievements/eps.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423104/eps_uet3ot.webp"
     },
     {
       "title": "Logo Design - 2nd Place",
       "description": "",
       "date": "2023",
-      "image": "/img/achievements/logo.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423105/logo_gwwuax.webp"
     },
     {
       "title": "Short Video - 2nd Place",
       "description": "",
       "date": "2023",
-      "image": "/img/achievements/video.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423107/video_nocxi5.webp"
     },
     {
       "title": "Joint Secretary - PMC & PAC",
       "description": "",
       "date": "2022-2023",
-      "image": "/img/achievements/js.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423101/js_spt0qf.webp"
     },
     {
       "title": "Paper Presentation - 1st Place",
       "description": "",
       "date": "2022",
-      "image": "/img/achievements/paper.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423101/paper_ftzuzj.webp"
     },
     {
       "title": "Short Film - 1st Place",
       "description": "",
       "date": "2022",
-      "image": "/img/achievements/film.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423108/film_kzphpz.webp"
     }
   ],
   "reviews": [
@@ -1582,35 +1486,35 @@
       "role": "",
       "comment": "",
       "rating": 5,
-      "image": "/img/reviews/people-2.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435439/people-2_wfqkwm.webp"
     },
     {
       "name": "Subaash Sivan N",
       "role": "",
       "comment": "",
       "rating": 5,
-      "image": "/img/reviews/people-3.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435441/people-3_l5fhti.webp"
     },
     {
       "name": "Dhil Rohith B",
       "role": "",
       "comment": "",
       "rating": 5,
-      "image": "/img/reviews/people-4.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435442/people-4_msu4pm.webp"
     },
     {
       "name": "Kishore G",
       "role": "",
       "comment": "",
       "rating": 5,
-      "image": "/img/reviews/people-6.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435438/people-5_nbykxu.webp"
     },
     {
       "name": "Asothama Chakravarthi V",
       "role": "",
       "comment": "",
       "rating": 5,
-      "image": "/img/reviews/people-1.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435439/people-1_fg2ola.webp"
     }
   ],
   "featuredProjects": [
@@ -1699,5 +1603,5 @@
       "content": "\n            <p>Welcome to my interactive portfolio hub—a carefully crafted digital space that represents my complete professional identity. This portfolio stands as a testament to my journey as a developer, showcasing not just my technical skills but also my passion for creating meaningful digital experiences. In this blog, I'll walk you through the conception, development, and unique features that make this portfolio truly special.</p>\n            \n            <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774279869/Portfolio_1_kh2gr7.png\" alt=\"Portfolio Hero Section\" class=\"blog-image\" />\n            \n            <h2>The Vision Behind My Portfolio</h2>\n            <p>Every developer needs a space to call their own—a digital home that tells their story, displays their work, and connects with potential employers or clients. When I set out to build my portfolio, I wanted more than just a static showcase. I wanted to create an interactive experience that would leave a lasting impression on visitors. The goal was simple yet ambitious: build a portfolio that not only displays projects but actively engages with visitors through intelligent conversation.</p>\n            \n            <p>The journey began with extensive research into modern portfolio designs. I studied what makes portfolios effective, what captures attention, and what drives action. What emerged was a clear vision: a portfolio that combines aesthetic appeal with functional excellence. I wanted visitors to not just view my work but feel connected to my story through interactive elements that respond to their queries in real-time.</p>\n            \n            <p>Technology selection was crucial. After careful consideration, I chose React as the foundation—this provided the component-based architecture needed for maintainability and scalability. Tailwind CSS offered the styling flexibility required for a modern, responsive design. The entire application would be powered by JavaScript, ensuring seamless interactivity and smooth user experiences across all devices.</p>\n            \n            <h2>Architecture and Technical Foundation</h2>\n            <p>The portfolio's architecture follows modern React best practices, leveraging hooks for state management and functional components for better performance. Each section—from projects to certifications, achievements to blogs—is modular, allowing for easy updates and maintenance. The component-based structure means I can add new features or modify existing ones without affecting the entire application.</p>\n            \n            <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774279869/Portfolio_2_adu0zg.png\" alt=\"Projects Section\" class=\"blog-image\" />\n            \n            <p>Performance optimization played a critical role in the development process. I implemented lazy loading for images and components, ensuring fast initial load times even with multiple high-resolution project images. The use of React's useMemo and useCallback hooks prevents unnecessary re-renders, keeping the application responsive and smooth.</p>\n            \n            <p>Responsive design was paramount—my portfolio needed to look flawless on devices ranging from mobile phones to large desktop monitors. Tailwind's utility-first approach made it simple to create responsive layouts that adapt elegantly to any screen size. The result is a portfolio that maintains its visual integrity and functionality across all platforms.</p>\n            \n            <h2>The AI Chatbot: A Standout Feature</h2>\n            <p>The integrated AI chatbot represents the portfolio's most innovative feature. This intelligent assistant communicates on my behalf, engaging with visitors and answering questions about my skills, projects, and experience. Unlike traditional contact forms that require manual follow-up, the chatbot provides instant responses, making the portfolio more interactive and accessible.</p>\n            \n            <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774279870/Portfolio_3_bg5wmq.png\" alt=\"AI Chatbot Interface\" class=\"blog-image\" />\n            \n            <p>The chatbot was designed to simulate natural conversation while providing accurate information. It can discuss my technical stack, explain project details, share my educational background, and even provide recommendations based on visitor interests. The natural language processing capabilities ensure that conversations feel organic and helpful rather than robotic.</p>\n            \n            <p>From a technical standpoint, the chatbot integration required careful planning. I implemented a robust backend system that handles message processing and generates appropriate responses. The backend ensures that the chatbot has access to up-to-date information about my projects, skills, and achievements, making every conversation relevant and informative.</p>\n            \n            <h2>Project Showcase System</h2>\n            <p>The projects section serves as the heart of my portfolio, displaying a curated collection of my work. Each project entry includes detailed information—project title, description, technologies used, live links, and source code repositories. The organized structure makes it easy for visitors to browse through my work and understand the scope and complexity of each project.</p>\n            \n            <p>What sets my project showcase apart is the attention to detail in presentation. Each project includes multiple images showcasing different aspects of the application. The tags system allows quick filtering by technology, making it simple for visitors to find projects relevant to their needs. Whether someone is interested in React projects, full-stack applications, or specific technologies like Node.js or MongoDB, they can easily navigate to projects matching their criteria.</p>\n            \n            <h2>Achievements and Certifications</h2>\n            <p>Beyond projects, the portfolio highlights my professional achievements and certifications. This section demonstrates continuous learning and professional growth—qualities that employers value highly. From technical certifications to competition achievements, each entry tells a story of dedication and skill development.</p>\n            \n            <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774279876/Portfolio_4_jh0jqz.png\" alt=\"Achievements Section\" class=\"blog-image\" />\n            <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774279872/Portfolio_5_cy7qds.png\" alt=\"Achievements Section\" class=\"blog-image\" />\n            \n            <p>The certifications section is particularly valuable—it provides potential employers with verifiable proof of my skills. Each certification includes details about the issuing organization, the skills covered, and the validation period. This transparency builds trust and credibility, showing that my claims are backed by recognized credentials.</p>\n            \n            <h2>Blog Integration</h2>\n            <p>The blog section transforms this portfolio from a simple showcase into a content platform. Here, I share insights, tutorials, and experiences from my development journey. Writing about technical topics reinforces my understanding while providing value to the broader developer community. The blog integration demonstrates that I'm not just a practitioner but also someone who contributes to collective knowledge.</p>\n            \n            <p>Each blog post is carefully structured with proper headings, images, and formatting. The content management system (even though it's file-based) allows for rich HTML content including code snippets, embedded images, and formatted text. This ensures that blog posts are both readable and informative.</p>\n            \n            <h2>Contact and Communication</h2>\n            <p>While the AI chatbot handles initial communications, the portfolio also includes a comprehensive contact system. The contact form connects to a backend service that processes submissions and sends email notifications. This ensures that important messages never get missed and can be addressed promptly.</p>\n            \n            <p>The backend handling for the contact form demonstrates my full-stack capabilities. It includes validation, error handling, and confirmation mechanisms—essential features for any production-ready web application. The system is designed to be reliable and user-friendly, ensuring positive communication experiences for visitors.</p>\n            \n            <h2>Deployment and Performance</h2>\n            <p>The portfolio is deployed on Vercel, a platform that provides excellent performance and reliability. Vercel's global CDN ensures fast loading times regardless of visitor location. The platform also offers automatic SSL certification, ensuring secure connections for all users.</p>\n            \n            <p>Monitoring and analytics help me understand how visitors interact with the portfolio. This data informs ongoing improvements, helping me optimize the user experience based on real usage patterns. The iterative improvement approach ensures the portfolio continues to meet evolving needs.</p>\n            \n            <h2>Future Enhancements</h2>\n            <p>This portfolio is designed to evolve. Regular updates will add new projects, achievements, and blog posts. The AI chatbot will continue to learn and improve, providing increasingly accurate and helpful responses. Performance optimizations will be implemented as new techniques become available.</p>\n            \n            <p>I'm also planning to add more interactive elements—potentially including a dark/light theme toggle, more complex animations, and perhaps even a project recommendation system based on visitor interests. The modular architecture makes adding these features straightforward without requiring major restructuring.</p>\n            \n            <h2>Conclusion</h2>\n            <p>This portfolio represents more than just a collection of my work—it embodies my approach to development and my commitment to creating meaningful digital experiences. The combination of modern technologies, thoughtful design, and innovative features like the AI chatbot creates a unique space that stands out in the crowded developer portfolio landscape.</p>\n            \n            <p>I hope this behind-the-scenes look inspires you to create something equally impactful. Whether you're a seasoned developer or just starting your journey, remember that your portfolio is your digital identity—make it count. Thank you for exploring my work, and feel free to reach out through the chatbot or contact form if you'd like to connect.</p>\n        "
     }
   ],
-  "lastUpdated": "2026-03-24T17:06:11.036Z"
+  "lastUpdated": "2026-03-25T11:06:36.161Z"
 }
