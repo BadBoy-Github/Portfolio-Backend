@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import fetch from "node-fetch";
 import path from "path";
 import { fileURLToPath } from "url";
+import nodemailer from 'nodemailer';
 import { startAutoSync, stopAutoSync, syncData } from './dataSync.js';
 
 // ES Module __dirname equivalent
@@ -210,6 +211,12 @@ app.post('/api/chat', async (req, res) => {
                     `- ${fp.name}: ${fp.description || 'Featured project'} - Link: ${fp.link || 'N/A'}`
                 ).join('\n') : 'No featured projects';
 
+            // Build blogs info
+            const blogsInfo = portfolioData.blogs ?
+                portfolioData.blogs.map(blog =>
+                    `- ${blog.title}: ${blog.subtitle || 'Blog post'} (${blog.readTime || 'N/A'})`
+                ).join('\n') : 'No blogs';
+
             context = `
             Your name is Portfolio-GPT. You are a friendly chatbot that lets users interact with Elayabarathi M V's portfolio and CV. 
             You are a helpful assistant for Elayabarathi M V's portfolio. 
@@ -226,6 +233,9 @@ app.post('/api/chat', async (req, res) => {
             
             Featured Projects (THESE ARE HIS BEST WORKS - mention these when asked about featured projects):
             ${featuredProjectsInfo}
+            
+            Blog Posts (He writes technical articles - mention when asked about blogs):
+            ${blogsInfo}
             
             Contact Information:
             - Email: ${portfolioData.contact.email}
@@ -421,6 +431,159 @@ app.post('/api/sync/start', (req, res) => {
         success: true,
         message: 'Auto-sync started (every 30 minutes)'
     });
+});
+
+// Contact form endpoint with nodemailer
+app.post('/api/contact', async (req, res) => {
+    try {
+        const { name, email, subject, category, message } = req.body;
+
+        // Validate required fields
+        if (!name || !email || !subject || !category || !message) {
+            return res.status(400).json({
+                success: false,
+                error: 'All fields are required'
+            });
+        }
+
+        // Validate category
+        const validCategories = ['query', 'feedback', 'question', 'issue', 'collab', 'chitchat', 'others'];
+        if (!validCategories.includes(category)) {
+            return res.status(400).json({
+                success: false,
+                error: 'Invalid category'
+            });
+        }
+
+        // Create nodemailer transporter
+        const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST || 'smtp.gmail.com',
+            port: parseInt(process.env.SMTP_PORT) || 587,
+            secure: false,
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS
+            }
+        });
+
+        // Email content
+        const mailOptions = {
+            from: process.env.SMTP_USER,
+            to: process.env.TO_EMAIL || process.env.SMTP_USER,
+            subject: `${category} | [Portfolio Contact Form] : ${subject}`,
+            html: `
+                <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>New Contact Form Submission</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f7fb; font-family: Arial, sans-serif;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding: 30px 0;">
+    <tr>
+      <td align="center">
+
+        <!-- Main Container -->
+        <table width="600" cellpadding="0" cellspacing="0"
+          style="background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 8px 25px rgba(0,0,0,0.08);">
+
+          <!-- Header -->
+          <tr>
+            <td style="background:#0284c7; padding:20px 30px; color:#ffffff;">
+              <h2 style="margin:0; font-size:22px;">📩 New Contact Message</h2>
+              <p style="margin:5px 0 0; font-size:14px; opacity:0.9;">
+                You’ve received a new message from your portfolio
+              </p>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:30px; color:#333333;">
+
+              <!-- Info Card -->
+              <table width="100%" cellpadding="0" cellspacing="0"
+                style="border:1px solid #e5e7eb; border-radius:10px; padding:20px; background:#f9fbfd;">
+
+                <tr>
+                  <td style="padding-bottom:10px;">
+                    <strong style="color:#0284c7;">👤 Name:</strong><br>
+                    ${name}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="padding-bottom:10px;">
+                    <strong style="color:#0284c7;">📧 Email:</strong><br>
+                    ${email}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="padding-bottom:10px;">
+                    <strong style="color:#0284c7;">📂 Category:</strong><br>
+                    ${category}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="padding-bottom:10px;">
+                    <strong style="color:#0284c7;">📝 Subject:</strong><br>
+                    ${subject}
+                  </td>
+                </tr>
+
+              </table>
+
+              <!-- Message Section -->
+              <div style="margin-top:25px;">
+                <strong style="color:#0284c7; font-size:16px;">💬 Message</strong>
+                <div style="margin-top:10px; padding:15px; background:#f1f5f9; border-radius:8px; line-height:1.6;">
+                  ${message}
+                </div>
+              </div>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:20px 30px; background:#f9fafb; text-align:center;">
+              <p style="margin:0; font-size:12px; color:#6b7280;">
+                This email was sent from your portfolio contact form.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
+            `
+        };
+
+        // Send email
+        await transporter.sendMail(mailOptions);
+
+        console.log(`📧 Contact form submitted: ${name} (${email}) - ${category}: ${subject}`);
+
+        res.json({
+            success: true,
+            message: 'Message sent successfully!'
+        });
+
+    } catch (error) {
+        console.error('❌ Contact form error:', error.message);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to send message. Please try again later.'
+        });
+    }
 });
 
 // Root endpoint
