@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastTrained": "2026-03-25T11:06:36.163Z",
+  "lastTrained": "2026-04-03T17:15:42.006Z",
   "examples": [
     {
       "input": "Tell me about yourself",
@@ -24,11 +24,11 @@
     },
     {
       "input": "What blogs have you written?",
-      "output": "My Interactive Portfolio Hub: A modern showcase of my complete journey (38 min read)"
+      "output": "My Interactive Portfolio Hub: A modern showcase of my complete journey (38 min read). Card Vaults: The Ultimate Digital Gift Card Marketplace: From concept to a secure, real-time digital commerce platform (45 min read)"
     },
     {
       "input": "Do you have a blog?",
-      "output": "Yes! Elayabarathi writes technical blogs. Here are some: My Interactive Portfolio Hub: A modern showcase of my complete journey (38 min read)"
+      "output": "Yes! Elayabarathi writes technical blogs. Here are some: My Interactive Portfolio Hub: A modern showcase of my complete journey (38 min read). Card Vaults: The Ultimate Digital Gift Card Marketplace: From concept to a secure, real-time digital commerce platform (45 min read)"
     },
     {
       "input": "How can I contact you?",
