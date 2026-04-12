@@ -348,6 +348,70 @@
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774360230/bamboo-blogs_a0bltm.webp"
     },
     {
+      "name": "User–Order System",
+      "description": "User–Order System is a backend-focused Java application designed to demonstrate one-to-many entity mapping using JPA and Hibernate. It models a real-world scenario where a single user can manage multiple orders, ensuring proper relational integrity and structured data handling. The application leverages MySQL for persistent storage and follows clean object-relational mapping principles.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/users-orders",
+      "skills": [
+        "jpa one to many mapping example",
+        "hibernate user order project",
+        "java backend relationship mapping",
+        "entity relationship mapping java",
+        "crud operations using hibernate",
+        "mysql integration java backend",
+        "console based java application",
+        "backend development java project",
+        "database driven application java",
+        "object relational mapping system",
+        "user order management system",
+        "backend user data management",
+        "order tracking system java",
+        "database driven backend solution",
+        "java application for order handling",
+        "data management system java",
+        "one to many relationship mapping",
+        "user to multiple orders system",
+        "bidirectional mapping jpa",
+        "data consistency handling",
+        "real world backend modeling",
+        "scalable relationship architecture"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774352970/user_order_project.webp"
+    },
+    {
+      "name": "Order–Payment System",
+      "description": "Order–Payment Management System is a backend-oriented Java application designed to simulate real-world order processing and payment handling workflows. Built using JPA and Hibernate, the system demonstrates efficient entity relationship mapping between orders and their corresponding payments. It emphasizes clean architecture, transactional integrity, and scalable backend design using MySQL as the persistent data store.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Order-Payment-one2one",
+      "skills": [
+        "jpa one to many mapping example",
+        "hibernate order payment project",
+        "java backend order management system",
+        "transaction management java project",
+        "crud operations using hibernate",
+        "entity relationship mapping java",
+        "mysql integration java backend",
+        "console based java application",
+        "order processing system java",
+        "database driven java backend",
+        "order and payment system",
+        "transaction management backend",
+        "ecommerce backend java project",
+        "order tracking system java",
+        "payment handling system",
+        "business logic backend system",
+        "data driven order management",
+        "order payment relationship mapping",
+        "transaction consistency handling",
+        "real world ecommerce backend logic",
+        "linked order payment system",
+        "data integrity validation system",
+        "structured backend architecture",
+        "enterprise level backend design"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1775754510/order_payment_b2tk3n.png"
+    },
+    {
       "name": "Tic Tac Toe",
       "description": "Tic Tac Toe is a modern implementation of the classic Tic Tac Toe game built using React and Tailwind CSS. It focuses on delivering a clean and interactive user experience while maintaining accurate game logic and smooth state transitions. The application allows two players to compete in real time on a responsive interface, showcasing strong fundamentals in component-based architecture, event handling, and UI design.",
       "link": "https://tic-tac-toe-game-000.netlify.app/",
@@ -376,6 +440,40 @@
         "modern minimal game design"
       ],
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774360959/tic-tac-toe_baiunc.webp"
+    },
+    {
+      "name": "CodePad",
+      "description": "CodePad is a modern AI-powered online code editor designed to deliver a seamless and efficient development experience directly in the browser. Built as a fullstack application, it integrates a robust frontend with a scalable backend to support real-time code writing and execution. The platform supports multiple programming languages including JavaScript, Python, and Java, enabling developers to test and validate their code instantly. A key highlight of this project is its development approach—leveraging AI tools for rapid implementation, followed by human refinement to ensure performance, usability, and reliability.",
+      "link": "https://code-pad-frontend.vercel.app/",
+      "github": "https://github.com/BadBoy-Github/CodePad-Frontend",
+      "skills": [
+        "online code editor project",
+        "ai powered code editor",
+        "multi language code editor javascript python java",
+        "fullstack code editor application",
+        "react code editor project",
+        "developer tools web application",
+        "browser based code editor",
+        "real time code execution platform",
+        "frontend backend integrated project",
+        "modern developer productivity tools",
+        "build online code editor",
+        "web based coding platform",
+        "code editor for developers",
+        "run code online javascript python java",
+        "interactive coding platform",
+        "developer playground online",
+        "cloud based coding environment",
+        "ai made",
+        "ai assisted development project",
+        "code editor built using ai tools",
+        "human refined ai generated application",
+        "multi language execution engine",
+        "scalable fullstack architecture",
+        "clean ui developer experience",
+        "browser ide with backend integration"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1775543058/CodePad_yraevd.png"
     },
     {
       "name": "TimeFlow",
@@ -619,6 +717,37 @@
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774365581/qr-generator_jcgzj3.webp"
     },
     {
+      "name": "Author–Book System",
+      "description": "The Author–Book System is a backend-driven Java application that demonstrates one-to-many entity mapping using JPA and Hibernate. It models the relationship between authors and their books, ensuring structured data organization and referential integrity. The system uses MySQL for data persistence and reflects real-world content management scenarios.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/author-book",
+      "skills": [
+        "jpa one to many mapping example",
+        "hibernate author book project",
+        "java backend relationship mapping",
+        "entity relationship mapping java",
+        "crud operations using hibernate",
+        "mysql integration java backend",
+        "console based java application",
+        "object relational mapping system",
+        "database driven java backend",
+        "backend development project java",
+        "author book management system",
+        "library management backend java",
+        "book tracking system java",
+        "data driven application java",
+        "content management backend",
+        "java database application",
+        "one to many entity mapping system",
+        "author to multiple books mapping",
+        "bidirectional relationship handling",
+        "data consistency validation",
+        "real world database modeling",
+        "structured backend architecture"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774352970/author_book_project.webp"
+    },
+    {
       "name": "DriveDirect",
       "description": "DriveDirect is a lightweight utility tool designed to convert Google Drive sharing links into direct image URLs that can be embedded and used across web platforms. Built using HTML, CSS and JavaScript, the project focuses on solving a common limitation by transforming inaccessible links into usable resources through efficient client-side logic.",
       "link": "https://google-image-to-link.netlify.app/",
@@ -648,6 +777,37 @@
         "practical utility for developers"
       ],
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774365787/google-drive_c0ewdf.webp"
+    },
+    {
+      "name": "Aadhar–PAN Identity Linker",
+      "description": "Aadhar–PAN Identity Linker is a backend-centric Java application engineered to demonstrate precise one-to-one entity mapping using JPA and Hibernate. It models the relationship between Aadhar and PAN records with strict referential integrity, reflecting real-world identity linkage systems. The application leverages MySQL for persistent storage and emphasizes clean architecture, scalability, and adherence to object-relational mapping principles.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Aadhar-Pan-one2one",
+      "skills": [
+        "jpa one to one mapping example",
+        "hibernate one to one mapping project",
+        "java persistence api project",
+        "entity relationship mapping java",
+        "mysql integration java project",
+        "backend java application",
+        "object relational mapping system",
+        "crud operations using hibernate",
+        "database driven java backend",
+        "console based java system",
+        "aadhar pan linking system",
+        "identity management backend",
+        "secure data mapping system",
+        "relational database project java",
+        "user data management system",
+        "backend identity linking solution",
+        "one to one entity relationship",
+        "bidirectional mapping jpa",
+        "data consistency validation",
+        "linked identity architecture",
+        "real world database modeling",
+        "enterprise level mapping logic"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1775754348/aadhar-pan_eiobq2.png"
     },
     {
       "name": "Microsoft UI Replica",
@@ -1619,5 +1779,5 @@
       "content": "\n        <p>Card Vault is more than just a website—it's a complete digital ecosystem designed to simplify how users discover, purchase, and manage digital gift cards. Built with performance, security, and user experience at its core, this platform represents my evolution as a full-stack developer and my ability to create real-world, scalable solutions. In this blog, I’ll take you deep into the journey behind Card Vault—from the initial idea to the technical architecture, challenges, and future vision.</p>\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774320955/cv_1_epiijo.png\" alt=\"Card Vault Trust Section\" class=\"blog-image\" />\n\n        <h2>The Idea Behind Card Vault</h2>\n        <p>The concept of Card Vault originated from a simple observation—digital gift cards are everywhere, yet the buying experience often feels fragmented, slow, or untrustworthy. Many platforms lack transparency, real-time updates, or seamless delivery. I wanted to change that.</p>\n\n        <p>The vision was clear: create a centralized platform where users can browse, purchase, and receive digital gift cards instantly, without friction. But I didn’t want to stop at functionality—I wanted personality. Card Vault was designed to feel premium, engaging, and slightly playful, with a tone that makes users feel confident while also entertained.</p>\n\n        <p>From the tagline “Pick a card. Any card.” to the subtle humor in the UI, every element was crafted to create a memorable experience. The goal wasn’t just to sell gift cards—it was to build a brand that users trust and enjoy interacting with.</p>\n\n        <h2>Design Philosophy & User Experience</h2>\n        <p>User experience played a central role in shaping Card Vault. The interface is clean, modern, and highly intuitive, allowing users to navigate effortlessly between sections like featured products, gift cards, and contact pages.</p>\n\n        <p>The homepage is structured to immediately capture attention with a bold hero section, followed by featured products that highlight limited-time deals. The layout ensures that users can quickly understand what the platform offers without feeling overwhelmed.</p>\n\n        <p>Microcopy and UI text were carefully crafted to add personality—phrases like “Faster Than Regret” and “Fort Knox Security” make the platform feel alive. These small details transform a basic e-commerce experience into something engaging and memorable.</p>\n\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1775229943/7_jmyz5p.png\" alt=\"Card Vault Featured products\" class=\"blog-image\" />\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1775229943/8_juptqq.png\" alt=\"Card Vault Gift Cards\" class=\"blog-image\" />\n\n        <h2>Core Features That Power Card Vault</h2>\n        <p>Card Vault is built around a set of powerful features that ensure a smooth and reliable user experience. The product browsing system allows users to explore various categories, including shopping, gaming, entertainment, and lifestyle gift cards.</p>\n\n        <p>The featured products section dynamically highlights exclusive deals, creating urgency with limited stock indicators like “Only 1 left” and expiration timers. This encourages faster decision-making and improves conversion rates.</p>\n\n        <p>The search functionality enables users to instantly find specific gift cards, reducing friction and improving usability. Combined with categorized listings, it ensures that users always find what they’re looking for quickly.</p>\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774320955/cv_3_h9h9ip.png\" alt=\"Card Vault Frequently Asked Questions\" class=\"blog-image\" />\n\n        <h2>Secure Payment System & UPI Integration</h2>\n        <p>One of the most critical aspects of Card Vault is its secure payment system. Since the platform deals with digital assets, ensuring safe transactions was a top priority.</p>\n\n        <p>The platform supports UPI-based transactions, making it highly accessible for Indian users. The payment flow is designed to be simple yet secure, requiring users to submit transaction details (UTR) for verification.</p>\n\n        <p>Behind the scenes, validation mechanisms ensure that each transaction is properly recorded and verified before delivering the digital product. This prevents fraud while maintaining a smooth user experience.</p>\n\n        <p>Security messaging like “Fort Knox Security” reinforces trust, assuring users that their data and purchases are protected with strong encryption practices.</p>\n\n        <h2>Real-Time Product Management</h2>\n        <p>Card Vault features a dynamic inventory system that updates product availability in real time. This ensures that users always see accurate stock information, reducing confusion and preventing overselling.</p>\n\n        <p>Each product includes detailed metadata such as price, discount, expiry date, and availability status. These details help users make informed decisions quickly.</p>\n\n        <p>The system also handles edge cases like out-of-stock items gracefully, ensuring that the user interface remains consistent and informative even when products are unavailable.</p>\n\n        <h2>Backend Architecture & Data Flow</h2>\n        <p>The backend of Card Vault is designed to handle multiple responsibilities, including product management, transaction verification, and user communication. It acts as the brain of the application, ensuring that all processes run smoothly.</p>\n\n        <p>APIs are structured to handle requests efficiently, with clear separation between frontend and backend logic. This modular approach makes the system scalable and easy to maintain.</p>\n\n        <p>Data flows seamlessly between the frontend and backend, ensuring that users receive instant updates on their purchases, stock availability, and order status.</p>\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774320957/cv_5_lwj26i.png\" alt=\"Card Vault Orders Page\" class=\"blog-image\" />\n\n        <h2>Performance Optimization</h2>\n        <p>Performance was a key focus during development. The application is optimized for fast load times, ensuring that users can browse and purchase without delays.</p>\n\n        <p>Lazy loading techniques are used for images and components, reducing initial load time and improving overall responsiveness. Efficient state management ensures that the UI updates smoothly without unnecessary re-renders.</p>\n\n        <p>The deployment on Vercel provides additional performance benefits, including global CDN distribution and automatic scaling, ensuring a consistent experience for users across different locations.</p>\n\n        <h2>Trust, Branding & User Confidence</h2>\n        <p>Building trust is essential for any e-commerce platform, especially one dealing with digital goods. Card Vault addresses this through clear communication, secure systems, and consistent branding.</p>\n\n        <p>Sections like “Why Trust the Vault?” highlight key value propositions, including authenticity, security, and fast delivery. These elements reassure users and build confidence in the platform.</p>\n\n        <p>The branding combines professionalism with personality, creating a unique identity that stands out from generic e-commerce websites.</p>\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774320956/cv_4_qikprw.png\" alt=\"Card Vault Contact Section\" class=\"blog-image\" />\n\n        <h2>Contact System & User Interaction</h2>\n        <p>Card Vault includes a comprehensive contact system that allows users to reach out بسهولة. Whether it’s a query, issue, or feedback, the platform ensures that communication is smooth and efficient.</p>\n\n        <p>Integration with email and WhatsApp provides multiple channels for user support, making it easier for users to get help when needed.</p>\n\n        <p>The contact form includes validation and structured input fields, ensuring that messages are clear and actionable.</p>\n\n        <h2>Challenges Faced During Development</h2>\n        <p>Building Card Vault came with its own set of challenges. One of the biggest hurdles was ensuring secure and reliable payment verification without introducing unnecessary complexity.</p>\n\n        <p>Managing real-time inventory updates was another challenge, especially when dealing with limited-stock items. Ensuring consistency between frontend display and backend data required careful planning.</p>\n\n        <p>Balancing performance with feature richness was also critical. Adding too many features could slow down the application, so optimization strategies were essential.</p>\n\n        <h2>Future Enhancements</h2>\n        <p>Card Vault is designed to evolve continuously. Future updates will include features like user authentication, order history tracking, and wishlist functionality.</p>\n\n        <p>I also plan to integrate automated payment verification systems, reducing manual steps and improving efficiency.</p>\n\n        <p>Additional enhancements may include personalized recommendations, advanced filtering, and analytics dashboards to improve both user experience and business insights.</p>\n\n        <h2>Conclusion</h2>\n        <p>Card Vault represents a complete end-to-end product—combining design, development, security, and user experience into a single platform. It showcases my ability to build scalable, production-ready applications that solve real problems.</p>\n\n        <p>This project is not just about selling gift cards—it’s about creating a seamless digital experience that users can trust and enjoy. As I continue to improve and expand Card Vault, it will remain a key milestone in my development journey.</p>\n\n        <p>If you haven’t explored it yet, now’s the time. Pick a card. Any card.</p>\n    "
     }
   ],
-  "lastUpdated": "2026-04-03T19:47:32.929Z"
+  "lastUpdated": "2026-04-12T16:23:13.764Z"
 }
