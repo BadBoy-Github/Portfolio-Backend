@@ -25,7 +25,11 @@
         "Bootstrap"
       ],
       "libraries": [
+        "Markdown",
         "MongoDB",
+        "Hibernate",
+        "JSON",
+        "Postman",
         "Adobe Express",
         "PowerDirector",
         "MS Office"
@@ -45,6 +49,9 @@
       "link": "https://elayabarathimv.vercel.app/",
       "github": "https://github.com/BadBoy-Github/Portfolio",
       "skills": [
+        "elayabarathi",
+        "elayabarathimv",
+        "elayabarathi m v",
         "frontend developer portfolio",
         "react developer portfolio",
         "javascript developer projects",
@@ -106,6 +113,86 @@
         "modern ecommerce ui ux"
       ],
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774320957/cv_head_l3uxbt.png"
+    },
+    {
+      "name": "Test Hive",
+      "description": "Test Hive is a full-stack examination platform designed to deliver a complete and modern online assessment experience. Built using the MERN stack with advanced frontend enhancements, the platform allows students to take interactive tests with real-time timers, question navigation, and detailed result analysis. The project was developed using an AI-assisted workflow, where AI tools were leveraged to accelerate development, improve debugging efficiency, and enhance overall productivity while maintaining full control over system design and implementation.",
+      "link": "https://test-hive-frontend.vercel.app/",
+      "github": "https://github.com/BadBoy-Github/Test-Hive-Frontend",
+      "skills": [
+        "ai assisted development project",
+        "modern developer productivity using ai",
+        "full stack exam platform project",
+        "mern online test system",
+        "react exam application",
+        "node js exam backend",
+        "mongodb test platform database",
+        "jwt authentication system",
+        "role based access control project",
+        "admin dashboard analytics system",
+        "online assessment platform",
+        "coding test platform project",
+        "exam management system full stack",
+        "secure test taking application",
+        "online exam platform",
+        "build test taking website",
+        "student assessment system",
+        "mock test platform",
+        "coding interview test platform",
+        "exam portal with leaderboard",
+        "online quiz and test website",
+        "student performance tracking system",
+        "learning and assessment platform",
+        "ai assist",
+        "study streak gamification system",
+        "anti cheating tab detection",
+        "multiple question types exam",
+        "coding question support platform",
+        "advanced test configuration system",
+        "leaderboard ranking system",
+        "real time timer exam interface",
+        "confetti completion animation",
+        "analytics dashboard exam platform",
+        "auto submit test system",
+        "question randomization system",
+        "negative marking system"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777821220/test_hive_mxhkqc.png"
+    },
+    {
+      "name": "Bamboo Blogs",
+      "description": "Bamboo Blogs is a multi-user blogging platform built using Python Flask, designed to go beyond traditional blog systems by introducing a structured creator workflow. Users can explore blogs, interact through comments, and apply to become content creators. Once approved by an admin, users gain the ability to create, edit, and manage their own blog posts. The platform uses PostgreSQL for reliable data storage and demonstrates a complete content management system with authentication, role-based access, and persistent data handling.",
+      "link": "https://bamboo-blogs-sample.onrender.com/",
+      "github": "https://github.com/BadBoy-Github/Bamboo-Blogs-Sample",
+      "skills": [
+        "flask blog application",
+        "python web development project",
+        "postgresql database integration",
+        "sqlite to postgresql migration",
+        "crud blog system flask",
+        "user authentication flask app",
+        "multi user role system python",
+        "content management system flask",
+        "backend development python flask",
+        "blog platform with comments",
+        "database driven web app python",
+        "build blog website",
+        "custom blogging platform",
+        "multi author blog system",
+        "content publishing website",
+        "blog website with admin panel",
+        "user generated content platform",
+        "website with login and posting",
+        "blogger approval workflow",
+        "admin controlled publishing system",
+        "multi role blog platform",
+        "user to blogger conversion system",
+        "post edit delete functionality",
+        "secure blog storage database",
+        "comment system blog app",
+        "creator onboarding system"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774360230/bamboo-blogs_a0bltm.webp"
     },
     {
       "name": "BuzzChat Live",
@@ -181,6 +268,74 @@
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774348727/shopsphere_x_q1zbiu.webp"
     },
     {
+      "name": "Country Info Manager",
+      "description": "Country Info Manager is a backend-focused Java application built using JPA and Hibernate to manage hierarchical geographical data including countries, states, and capitals. The system models real-world relationships where a country can have multiple states (one-to-many) and each country or state can have a capital (one-to-one). It provides a menu-driven console interface to perform operations such as adding records, retrieving details by ID, viewing all entries, and checking population data. The project demonstrates strong understanding of ORM concepts, entity relationships, and database persistence using Hibernate.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/country-info",
+      "skills": [
+        "jpa hibernate project java",
+        "one to many mapping hibernate",
+        "one to one mapping jpa",
+        "entity relationship java project",
+        "country state capital database system",
+        "hibernate crud operations project",
+        "java backend console application",
+        "entity manager jpa example",
+        "relational mapping hibernate project",
+        "menu driven java project",
+        "country information management system",
+        "geographical data management app",
+        "country state capital tracking system",
+        "data management console application",
+        "backend system for location data",
+        "hierarchical data management system",
+        "country state capital relationship mapping",
+        "one to many and one to one relationships",
+        "menu driven console interface",
+        "dynamic data retrieval by id",
+        "population tracking system",
+        "bidirectional entity mapping",
+        "separate dao layer architecture",
+        "database persistence using jpa"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777539565/country_info_orkusa.png"
+    },
+    {
+      "name": "CineRank",
+      "description": "CineRank is a dynamic movie ranking web application built using Flask that allows users to create and manage a personalized movie collection. Instead of manually entering movie details, the platform integrates with the TMDB API to fetch accurate and rich movie data including titles, descriptions, ratings, and posters. Users can simply search for a movie, select the desired result, and instantly add it to their collection with complete metadata. The application provides a seamless interface for rating and reviewing movies, making it a practical tool for maintaining a curated watchlist.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/SQLite-Flask-Movie-Search-Ranking",
+      "skills": [
+        "flask crud application project",
+        "python movie database app",
+        "flask sqlalchemy project",
+        "api integration python project",
+        "movie ranking system python",
+        "full stack flask web app",
+        "sqlite database project python",
+        "server side rendering flask app",
+        "python web development project",
+        "dynamic ranking system application",
+        "movie watchlist web app",
+        "personal movie tracker",
+        "rate and review movies website",
+        "custom movie library app",
+        "movie collection manager",
+        "film rating website",
+        "movie recommendation tracker",
+        "watchlist organizer website",
+        "tmdb api integration project",
+        "auto ranking system based on rating",
+        "dynamic movie search api",
+        "real time movie data fetching",
+        "review and rating system",
+        "movie poster and metadata fetch",
+        "pagination flask project",
+        "error handling api requests"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777185394/movie_ranking_mu7dkh.png"
+    },
+    {
       "name": "Student Course Manager",
       "description": "Student Course Manager is a backend-focused Java application designed to demonstrate the implementation of a many-to-many relationship using JPA and Hibernate. The system models real-world scenarios where multiple students can enroll in multiple courses, and each course can be accessed by multiple students. It includes a menu-driven interface to perform operations such as creating students and courses, enrolling in courses, viewing relationships, updating records, and deleting data. The project emphasizes strong understanding of ORM concepts, entity mapping, and relational database design.",
       "link": "",
@@ -247,6 +402,25 @@
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774352970/spotify-clone_q2cdb9.webp"
     },
     {
+      "name": "Classic Snake Game",
+      "description": "Classic Snake Game is a console-based arcade game developed using Python and the Turtle graphics library, inspired by one of the most popular and timeless games ever created. This project recreates the nostalgic gameplay experience where the player controls a continuously moving snake that grows longer as it consumes food. With each successful move, the challenge increases, requiring better control and quicker decision-making. The primary goal of this project is to demonstrate how fundamental programming concepts can be used to build an engaging and interactive game from scratch.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Snake-Game",
+      "skills": [
+        "python snake game",
+        "turtle graphics game",
+        "console based python project",
+        "arcade game python",
+        "snake game implementation",
+        "game logic python",
+        "collision detection game",
+        "interactive python project",
+        "classic game development",
+        "beginner game python"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777224790/snake_x1vib6.png"
+    },
+    {
       "name": "Garage Manager",
       "description": "Garage Manager is a full-stack garage management system designed to streamline vehicle service operations through a structured and interactive dashboard. Built using the MERN stack, it enables administrators to manage customers, track vehicle repairs, and monitor service status efficiently. The platform incorporates role-based authentication to ensure secure access and organized workflows. With a clean UI and real-time data representation, it simplifies daily garage operations and enhances productivity for service managers.",
       "link": "https://garage-manager-frontend.vercel.app/",
@@ -281,6 +455,36 @@
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774358736/garage_cax9fk.webp"
     },
     {
+      "name": "SkyWatch Alert",
+      "description": "SkyWatch Alert is a Python-based automation tool that tracks the real-time position of the International Space Station (ISS) and notifies the user when it is visible overhead. It combines live location data with time-based conditions to determine optimal viewing moments.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/ISS-Overhead-Notifier",
+      "skills": [
+        "python api integration project",
+        "real time tracking python",
+        "automation alert system python",
+        "location based condition checking",
+        "datetime logic python project",
+        "smtp email automation python",
+        "event driven python script",
+        "loop based monitoring system",
+        "external api usage python",
+        "backend automation script",
+        "iss tracker python",
+        "space station tracker",
+        "astronomy alert system",
+        "night sky notification tool",
+        "iss overhead alert",
+        "real time iss position tracking",
+        "location based filtering",
+        "day night condition detection",
+        "automated email notifications",
+        "continuous monitoring loop",
+        "event triggered alert system"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777225631/iss_tracker_zqztjg.png"
+    },
+    {
       "name": "Stellar AI",
       "description": "Stellar AI is a modern AI-powered chatbot built using React and Tailwind CSS, integrated with Google’s Gemini API to deliver intelligent and context-aware responses. Designed with a strong focus on UI/UX, it offers a clean and engaging chat interface that enhances user interaction. The application maintains conversation history and provides real-time responses, creating a seamless conversational experience. It showcases the ability to integrate large language models into user-friendly web applications.",
       "link": "https://stellar-steel-tau.vercel.app/",
@@ -312,41 +516,6 @@
         "user friendly ai interface"
       ],
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774359356/stellar-ai_clv90o.webp"
-    },
-    {
-      "name": "Bamboo Blogs",
-      "description": "Bamboo Blogs is a multi-user blogging platform built using Python Flask, designed to go beyond traditional blog systems by introducing a structured creator workflow. Users can explore blogs, interact through comments, and apply to become content creators. Once approved by an admin, users gain the ability to create, edit, and manage their own blog posts. The platform uses PostgreSQL for reliable data storage and demonstrates a complete content management system with authentication, role-based access, and persistent data handling.",
-      "link": "https://bamboo-blogs-sample.onrender.com/",
-      "github": "https://github.com/BadBoy-Github/Bamboo-Blogs-Sample",
-      "skills": [
-        "flask blog application",
-        "python web development project",
-        "postgresql database integration",
-        "sqlite to postgresql migration",
-        "crud blog system flask",
-        "user authentication flask app",
-        "multi user role system python",
-        "content management system flask",
-        "backend development python flask",
-        "blog platform with comments",
-        "database driven web app python",
-        "build blog website",
-        "custom blogging platform",
-        "multi author blog system",
-        "content publishing website",
-        "blog website with admin panel",
-        "user generated content platform",
-        "website with login and posting",
-        "blogger approval workflow",
-        "admin controlled publishing system",
-        "multi role blog platform",
-        "user to blogger conversion system",
-        "post edit delete functionality",
-        "secure blog storage database",
-        "comment system blog app",
-        "creator onboarding system"
-      ],
-      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774360230/bamboo-blogs_a0bltm.webp"
     },
     {
       "name": "User–Order System",
@@ -413,6 +582,107 @@
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1775754510/order_payment_b2tk3n.png"
     },
     {
+      "name": "InstaFlow Bot",
+      "description": "InstaFlow Bot is a browser automation project built using Selenium that simulates user interactions on Instagram to automate repetitive tasks. The bot logs into an account securely using environment variables, navigates to a target profile, and dynamically loads followers using scroll-based interaction. It intelligently identifies and interacts with follow buttons, replicating real user behavior through controlled delays and randomized actions. The project demonstrates how automation scripts can interact with modern dynamic web applications using DOM manipulation and event simulation.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Insta-Follower-Bot",
+      "skills": [
+        "selenium automation python project",
+        "web automation bot python",
+        "browser automation selenium project",
+        "python scripting automation",
+        "real world selenium use case",
+        "automation testing concepts python",
+        "dynamic web scraping selenium",
+        "python dotenv environment variables",
+        "secure credential handling python",
+        "automation workflow design project",
+        "instagram automation tool",
+        "social media automation bot",
+        "automate repetitive browser tasks",
+        "auto login and interaction system",
+        "task automation software python",
+        "social engagement automation tool",
+        "instagram login automation",
+        "auto follower interaction system",
+        "random delay bot detection avoidance",
+        "scroll based dynamic loading automation",
+        "xpath based element targeting",
+        "exception handling selenium bot",
+        "secure credentials using dotenv",
+        "controlled follow limit system"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777186392/insta_bot_tvv8pv.png"
+    },
+    {
+      "name": "ApplyFlow",
+      "description": "ApplyFlow is a browser automation project built using Selenium that streamlines the job application process on LinkedIn. The system automates login, navigates through job listings, and interacts with the Easy Apply workflow by simulating real user actions. It handles multi-step form submissions, allowing users to review and confirm details at key checkpoints before proceeding. By combining automation with controlled user interaction, the project demonstrates how repetitive workflows can be optimized without completely removing human oversight.",
+      "link": "",
+      "github": "http://github.com/BadBoy-Github/LinkedIn-Automatic-Job-Application",
+      "skills": [
+        "selenium automation python project",
+        "linkedin automation bot python",
+        "browser automation workflow",
+        "python web automation script",
+        "real world automation project selenium",
+        "form automation selenium python",
+        "xpath automation project",
+        "secure login automation python",
+        "task automation using python",
+        "automation testing concepts selenium",
+        "job application automation tool",
+        "auto apply jobs linkedin",
+        "streamline job application process",
+        "automated form filling system",
+        "job search productivity tool",
+        "career workflow automation tool",
+        "linkedin login automation",
+        "easy apply workflow automation",
+        "multi step form automation",
+        "user assisted checkpoints system",
+        "secure credentials using dotenv",
+        "dynamic element interaction selenium",
+        "guided submission flow",
+        "step by step automation execution"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777187271/linkedin_auto_apply_e8grqy.png"
+    },
+    {
+      "name": "College Student Management System",
+      "description": "College Student Management System is a fullstack MERN-based web application designed to manage student records, academic performance, fee tracking, and official document generation. It replaces traditional manual processes with a centralized digital platform for educational institutions.",
+      "link": "https://college-student-management-system-f.vercel.app/",
+      "github": "https://github.com/BadBoy-Github/College-Student-Management-System-frontend",
+      "skills": [
+        "fullstack web application project",
+        "mern stack project student management",
+        "react node mongodb project",
+        "backend api development nodejs",
+        "role based authentication jwt project",
+        "crud operations fullstack project",
+        "database driven web application",
+        "admin dashboard system project",
+        "real world management system",
+        "secure authentication system bcrypt",
+        "college management system",
+        "student management web app",
+        "academic tracking system",
+        "student records management",
+        "education management software",
+        "ai assist",
+        "role based access admin teacher",
+        "student marks tracking system",
+        "fees management system",
+        "document generation system",
+        "certificate and transcript generator",
+        "data visualization dashboard recharts",
+        "secure login authentication",
+        "mongodb database integration",
+        "api driven architecture",
+        "modern react frontend vite"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777305973/clgstdms_kr96qj.png"
+    },
+    {
       "name": "Tic Tac Toe",
       "description": "Tic Tac Toe is a modern implementation of the classic Tic Tac Toe game built using React and Tailwind CSS. It focuses on delivering a clean and interactive user experience while maintaining accurate game logic and smooth state transitions. The application allows two players to compete in real time on a responsive interface, showcasing strong fundamentals in component-based architecture, event handling, and UI design.",
       "link": "https://tic-tac-toe-game-000.netlify.app/",
@@ -443,6 +713,36 @@
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774360959/tic-tac-toe_baiunc.webp"
     },
     {
+      "name": "CustOrder Nexus",
+      "description": "CustOrder Nexus is a console-based backend system built using Java and Hibernate that manages customer and order data through a structured relational database. It models a real-world Many-to-One relationship where multiple orders are associated with a single customer, enabling efficient tracking and organization of transactional records.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Orders-Customers",
+      "skills": [
+        "hibernate many to one relationship project",
+        "java order management backend",
+        "jpa entity mapping project",
+        "orm hibernate mysql integration",
+        "backend data modeling java",
+        "entity manager hibernate application",
+        "console based java system",
+        "relational database mapping project",
+        "java backend architecture design",
+        "crud operations hibernate project",
+        "order customer management system",
+        "customer order tracking system",
+        "ecommerce backend logic",
+        "order processing application",
+        "customer database manager",
+        "many to one relationship mapping",
+        "bidirectional entity navigation",
+        "customer based order filtering",
+        "reverse lookup by order id",
+        "structured relational data flow",
+        "menu driven console interface"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777213301/order_user_i2rp64.png"
+    },
+    {
       "name": "CodePad",
       "description": "CodePad is a modern AI-powered online code editor designed to deliver a seamless and efficient development experience directly in the browser. Built as a fullstack application, it integrates a robust frontend with a scalable backend to support real-time code writing and execution. The platform supports multiple programming languages including JavaScript, Python, and Java, enabling developers to test and validate their code instantly. A key highlight of this project is its development approach—leveraging AI tools for rapid implementation, followed by human refinement to ensure performance, usability, and reliability.",
       "link": "https://code-pad-frontend.vercel.app/",
@@ -465,7 +765,7 @@
         "interactive coding platform",
         "developer playground online",
         "cloud based coding environment",
-        "ai made",
+        "ai assist",
         "ai assisted development project",
         "code editor built using ai tools",
         "human refined ai generated application",
@@ -475,6 +775,40 @@
         "browser ide with backend integration"
       ],
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1775543058/CodePad_yraevd.png"
+    },
+    {
+      "name": "DataFlow Automator",
+      "description": "DataFlow Automator is an end-to-end data automation project that combines web scraping and browser automation to create a seamless data pipeline. The system extracts property data such as addresses, prices, and links from a Zillow-like website using BeautifulSoup and Requests. It then processes and cleans the data before automatically submitting it into a Google Form using Selenium, effectively storing the information in a structured format. This project demonstrates how multiple tools can be integrated to transform raw web data into organized datasets without manual intervention.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Data-Entry-Automation-Bot",
+      "skills": [
+        "python web scraping project",
+        "beautifulsoup scraping python",
+        "selenium automation project",
+        "data pipeline automation python",
+        "web scraping and automation integration",
+        "real world scraping project",
+        "form automation selenium python",
+        "data cleaning python project",
+        "requests and bs4 integration",
+        "end to end automation workflow",
+        "automated data entry system",
+        "scrape and store data automatically",
+        "google form automation tool",
+        "data collection automation software",
+        "real estate data scraper",
+        "automated data pipeline solution",
+        "bulk form submission automation",
+        "zillow clone scraping project",
+        "address price link extraction",
+        "data cleaning and preprocessing",
+        "google form auto submission",
+        "structured data pipeline workflow",
+        "loop based bulk submission",
+        "selenium form automation",
+        "multi source integration python"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777191890/data_entry_automation_cnpiir.png"
     },
     {
       "name": "TimeFlow",
@@ -505,6 +839,36 @@
         "smooth timer experience"
       ],
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774363896/timer_ccpn6z.webp"
+    },
+    {
+      "name": "FocusFlow Timer",
+      "description": "FocusFlow Timer is a Python-based GUI application that implements the Pomodoro Technique to enhance productivity through structured work and break intervals. It provides a visual countdown timer along with automatic session transitions between focused work and rest periods.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Pomorodo-Times",
+      "skills": [
+        "python tkinter project",
+        "gui based timer application",
+        "event driven programming python",
+        "state management python app",
+        "time based logic implementation",
+        "desktop productivity tool python",
+        "python automation gui",
+        "loop and callback handling python",
+        "user interface python project",
+        "real time countdown application",
+        "pomodoro timer app",
+        "study timer application",
+        "productivity timer tool",
+        "focus timer",
+        "work break timer",
+        "pomodoro technique implementation",
+        "automatic session switching",
+        "short and long break cycles",
+        "visual countdown timer",
+        "progress tracking with checkmarks",
+        "interactive gui controls"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777226217/pomodoro_timer_shm4kx.png"
     },
     {
       "name": "LibraCore CLI",
@@ -567,6 +931,39 @@
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774364215/simple-portfolio_ec17xe.webp"
     },
     {
+      "name": "PricePulse",
+      "description": "PricePulse is a console-based price tracking application that monitors product prices on Amazon and notifies users when a desired price threshold is reached. Built using BeautifulSoup and Requests, the system intelligently scrapes product data while handling anti-bot mechanisms through user-agent rotation and session management. It continuously checks the product price and triggers an email alert using SMTP when the price drops below the target value. Designed for reliability, the application includes multiple fallback selectors and robust error handling to ensure consistent performance.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Amazon-Price-Tracker",
+      "skills": [
+        "python web scraping project",
+        "amazon price tracker python",
+        "beautifulsoup scraping automation",
+        "requests session handling python",
+        "email automation python project",
+        "real world scraping application",
+        "anti bot scraping techniques",
+        "python smtp email automation",
+        "data extraction and alert system",
+        "automation pipeline python",
+        "price tracking tool online shopping",
+        "get notified price drops amazon",
+        "deal alert automation system",
+        "product price monitoring tool",
+        "shopping alert software",
+        "discount tracking system",
+        "multi selector price extraction",
+        "anti bot detection handling",
+        "random user agent rotation",
+        "email alert system smtp",
+        "target price trigger system",
+        "session based request handling",
+        "robust error handling scraping",
+        "console based monitoring tool"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777193020/amazon_price_tracker_fzwzwn.png"
+    },
+    {
       "name": "Rider",
       "description": "Rider is a modern ride booking interface built using React and Tailwind CSS, inspired by real-world transportation platforms like Uber and Rapido. The project focuses on delivering a clean and intuitive user experience, replicating core booking workflows with a visually appealing and responsive design. It highlights the ability to rapidly develop production-like interfaces using efficient development practices.",
       "link": "https://rider-booking.netlify.app/",
@@ -587,7 +984,7 @@
         "transport booking system",
         "online cab booking app",
         "uber like web application",
-        "ai made",
+        "ai assist",
         "modern booking interface design",
         "fast developed web application",
         "clean and intuitive user flow",
@@ -596,6 +993,38 @@
         "smooth user experience design"
       ],
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774364565/rider_z8bakw.webp"
+    },
+    {
+      "name": "ScrollSense Bot",
+      "description": "ScrollSense Bot is a Selenium-based automation project designed to simulate intelligent browsing behavior across paginated web content. The bot logs into a website, performs user actions, and gradually scrolls through the page while dynamically detecting content height. Once it reaches the end, it automatically navigates to the next page and continues the process recursively. Built on the Quotes to Scrape platform, the project demonstrates how automation scripts can handle both scrolling and pagination seamlessly in real-world web environments.",
+      "link": "",
+      "github": "http://github.com/BadBoy-Github/Quotes-Scrolling-Automation",
+      "skills": [
+        "selenium automation python project",
+        "pagination handling selenium",
+        "scroll automation python",
+        "dynamic page navigation selenium",
+        "web automation workflow python",
+        "browser automation scrolling logic",
+        "recursive automation python",
+        "xpath element handling selenium",
+        "login automation python project",
+        "real world selenium use case",
+        "automated content browsing tool",
+        "scroll and navigate websites automatically",
+        "automated reading assistant bot",
+        "pagination automation tool",
+        "content extraction automation system",
+        "auto login functionality",
+        "smooth scrolling automation",
+        "dynamic page height detection",
+        "recursive next page navigation",
+        "end of page detection logic",
+        "multi page automation workflow",
+        "controlled scroll speed simulation",
+        "exception handling selenium"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777192313/quote_scroll_bot_jy0wzg.png"
     },
     {
       "name": "ClimaSense",
@@ -626,6 +1055,36 @@
         "location based weather search"
       ],
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774364791/weather-app_nkda3c.webp"
+    },
+    {
+      "name": "AutoWish Engine",
+      "description": "AutoWish Engine is a Python-based automation tool that sends personalized birthday wishes via email by reading user data from a CSV file. It dynamically selects message templates and customizes them with recipient details for a more personal touch.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Birthday-Wisher",
+      "skills": [
+        "python automation project",
+        "email automation python",
+        "pandas data handling project",
+        "csv data processing python",
+        "datetime based automation",
+        "smtp email python project",
+        "event driven python script",
+        "template based messaging system",
+        "backend scripting python",
+        "file handling automation project",
+        "birthday reminder app",
+        "birthday email sender",
+        "automated greeting system",
+        "personalized message sender",
+        "birthday notification tool",
+        "dynamic email templates",
+        "personalized name insertion",
+        "csv based contact storage",
+        "random message selection",
+        "date based triggering",
+        "automated email delivery"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777226013/birthday_wisher_jyyepz.png"
     },
     {
       "name": "Swiggy UI Replica",
@@ -801,7 +1260,7 @@
         "image link generator online",
         "convert drive link to image url",
         "google drive file converter",
-        "ai made",
+        "ai assist",
         "instant link conversion",
         "direct image url generation",
         "client side processing tool",
@@ -873,6 +1332,36 @@
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774367226/microsoft-clone_iubrps.webp"
     },
     {
+      "name": "AuthorLink Engine",
+      "description": "AuthorLink Engine is a console-based backend application built using Java and Hibernate to manage books and their corresponding authors through a structured relational database system. It enables efficient handling of entity relationships where multiple books are associated with a single author.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Book-Author",
+      "skills": [
+        "hibernate many to one project",
+        "java hibernate crud application",
+        "jpa entity relationship project",
+        "backend data management java",
+        "mysql hibernate integration",
+        "orm mapping java project",
+        "console based java application",
+        "entity manager hibernate project",
+        "relational database mapping java",
+        "java backend architecture project",
+        "book author management system",
+        "library management backend",
+        "author book database system",
+        "book tracking application",
+        "author database manager",
+        "many to one relationship mapping",
+        "bidirectional entity navigation",
+        "complete crud operations",
+        "dynamic data retrieval",
+        "structured database design",
+        "menu driven console interface"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777212401/book_author_z7r8yt.png"
+    },
+    {
       "name": "LinkedIn Pro",
       "description": "LinkedIn Pro is an enhanced professional profile interface inspired by LinkedIn, built using React and Tailwind CSS. The project focuses on improving layout structure and visual hierarchy to create a more refined and user-friendly experience while maintaining familiarity with real-world social platforms.",
       "link": "https://linkedin-profile-clone.vercel.app/",
@@ -923,7 +1412,7 @@
         "finance management tool",
         "monthly budget tracker",
         "money tracking app",
-        "ai made",
+        "ai assist",
         "ai assisted financial insights",
         "monthly expense tracking",
         "data visualization charts",
@@ -994,6 +1483,36 @@
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774358359/todo_q71dpz.webp"
     },
     {
+      "name": "SecureKey Vault",
+      "description": "SecureKey Vault is a Python-based desktop utility that allows users to generate strong passwords and securely store login credentials through a simple graphical interface. It provides an efficient way to manage multiple account details in one place.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Password-Generator-Manager",
+      "skills": [
+        "python tkinter project",
+        "password generator python",
+        "desktop gui application python",
+        "random password generation logic",
+        "clipboard automation python",
+        "file handling python project",
+        "user input handling gui",
+        "python utility application",
+        "secure data storage python",
+        "desktop tool development",
+        "password manager app",
+        "password generator tool",
+        "login credential saver",
+        "secure password storage",
+        "account manager tool",
+        "strong random password generation",
+        "clipboard auto copy feature",
+        "simple gui interface",
+        "credential storage system",
+        "user friendly input flow",
+        "quick access password tool"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777224504/password_generator_manager_ujaudk.png"
+    },
+    {
       "name": "CalcPro",
       "description": "CalcPro is a modern scientific calculator application built using Next.js and React, designed to perform accurate mathematical computations with a clean and responsive user interface. It combines functionality with a visually appealing design to enhance user interaction.",
       "link": "https://calculator-nextjs.netlify.app/",
@@ -1022,6 +1541,36 @@
         "modern calculator ui"
       ],
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774358156/calculator_mmw9ej.webp"
+    },
+    {
+      "name": "Traffic Escape Turtle",
+      "description": "Traffic Escape Turtle is a Python-based arcade-style game built using the Turtle graphics module, where players control a turtle navigating through continuous traffic. The objective is to cross the road while avoiding dynamically moving obstacles in an endless gameplay loop.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Turtle-crossing-game",
+      "skills": [
+        "python turtle game project",
+        "object oriented python game",
+        "collision detection python",
+        "game logic implementation python",
+        "random obstacle generation",
+        "real time game mechanics",
+        "python mini game development",
+        "loop and event driven game",
+        "beginner game dev project python",
+        "interactive python application",
+        "turtle crossing game",
+        "road crossing game python",
+        "arcade style game",
+        "endless survival game",
+        "traffic dodge game",
+        "endless gameplay mechanics",
+        "progressive difficulty increase",
+        "random obstacle spawning",
+        "collision detection system",
+        "real time movement control",
+        "nostalgic arcade experience"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777222297/turtle_crossing_game_tcopgt.png"
     },
     {
       "name": "CartList",
@@ -1084,6 +1633,25 @@
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774356273/profile-card_clhuat.webp"
     },
     {
+      "name": "Internet Speed Complaint Bot",
+      "description": "A console-based automation tool built with Python and Selenium that monitors internet speed and automatically raises complaints when the service does not meet promised performance.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Twitter-Complaint-Automation",
+      "skills": [
+        "python automation project",
+        "selenium automation bot",
+        "console based python project",
+        "real world automation python",
+        "browser automation selenium",
+        "internet speed testing automation",
+        "twitter automation bot",
+        "conditional logic automation",
+        "task automation python",
+        "backend automation script"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774353769/internet-reporter_zcitsf.webp"
+    },
+    {
       "name": "DataCraft CRUD",
       "description": "DataCraft CRUD is a frontend data management application that enables users to create, read, update, and delete records through a clean and structured interface. Built using HTML, CSS, and JavaScript, it focuses on simplicity and effective data handling.",
       "link": "https://crud-application-json.onrender.com/",
@@ -1112,6 +1680,36 @@
         "user friendly data handling"
       ],
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774356103/crud-app-json_vmc54b.webp"
+    },
+    {
+      "name": "SkySaver Bot",
+      "description": "SkySaver Bot is an intelligent automation system built with Python that tracks flight prices and identifies the best travel deals in real time. It integrates multiple APIs to fetch, store, and analyze flight data, helping users find cost-effective travel options effortlessly.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Flight-Finder-System",
+      "skills": [
+        "python automation project",
+        "api integration python project",
+        "flight price tracker python",
+        "real world automation system",
+        "backend scripting python",
+        "data comparison automation",
+        "third party api integration",
+        "python notification system",
+        "email and sms automation",
+        "google sheets api project",
+        "flight deal tracker",
+        "travel price alert system",
+        "flight price comparison tool",
+        "cheap flight finder",
+        "travel automation tool",
+        "real time flight price tracking",
+        "google sheets data integration",
+        "price comparison logic",
+        "automated deal detection",
+        "email and sms notifications",
+        "multi api integration system"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777221420/flight_deal_tracker_rwgung.png"
     },
     {
       "name": "DevSnapshot UI",
@@ -1194,7 +1792,7 @@
         "interactive portfolio",
         "modern portfolio ui",
         "minimal portfolio website",
-        "ai made",
+        "ai assist",
         "3d background integration",
         "minimal single screen layout",
         "interactive visual design",
@@ -1237,6 +1835,45 @@
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774354479/agnps_jrw3bp.webp"
     },
     {
+      "name": "Retro Pong Game",
+      "description": "Retro Pong Game is a classic two-player arcade game recreated using Python and the Turtle graphics library. Inspired by the original Pong, this project brings back the nostalgic gameplay experience with simple yet engaging mechanics where two players control paddles on either side to bounce a moving ball. The focus of the project is on recreating a timeless game using fundamental programming concepts and interactive graphics.",
+      "link": "",
+      "github": "https://github.com/BadBoy-Github/Pong-Game",
+      "skills": [
+        "python game development",
+        "turtle graphics game",
+        "console based game python",
+        "retro arcade game project",
+        "two player game python",
+        "pong game implementation",
+        "game logic python project",
+        "collision detection game",
+        "interactive python project",
+        "classic game recreation"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1777224643/pong_tgmp5a.png"
+    },
+    {
+      "name": "Encapsulated Iron Oxide Nanoparticles for Cancer Therapy",
+      "description": "This research focuses on the synthesis and evaluation of dioxepine-encapsulated iron oxide nanoparticles (IONPs) as a potential anticancer agent against colorectal cancer cells (HT-29). The study explores a nanotechnology-driven therapeutic approach where bioactive compounds derived from Parmotrema reticulatum are integrated with iron oxide nanoparticles to enhance biological activity. Special emphasis is given to understanding how these nanoparticles interact with cancer cells and induce cell death through reactive oxygen species (ROS)-mediated apoptosis.",
+      "link": "",
+      "github": "",
+      "skills": [
+        "biotech",
+        "nanotechnology cancer research",
+        "iron oxide nanoparticles study",
+        "biotech research project",
+        "nanomedicine research",
+        "anticancer nanoparticle study",
+        "cytotoxicity research HT29",
+        "apoptosis research study",
+        "biomedical research project",
+        "drug delivery nanoparticles",
+        "scientific experimental study"
+      ],
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774353705/ionps_s9aqbj.webp"
+    },
+    {
       "name": "Cafe & Wifi API",
       "description": "Cafe  & Wifi API is a RESTful backend service built using Python and Flask that allows users to manage and retrieve coffee shop data. It provides structured endpoints for handling real-world cafe information.",
       "link": "https://documenter.getpostman.com/view/39718363/2sB34ZrPqt",
@@ -1267,86 +1904,105 @@
         "backend service project"
       ],
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774354203/api-cafe_fxzjln.webp"
-    },
-    {
-      "name": "Internet Speed Complaint Bot",
-      "description": "A console-based automation tool built with Python and Selenium that monitors internet speed and automatically raises complaints when the service does not meet promised performance.",
-      "link": "",
-      "github": "https://github.com/BadBoy-Github/Twitter-Complaint-Automation",
-      "skills": [
-        "python automation project",
-        "selenium automation bot",
-        "console based python project",
-        "real world automation python",
-        "browser automation selenium",
-        "internet speed testing automation",
-        "twitter automation bot",
-        "conditional logic automation",
-        "task automation python",
-        "backend automation script"
-      ],
-      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774353769/internet-reporter_zcitsf.webp"
-    },
-    {
-      "name": "Encapsulated Iron Oxide Nanoparticles for Cancer Therapy",
-      "description": "This research focuses on the synthesis and evaluation of dioxepine-encapsulated iron oxide nanoparticles (IONPs) as a potential anticancer agent against colorectal cancer cells (HT-29). The study explores a nanotechnology-driven therapeutic approach where bioactive compounds derived from Parmotrema reticulatum are integrated with iron oxide nanoparticles to enhance biological activity. Special emphasis is given to understanding how these nanoparticles interact with cancer cells and induce cell death through reactive oxygen species (ROS)-mediated apoptosis.",
-      "link": "",
-      "github": "",
-      "skills": [
-        "biotech",
-        "nanotechnology cancer research",
-        "iron oxide nanoparticles study",
-        "biotech research project",
-        "nanomedicine research",
-        "anticancer nanoparticle study",
-        "cytotoxicity research HT29",
-        "apoptosis research study",
-        "biomedical research project",
-        "drug delivery nanoparticles",
-        "scientific experimental study"
-      ],
-      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774353705/ionps_s9aqbj.webp"
-    },
-    {
-      "name": "Retro Pong Game",
-      "description": "Retro Pong Game is a classic two-player arcade game recreated using Python and the Turtle graphics library. Inspired by the original Pong, this project brings back the nostalgic gameplay experience with simple yet engaging mechanics where two players control paddles on either side to bounce a moving ball. The focus of the project is on recreating a timeless game using fundamental programming concepts and interactive graphics.",
-      "link": "",
-      "github": "https://github.com/BadBoy-Github/Pong-Game",
-      "skills": [
-        "python game development",
-        "turtle graphics game",
-        "console based game python",
-        "retro arcade game project",
-        "two player game python",
-        "pong game implementation",
-        "game logic python project",
-        "collision detection game",
-        "interactive python project",
-        "classic game recreation"
-      ],
-      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774353643/pong_vuun82.webp"
-    },
-    {
-      "name": "Classic Snake Game",
-      "description": "Classic Snake Game is a console-based arcade game developed using Python and the Turtle graphics library, inspired by one of the most popular and timeless games ever created. This project recreates the nostalgic gameplay experience where the player controls a continuously moving snake that grows longer as it consumes food. With each successful move, the challenge increases, requiring better control and quicker decision-making. The primary goal of this project is to demonstrate how fundamental programming concepts can be used to build an engaging and interactive game from scratch.",
-      "link": "",
-      "github": "https://github.com/BadBoy-Github/Snake-Game",
-      "skills": [
-        "python snake game",
-        "turtle graphics game",
-        "console based python project",
-        "arcade game python",
-        "snake game implementation",
-        "game logic python",
-        "collision detection game",
-        "interactive python project",
-        "classic game development",
-        "beginner game python"
-      ],
-      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774353565/snake_v68xow.webp"
     }
   ],
-  "experience": [],
+  "experience": [
+    {
+      "title": "React JS Developer Intern",
+      "company": "The Skybrisk",
+      "period": "Jan 2026 - Current",
+      "description": "Developing scalable web applications using React.js. Creating reusable components, optimizing performance, and integrating RESTful APIs for seamless user experiences.",
+      "skills": [
+        "React JS",
+        "State Management",
+        "API Integration",
+        "Performance Optimization",
+        "UI/UX Implementation"
+      ],
+      "link": "https://www.theskybrisk.com/"
+    },
+    {
+      "title": "Java Full Stack Developer Trainee",
+      "company": "QSpiders Software Testing & Development Institute",
+      "period": "Aug 2025 - Current",
+      "description": "Full-stack Java training covering front-end, back-end, and middleware. Strengthening problem-solving skills through dedicated aptitude training.",
+      "skills": [
+        "SQL",
+        "Aptitude",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Java"
+      ],
+      "link": "https://qspiders.com/"
+    },
+    {
+      "title": "Web Developer Intern",
+      "company": "Hex Softwares",
+      "period": "Feb - Mar 2026",
+      "description": "Hands-on web development using HTML5, CSS3, and JavaScript. Creating responsive landing pages with Tailwind CSS for client websites.",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JS"
+      ],
+      "link": "https://hexsoftwares.com/"
+    },
+    {
+      "title": "React JS Developer Intern",
+      "company": "The Coding Samurai",
+      "period": "Jan - Feb 2026",
+      "description": "Building high-quality React interfaces and interactive features. Translating wireframes into code with cross-browser compatibility and mobile responsiveness.",
+      "skills": [
+        "React JS",
+        "Tailwind CSS"
+      ],
+      "link": "https://codingsamurai.vercel.app/"
+    },
+    {
+      "title": "Software Developer Intern",
+      "company": "Cognifyz Technologies Pvt Ltd",
+      "period": "Nov - Dec 2025",
+      "description": "Engaged in various Java programming tasks to enhance learning and problem-solving skills. Continuously acquiring new knowledge and practical experience in Java development through hands-on projects and challenges.",
+      "skills": [
+        "Java",
+        "Problem Solving"
+      ],
+      "link": "https://cognifyz.com/"
+    },
+    {
+      "title": "",
+      "company": "Corizo Edutech Pvt Ltd",
+      "period": "Oct - Dec 2024",
+      "description": "",
+      "skills": [],
+      "link": "https://corizo.in/"
+    },
+    {
+      "title": "Applied Microbiology and Agricultural Biotechnology",
+      "company": "Elies Biotech Pvt Ltd",
+      "period": "Jul - Aug 2022",
+      "description": "Practical skills in microbial characterization, biofertilizer production, and mushroom tissue culture. Building foundation in applied microbiology.",
+      "skills": [
+        "Microbiology",
+        "Mushroom Cultivation",
+        "BSFL Rearing"
+      ],
+      "link": "https://eliesbiotech.co.in/"
+    },
+    {
+      "title": "Millets Processing and Production",
+      "company": "Biorith Techno Products Pvt Ltd",
+      "period": "Jun - Jul 2022",
+      "description": "Operating advanced machinery for eco-friendly packaging. Gaining experience in sustainable agriculture and food processing.",
+      "skills": [
+        "Food Science",
+        "Food Processing",
+        "Quality Checking"
+      ],
+      "link": "https://biorith.in/"
+    }
+  ],
   "education": [
     {
       "institution": "",
@@ -1718,6 +2374,9 @@
       "github": "https://github.com/BadBoy-Github/Portfolio",
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774279871/Portfolio_head_cd3ap3.png",
       "tags": [
+        "elayabarathi",
+        "elayabarathimv",
+        "elayabarathi m v",
         "frontend developer portfolio",
         "react developer portfolio",
         "javascript developer projects",
@@ -1812,5 +2471,5 @@
       "content": "\n        <p>Card Vault is more than just a website—it's a complete digital ecosystem designed to simplify how users discover, purchase, and manage digital gift cards. Built with performance, security, and user experience at its core, this platform represents my evolution as a full-stack developer and my ability to create real-world, scalable solutions. In this blog, I’ll take you deep into the journey behind Card Vault—from the initial idea to the technical architecture, challenges, and future vision.</p>\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774320955/cv_1_epiijo.png\" alt=\"Card Vault Trust Section\" class=\"blog-image\" />\n\n        <h2>The Idea Behind Card Vault</h2>\n        <p>The concept of Card Vault originated from a simple observation—digital gift cards are everywhere, yet the buying experience often feels fragmented, slow, or untrustworthy. Many platforms lack transparency, real-time updates, or seamless delivery. I wanted to change that.</p>\n\n        <p>The vision was clear: create a centralized platform where users can browse, purchase, and receive digital gift cards instantly, without friction. But I didn’t want to stop at functionality—I wanted personality. Card Vault was designed to feel premium, engaging, and slightly playful, with a tone that makes users feel confident while also entertained.</p>\n\n        <p>From the tagline “Pick a card. Any card.” to the subtle humor in the UI, every element was crafted to create a memorable experience. The goal wasn’t just to sell gift cards—it was to build a brand that users trust and enjoy interacting with.</p>\n\n        <h2>Design Philosophy & User Experience</h2>\n        <p>User experience played a central role in shaping Card Vault. The interface is clean, modern, and highly intuitive, allowing users to navigate effortlessly between sections like featured products, gift cards, and contact pages.</p>\n\n        <p>The homepage is structured to immediately capture attention with a bold hero section, followed by featured products that highlight limited-time deals. The layout ensures that users can quickly understand what the platform offers without feeling overwhelmed.</p>\n\n        <p>Microcopy and UI text were carefully crafted to add personality—phrases like “Faster Than Regret” and “Fort Knox Security” make the platform feel alive. These small details transform a basic e-commerce experience into something engaging and memorable.</p>\n\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1775229943/7_jmyz5p.png\" alt=\"Card Vault Featured products\" class=\"blog-image\" />\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1775229943/8_juptqq.png\" alt=\"Card Vault Gift Cards\" class=\"blog-image\" />\n\n        <h2>Core Features That Power Card Vault</h2>\n        <p>Card Vault is built around a set of powerful features that ensure a smooth and reliable user experience. The product browsing system allows users to explore various categories, including shopping, gaming, entertainment, and lifestyle gift cards.</p>\n\n        <p>The featured products section dynamically highlights exclusive deals, creating urgency with limited stock indicators like “Only 1 left” and expiration timers. This encourages faster decision-making and improves conversion rates.</p>\n\n        <p>The search functionality enables users to instantly find specific gift cards, reducing friction and improving usability. Combined with categorized listings, it ensures that users always find what they’re looking for quickly.</p>\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774320955/cv_3_h9h9ip.png\" alt=\"Card Vault Frequently Asked Questions\" class=\"blog-image\" />\n\n        <h2>Secure Payment System & UPI Integration</h2>\n        <p>One of the most critical aspects of Card Vault is its secure payment system. Since the platform deals with digital assets, ensuring safe transactions was a top priority.</p>\n\n        <p>The platform supports UPI-based transactions, making it highly accessible for Indian users. The payment flow is designed to be simple yet secure, requiring users to submit transaction details (UTR) for verification.</p>\n\n        <p>Behind the scenes, validation mechanisms ensure that each transaction is properly recorded and verified before delivering the digital product. This prevents fraud while maintaining a smooth user experience.</p>\n\n        <p>Security messaging like “Fort Knox Security” reinforces trust, assuring users that their data and purchases are protected with strong encryption practices.</p>\n\n        <h2>Real-Time Product Management</h2>\n        <p>Card Vault features a dynamic inventory system that updates product availability in real time. This ensures that users always see accurate stock information, reducing confusion and preventing overselling.</p>\n\n        <p>Each product includes detailed metadata such as price, discount, expiry date, and availability status. These details help users make informed decisions quickly.</p>\n\n        <p>The system also handles edge cases like out-of-stock items gracefully, ensuring that the user interface remains consistent and informative even when products are unavailable.</p>\n\n        <h2>Backend Architecture & Data Flow</h2>\n        <p>The backend of Card Vault is designed to handle multiple responsibilities, including product management, transaction verification, and user communication. It acts as the brain of the application, ensuring that all processes run smoothly.</p>\n\n        <p>APIs are structured to handle requests efficiently, with clear separation between frontend and backend logic. This modular approach makes the system scalable and easy to maintain.</p>\n\n        <p>Data flows seamlessly between the frontend and backend, ensuring that users receive instant updates on their purchases, stock availability, and order status.</p>\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774320957/cv_5_lwj26i.png\" alt=\"Card Vault Orders Page\" class=\"blog-image\" />\n\n        <h2>Performance Optimization</h2>\n        <p>Performance was a key focus during development. The application is optimized for fast load times, ensuring that users can browse and purchase without delays.</p>\n\n        <p>Lazy loading techniques are used for images and components, reducing initial load time and improving overall responsiveness. Efficient state management ensures that the UI updates smoothly without unnecessary re-renders.</p>\n\n        <p>The deployment on Vercel provides additional performance benefits, including global CDN distribution and automatic scaling, ensuring a consistent experience for users across different locations.</p>\n\n        <h2>Trust, Branding & User Confidence</h2>\n        <p>Building trust is essential for any e-commerce platform, especially one dealing with digital goods. Card Vault addresses this through clear communication, secure systems, and consistent branding.</p>\n\n        <p>Sections like “Why Trust the Vault?” highlight key value propositions, including authenticity, security, and fast delivery. These elements reassure users and build confidence in the platform.</p>\n\n        <p>The branding combines professionalism with personality, creating a unique identity that stands out from generic e-commerce websites.</p>\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774320956/cv_4_qikprw.png\" alt=\"Card Vault Contact Section\" class=\"blog-image\" />\n\n        <h2>Contact System & User Interaction</h2>\n        <p>Card Vault includes a comprehensive contact system that allows users to reach out بسهولة. Whether it’s a query, issue, or feedback, the platform ensures that communication is smooth and efficient.</p>\n\n        <p>Integration with email and WhatsApp provides multiple channels for user support, making it easier for users to get help when needed.</p>\n\n        <p>The contact form includes validation and structured input fields, ensuring that messages are clear and actionable.</p>\n\n        <h2>Challenges Faced During Development</h2>\n        <p>Building Card Vault came with its own set of challenges. One of the biggest hurdles was ensuring secure and reliable payment verification without introducing unnecessary complexity.</p>\n\n        <p>Managing real-time inventory updates was another challenge, especially when dealing with limited-stock items. Ensuring consistency between frontend display and backend data required careful planning.</p>\n\n        <p>Balancing performance with feature richness was also critical. Adding too many features could slow down the application, so optimization strategies were essential.</p>\n\n        <h2>Future Enhancements</h2>\n        <p>Card Vault is designed to evolve continuously. Future updates will include features like user authentication, order history tracking, and wishlist functionality.</p>\n\n        <p>I also plan to integrate automated payment verification systems, reducing manual steps and improving efficiency.</p>\n\n        <p>Additional enhancements may include personalized recommendations, advanced filtering, and analytics dashboards to improve both user experience and business insights.</p>\n\n        <h2>Conclusion</h2>\n        <p>Card Vault represents a complete end-to-end product—combining design, development, security, and user experience into a single platform. It showcases my ability to build scalable, production-ready applications that solve real problems.</p>\n\n        <p>This project is not just about selling gift cards—it’s about creating a seamless digital experience that users can trust and enjoy. As I continue to improve and expand Card Vault, it will remain a key milestone in my development journey.</p>\n\n        <p>If you haven’t explored it yet, now’s the time. Pick a card. Any card.</p>\n    "
     }
   ],
-  "lastUpdated": "2026-04-18T08:21:01.671Z"
+  "lastUpdated": "2026-07-26T17:51:26.939Z"
 }

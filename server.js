@@ -8,6 +8,7 @@ import fetch from "node-fetch";
 import path from "path";
 import { fileURLToPath } from "url";
 import nodemailer from 'nodemailer';
+import mongoose from 'mongoose';
 import { startAutoSync, stopAutoSync, syncData } from './dataSync.js';
 
 // ES Module __dirname equivalent
@@ -22,10 +23,32 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors({
     origin: process.env.FRONTEND_URL,
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true
 }));
 app.use(bodyParser.json());
+
+// MongoDB Connection
+let mongoConnected = false;
+
+async function connectMongo() {
+    try {
+        const uri = process.env.MONGO_URI;
+        if (!uri) {
+            console.log('⚠️  MONGO_URI not found in environment variables. Admin CRUD features will be unavailable.');
+            return false;
+        }
+        await mongoose.connect(uri);
+        mongoConnected = true;
+        console.log('✅ MongoDB connected successfully');
+        return true;
+    } catch (error) {
+        console.error('❌ MongoDB connection error:', error.message);
+        return false;
+    }
+}
+
+connectMongo();
 
 // Load portfolio data
 let portfolioData;
@@ -89,17 +112,14 @@ function generateLocalResponse(question) {
     const q = question.toLowerCase().trim();
     const data = portfolioData;
 
-    // GitHub related questions
     if (q.includes('github') || q.includes('git') || q.includes('code') || q.includes('repository')) {
         return `🔗 Elayabarathi's GitHub: ${data.contact.github}\n\nHere you'll find all his projects including:\n• Portfolio Website (React + Tailwind)\n• Bamboo Blogs (Flask blog platform)\n• Spotify Clone (with React)\n• eCommerce applications\n• AI Chatbots\n• And many more with complete source code!\n\nFeel free to explore and star his repositories!`;
     }
 
-    // Greetings
     if (/(hello|hi|hey|greetings|good morning|good afternoon)/i.test(q)) {
         return "Hello! 👋 I'm Elayabarathi's portfolio assistant. He's a passionate full-stack developer and biotechnologist. I can tell you about his projects, skills, experience, or how to contact him. What would you like to know?";
     }
 
-    // Projects
     if (q.includes('project') || q.includes('portfolio') || q.includes('work')) {
         const projects = data.projects.slice(0, 4).map(proj =>
             `• ${proj.name}: ${proj.description.substring(0, 80)}...`
@@ -108,33 +128,27 @@ function generateLocalResponse(question) {
         return `🚀 Elayabarathi's Projects:\n\n${projects}\n\nCheck out his portfolio for live demos: ${data.contact.portfolio}`;
     }
 
-    // Skills
     if (q.includes('skill') || q.includes('technology') || q.includes('tech') || q.includes('stack')) {
         return `💻 Technical Skills:\n\nFRONTEND: React, JavaScript, HTML, CSS, Tailwind\nBACKEND: Python, Flask, Node.js, Express\nDATABASES: MongoDB, PostgreSQL, SQLite\nTOOLS: Git, VS Code, Postman, Docker\n\n🧬 Biotechnology:\nMicrobiology, Genetic Engineering, Nanobiotechnology, Bioinformatic\n\nHe's always learning new technologies!`;
     }
 
-    // Experience
     if (q.includes('experience') || q.includes('work') || q.includes('intern') || q.includes('job')) {
         return `💼 Professional Experience:\n\n• Fullstack Web Developer Intern @ Corizo Edutech\n• Java Fullstack Trainee @ QSpider\n• Biotechnology Intern @ Elies Biotech\n• Research in Nanobiotechnology & Antimicrobial Solutions\n\nHe has practical experience in both software development and biotech research.`;
     }
 
-    // Contact
     if (q.includes('contact') || q.includes('email') || q.includes('linkedin') || q.includes('reach') || q.includes('connect')) {
         return `📞 Contact Elayabarathi:\n\n📧 Email: ${data.contact.email}\n💼 LinkedIn: ${data.contact.linkedin}\n🔗 GitHub: ${data.contact.github}\n🌐 Portfolio: ${data.contact.portfolio}\n\nHe's open to collaborations and new opportunities!`;
     }
 
-    // About
     if (q.includes('about') || q.includes('who are you') || q.includes('yourself') || q.includes('introduce')) {
         return `👨‍💻 About Elayabarathi:\n\n${data.about}\n\nHe's passionate about integrating technology and biology to create innovative solutions that make a difference.`;
     }
 
-    // Education
     if (q.includes('education') || q.includes('degree') || q.includes('study') || q.includes('college')) {
         const edu = data.education[0];
         return `🎓 Education:\n\n${edu.education}\n${edu.institution} (${edu.year})\nGrade: ${edu.percentage}\n\n${edu.description}`;
     }
 
-    // Default response
     return `🤖 I can help you learn about Elayabarathi M V! Here's what I can tell you about:\n\n• His projects and portfolio 🚀\n• Technical skills and technologies 💻\n• Professional experience 💼\n• Education background 🎓\n• Contact information 📞\n• GitHub repositories 🔗\n\nWhat would you like to know specifically?`;
 }
 
@@ -142,27 +156,18 @@ function generateLocalResponse(question) {
 function formatAIResponse(text) {
     if (!text) return text;
 
-    // Replace markdown-style formatting with HTML
     let formatted = text
-        // Headers (### Header -> <strong>Header</strong>)
         .replace(/###\s+(.+)/g, '<strong>$1</strong>')
-        // Bold (**text** -> <strong>text</strong>)
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        // Italic (*text* -> <em>text</em>)
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
-        // Bullet points with • or -
         .replace(/^[\s]*[•\-]\s+(.+)$/gm, '• $1')
-        // Multiple newlines to single newline
         .replace(/\n\s*\n/g, '\n')
-        // Ensure proper line breaks
         .replace(/\n/g, '<br/>')
-        // Ensure proper link formating
         .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
 
     return formatted;
 }
 
-// Update the chat endpoint to use formatting
 app.post('/api/chat', async (req, res) => {
     try {
         const { question } = req.body;
@@ -176,11 +181,9 @@ app.post('/api/chat', async (req, res) => {
 
         console.log(`💬 Question: "${question}"`);
 
-        // Try AI model first, fallback to local responses
         let answer;
         let source = 'local';
 
-        // Build enhanced context from training data
         let context = `
         Your name is Portfolio-GPT, let the user to interact with Elayabarathi M V's portfolio and CV. 
         You are a helpful assistant for Elayabarathi M V's portfolio. 
@@ -203,15 +206,12 @@ app.post('/api/chat', async (req, res) => {
         If you don't know something specific, suggest asking about his projects, skills, or experience.
         `;
 
-        // Override with training data context if available
         if (trainingData && trainingData.context) {
-            // Build featured projects info
             const featuredProjectsInfo = portfolioData.featuredProjects ?
                 portfolioData.featuredProjects.map(fp =>
                     `- ${fp.name}: ${fp.description || 'Featured project'} - Link: ${fp.link || 'N/A'}`
                 ).join('\n') : 'No featured projects';
 
-            // Build blogs info
             const blogsInfo = portfolioData.blogs ?
                 portfolioData.blogs.map(blog =>
                     `- ${blog.title}: ${blog.subtitle || 'Blog post'} (${blog.readTime || 'N/A'})`
@@ -349,9 +349,20 @@ app.get('/api/test', (req, res) => {
             health: 'GET /api/health',
             test: 'GET /api/test',
             testAI: 'GET /api/test-ai',
-            sync: 'POST /api/sync - Trigger manual data sync',
-            syncStatus: 'GET /api/sync-status - Check sync status'
-        }
+            sync: 'POST /api/sync',
+            syncStatus: 'GET /api/sync-status',
+            login: 'POST /api/admin/login',
+            seed: 'POST /api/admin/seed',
+            techStacks: '/api/admin/tech-stacks',
+            projects: '/api/admin/projects',
+            certificates: '/api/admin/certificates',
+            achievements: '/api/admin/achievements',
+            reviews: '/api/admin/reviews',
+            experience: '/api/admin/experience',
+            education: '/api/admin/education',
+            blogs: '/api/admin/blogs'
+        },
+        mongoConnected
     });
 });
 
@@ -362,7 +373,6 @@ app.post('/api/sync', async (req, res) => {
         const success = await syncData();
 
         if (success) {
-            // Reload data after sync
             loadData();
             res.json({
                 success: true,
@@ -438,7 +448,6 @@ app.post('/api/contact', async (req, res) => {
     try {
         const { name, email, subject, category, message } = req.body;
 
-        // Validate required fields
         if (!name || !email || !subject || !category || !message) {
             return res.status(400).json({
                 success: false,
@@ -446,7 +455,6 @@ app.post('/api/contact', async (req, res) => {
             });
         }
 
-        // Validate category
         const validCategories = ['query', 'feedback', 'question', 'issue', 'collab', 'chitchat', 'others'];
         if (!validCategories.includes(category)) {
             return res.status(400).json({
@@ -455,7 +463,6 @@ app.post('/api/contact', async (req, res) => {
             });
         }
 
-        // Create nodemailer transporter
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST || 'smtp.gmail.com',
             port: parseInt(process.env.SMTP_PORT) || 587,
@@ -466,7 +473,6 @@ app.post('/api/contact', async (req, res) => {
             }
         });
 
-        // Email content
         const mailOptions = {
             from: process.env.SMTP_USER,
             to: process.env.TO_EMAIL || process.env.SMTP_USER,
@@ -567,7 +573,6 @@ app.post('/api/contact', async (req, res) => {
             `
         };
 
-        // Send email
         await transporter.sendMail(mailOptions);
 
         console.log(`📧 Contact form submitted: ${name} (${email}) - ${category}: ${subject}`);
@@ -591,10 +596,22 @@ app.get('/', (req, res) => {
     res.json({
         message: 'Welcome to Elayabarathi Portfolio Chatbot API',
         endpoints: {
-            chat: 'POST /api/chat - Send questions about the portfolio',
-            health: 'GET /api/health - Check server status',
-            test: 'GET /api/test - Test endpoint',
-            testAI: 'GET /api/test-ai - Test AI model'
+            chat: 'POST /api/chat',
+            health: 'GET /api/health',
+            test: 'GET /api/test',
+            testAI: 'GET /api/test-ai',
+            sync: 'POST /api/sync',
+            syncStatus: 'GET /api/sync-status',
+            login: 'POST /api/admin/login',
+            seed: 'POST /api/admin/seed',
+            techStacks: '/api/admin/tech-stacks',
+            projects: '/api/admin/projects',
+            certificates: '/api/admin/certificates',
+            achievements: '/api/admin/achievements',
+            reviews: '/api/admin/reviews',
+            experience: '/api/admin/experience',
+            education: '/api/admin/education',
+            blogs: '/api/admin/blogs'
         },
         features: {
             ai: 'Integrated Hugging Face AI model',
@@ -607,6 +624,104 @@ app.get('/', (req, res) => {
     });
 });
 
+// Admin routes
+import authRoutes from './routes/auth.js';
+import techStackRoutes from './routes/techStacks.js';
+import projectRoutes from './routes/projects.js';
+import certificateRoutes from './routes/certificates.js';
+import achievementRoutes from './routes/achievements.js';
+import reviewRoutes from './routes/reviews.js';
+import experienceRoutes from './routes/experience.js';
+import educationRoutes from './routes/education.js';
+import blogRoutes from './routes/blogs.js';
+
+app.use('/api/admin', authRoutes);
+app.use('/api/admin/tech-stacks', techStackRoutes);
+app.use('/api/admin/projects', projectRoutes);
+app.use('/api/admin/certificates', certificateRoutes);
+app.use('/api/admin/achievements', achievementRoutes);
+app.use('/api/admin/reviews', reviewRoutes);
+app.use('/api/admin/experience', experienceRoutes);
+app.use('/api/admin/education', educationRoutes);
+app.use('/api/admin/blogs', blogRoutes);
+
+import { authMiddleware } from './middleware/auth.js';
+
+// Seed endpoint
+app.post('/api/admin/seed', authMiddleware, async (req, res) => {
+    if (!mongoConnected) {
+        return res.status(500).json({ success: false, message: 'MongoDB not connected' });
+    }
+    try {
+        const Admin = (await import('./models/Admin.js')).default;
+        const TechStack = (await import('./models/TechStack.js')).default;
+        const Project = (await import('./models/Project.js')).default;
+        const Certificate = (await import('./models/Certificate.js')).default;
+        const Achievement = (await import('./models/Achievement.js')).default;
+        const Review = (await import('./models/Review.js')).default;
+        const Experience = (await import('./models/Experience.js')).default;
+        const Education = (await import('./models/Education.js')).default;
+        const Blog = (await import('./models/Blog.js')).default;
+        const bcrypt = (await import('bcryptjs')).default;
+        const fs = await import('fs');
+
+        const dataPath = path.join(__dirname, "data", "data.json");
+        const raw = fs.readFileSync(dataPath, "utf8");
+        const data = JSON.parse(raw);
+
+        await Admin.deleteMany({});
+        await TechStack.deleteMany({});
+        await Project.deleteMany({});
+        await Certificate.deleteMany({});
+        await Achievement.deleteMany({});
+        await Review.deleteMany({});
+        await Experience.deleteMany({});
+        await Education.deleteMany({});
+        await Blog.deleteMany({});
+
+        const adminEmail = process.env.ADMIN_EMAIL || 'elayabarathiedison@gmail.com';
+        const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+        const salt = await bcrypt.hash(adminPassword, 10);
+        await Admin.create({ email: adminEmail, password: salt });
+
+        if (data.skills && data.skills['technical skills']) {
+            const skills = data.skills['technical skills'];
+            for (const [category, items] of Object.entries(skills)) {
+                if (Array.isArray(items) && items.length > 0) {
+                    await TechStack.create({ category, items });
+                }
+            }
+        }
+
+        if (Array.isArray(data.projects)) {
+            await Project.insertMany(data.projects);
+        }
+        if (Array.isArray(data.certificates)) {
+            await Certificate.insertMany(data.certificates);
+        }
+        if (Array.isArray(data.achievements)) {
+            await Achievement.insertMany(data.achievements);
+        }
+        if (Array.isArray(data.reviews)) {
+            await Review.insertMany(data.reviews);
+        }
+        if (Array.isArray(data.experience)) {
+            await Experience.insertMany(data.experience);
+        }
+        if (Array.isArray(data.education)) {
+            await Education.insertMany(data.education);
+        }
+        if (Array.isArray(data.blogs)) {
+            await Blog.insertMany(data.blogs);
+        }
+
+        res.json({ success: true, message: 'Database seeded successfully' });
+    } catch (error) {
+        console.error('Seed error:', error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
+
 // Start server
 app.listen(PORT, () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
@@ -614,6 +729,13 @@ app.listen(PORT, () => {
     console.log(`💬 Chat endpoint: POST http://localhost:${PORT}/api/chat`);
     console.log(`🤖 AI test: http://localhost:${PORT}/api/test-ai`);
     console.log(`🎯 Test endpoint: http://localhost:${PORT}/api/test`);
+    console.log(`🔑 Admin login: POST http://localhost:${PORT}/api/admin/login`);
+
+    if (mongoConnected) {
+        console.log('✅ MongoDB connected');
+    } else {
+        console.log('⚠️  MongoDB not connected. Run seed endpoint after setting MONGO_URI in .env');
+    }
 
     // Start auto-sync (every 30 minutes)
     startAutoSync();
@@ -624,4 +746,3 @@ app.listen(PORT, () => {
         console.log('✅ Hugging Face token loaded');
     }
 });
-
