@@ -127,14 +127,31 @@ function formatProjects(projectData) {
 function formatExperience(expData) {
     if (!expData || !Array.isArray(expData)) return [];
 
-    return expData.map(exp => ({
-        title: exp.name || exp.title || '',
-        company: exp.instName || exp.company || '',
-        period: exp.year || exp.period || '',
-        description: exp.desc || exp.description || '',
-        skills: exp.skills || [],
-        link: exp.instLink || exp.link || ''
-    }));
+    const result = [];
+    for (const exp of expData) {
+        if (exp.compound && Array.isArray(exp.content)) {
+            for (const item of exp.content) {
+                result.push({
+                    title: item.name || item.title || '',
+                    company: item.instName || item.company || '',
+                    period: item.year || item.period || '',
+                    description: item.desc || item.description || '',
+                    skills: item.skills || [],
+                    link: item.instLink || item.link || ''
+                });
+            }
+        } else {
+            result.push({
+                title: exp.name || exp.title || '',
+                company: exp.instName || exp.company || '',
+                period: exp.year || exp.period || '',
+                description: exp.desc || exp.description || '',
+                skills: exp.skills || [],
+                link: exp.instLink || exp.link || ''
+            });
+        }
+    }
+    return result;
 }
 
 // Format education for backend
@@ -142,10 +159,10 @@ function formatEducation(eduData) {
     if (!eduData || !Array.isArray(eduData)) return [];
 
     return eduData.map(e => ({
-        institution: e.school || e.college || e.institution || '',
-        degree: e.degree || e.course || '',
+        institution: e.instName || e.school || e.college || e.institution || '',
+        degree: e.name || e.degree || e.course || '',
         year: e.year || e.graduationYear || '',
-        percentage: e.grade || e.percentage || '',
+        percentage: e.perc || e.grade || e.percentage || '',
         description: e.desc || e.description || ''
     }));
 }

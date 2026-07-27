@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastTrained": "2026-07-26T17:51:26.942Z",
+  "lastTrained": "2026-07-27T17:27:48.678Z",
   "examples": [
     {
       "input": "Tell me about yourself",
@@ -16,11 +16,11 @@
     },
     {
       "input": "What is your work experience?",
-      "output": "React JS Developer Intern at The Skybrisk (Jan 2026 - Current): Developing scalable web applications using React.js. Creating reusable component.... Java Full Stack Developer Trainee at QSpiders Software Testing & Development Institute (Aug 2025 - Current): Full-stack Java training covering front-end, back-end, and middleware. Strengthe.... Web Developer Intern at Hex Softwares (Feb - Mar 2026): Hands-on web development using HTML5, CSS3, and JavaScript. Creating responsive .... React JS Developer Intern at The Coding Samurai (Jan - Feb 2026): Building high-quality React interfaces and interactive features. Translating wir.... Software Developer Intern at Cognifyz Technologies Pvt Ltd (Nov - Dec 2025): Engaged in various Java programming tasks to enhance learning and problem-solvin....  at Corizo Edutech Pvt Ltd (Oct - Dec 2024): .... Applied Microbiology and Agricultural Biotechnology at Elies Biotech Pvt Ltd (Jul - Aug 2022): Practical skills in microbial characterization, biofertilizer production, and mu.... Millets Processing and Production at Biorith Techno Products Pvt Ltd (Jun - Jul 2022): Operating advanced machinery for eco-friendly packaging. Gaining experience in s..."
+      "output": "React JS Developer Intern at The Skybrisk (Jan 2026 - Current): Developing scalable web applications using React.js. Creating reusable component.... Java Full Stack Developer Trainee at QSpiders Software Testing & Development Institute (Aug 2025 - Current): Full-stack Java training covering front-end, back-end, and middleware. Strengthe.... Web Developer Intern at Hex Softwares (Feb - Mar 2026): Hands-on web development using HTML5, CSS3, and JavaScript. Creating responsive .... React JS Developer Intern at The Coding Samurai (Jan - Feb 2026): Building high-quality React interfaces and interactive features. Translating wir.... Software Developer Intern at Cognifyz Technologies Pvt Ltd (Nov - Dec 2025): Engaged in various Java programming tasks to enhance learning and problem-solvin.... Full Stack Developer at  (Nov - Dec 2024): Building real-world projects like CRUD apps and eCommerce sites. Gaining hands-o.... Full Stack Developer at  (Oct - Nov 2024): Hands-on experience with HTML, CSS, JavaScript, MongoDB, and Node.js. Building p.... Applied Microbiology and Agricultural Biotechnology at Elies Biotech Pvt Ltd (Jul - Aug 2022): Practical skills in microbial characterization, biofertilizer production, and mu.... Millets Processing and Production at Biorith Techno Products Pvt Ltd (Jun - Jul 2022): Operating advanced machinery for eco-friendly packaging. Gaining experience in s..."
     },
     {
       "input": "What is your educational background?",
-      "output": " at  (2020 - 2024).  at  (2019 - 2020).  at  (2017 - 2018)"
+      "output": " B.Tech Biotechnology at K S Rangasamy College of Technology (2020 - 2024). HSC - Bio Math at U R C Palaniammal Matriculation Higher Secondary School (2019 - 2020). SSLC at U R C Palaniammal Matriculation Higher Secondary School (2017 - 2018)"
     },
     {
       "input": "What are your featured projects?",

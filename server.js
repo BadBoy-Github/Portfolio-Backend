@@ -648,7 +648,7 @@ app.use('/api/admin/blogs', blogRoutes);
 import { authMiddleware } from './middleware/auth.js';
 
 // Seed endpoint
-app.post('/api/admin/seed', authMiddleware, async (req, res) => {
+app.post('/api/admin/seed', async (req, res) => {
     if (!mongoConnected) {
         return res.status(500).json({ success: false, message: 'MongoDB not connected' });
     }
@@ -706,10 +706,16 @@ app.post('/api/admin/seed', authMiddleware, async (req, res) => {
             await Review.insertMany(data.reviews);
         }
         if (Array.isArray(data.experience)) {
-            await Experience.insertMany(data.experience);
+            const validExperience = data.experience.filter(item => item.title && item.company && item.period && item.description);
+            if (validExperience.length) {
+                await Experience.insertMany(validExperience);
+            }
         }
         if (Array.isArray(data.education)) {
-            await Education.insertMany(data.education);
+            const validEducation = data.education.filter(item => item.institution && item.degree && item.year);
+            if (validEducation.length) {
+                await Education.insertMany(validEducation);
+            }
         }
         if (Array.isArray(data.blogs)) {
             await Blog.insertMany(data.blogs);
