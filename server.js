@@ -688,7 +688,13 @@ app.post('/api/admin/seed', async (req, res) => {
             const skills = data.skills['technical skills'];
             for (const [category, items] of Object.entries(skills)) {
                 if (Array.isArray(items) && items.length > 0) {
-                    await TechStack.create({ category, items });
+                    const skillItems = items.map(item => {
+                        if (typeof item === 'string') {
+                            return { label: item, desc: '', imgSrc: '' };
+                        }
+                        return item;
+                    });
+                    await TechStack.create({ category, items: skillItems });
                 }
             }
         }
@@ -697,22 +703,89 @@ app.post('/api/admin/seed', async (req, res) => {
             await Project.insertMany(data.projects);
         }
         if (Array.isArray(data.certificates)) {
-            await Certificate.insertMany(data.certificates);
+            const formattedCertificates = data.certificates.map((cert, index) => ({
+                name: cert.name || cert.title || '',
+                issuer: cert.issuer || cert.company || '',
+                date: cert.date || cert.year || '',
+                description: cert.desc || cert.description || '',
+                link: cert.link || cert.url || '',
+                image: cert.imgSrc || cert.image || '',
+                logo: cert.logo || '',
+                certNumber: index + 1
+            }));
+            await Certificate.insertMany(formattedCertificates);
         }
         if (Array.isArray(data.achievements)) {
-            await Achievement.insertMany(data.achievements);
+            const formattedAchievements = data.achievements.map(ach => ({
+                title: ach.title || ach.name || '',
+                description: ach.desc || ach.description || '',
+                date: ach.date || ach.year || '',
+                image: ach.imgSrc || ach.image || '',
+                tags: ach.tags || []
+            }));
+            await Achievement.insertMany(formattedAchievements);
         }
         if (Array.isArray(data.reviews)) {
-            await Review.insertMany(data.reviews);
+            const formattedReviews = data.reviews.map(rev => ({
+                name: rev.name || rev.reviewerName || '',
+                role: rev.role || rev.reviewerRole || '',
+                company: rev.company || '',
+                comment: rev.comment || rev.review || '',
+                rating: rev.rating || 5,
+                image: rev.imgSrc || rev.image || ''
+            }));
+            await Review.insertMany(formattedReviews);
         }
         if (Array.isArray(data.experience)) {
-            const validExperience = data.experience.filter(item => item.title && item.company && item.period && item.description);
+            const formattedExperience = [];
+            for (const exp of data.experience) {
+                if (exp.compound && Array.isArray(exp.content)) {
+                    for (const item of exp.content) {
+                        formattedExperience.push({
+                            title: item.name || item.title || '',
+                            company: item.instName || item.company || '',
+                            period: item.year || item.period || '',
+                            description: item.desc || item.description || '',
+                            skills: item.skills || [],
+                            link: item.instLink || item.link || '',
+                            role: item.role || '',
+                            instLogo: item.instLogo || '',
+                            imgSrc: item.imgSrc || '',
+                            certifi: !!item.certifi
+                        });
+                    }
+                } else {
+                    formattedExperience.push({
+                        title: exp.name || exp.title || '',
+                        company: exp.instName || exp.company || '',
+                        period: exp.year || exp.period || '',
+                        description: exp.desc || exp.description || '',
+                        skills: exp.skills || [],
+                        link: exp.instLink || exp.link || '',
+                        role: exp.role || '',
+                        instLogo: exp.instLogo || '',
+                        imgSrc: exp.imgSrc || '',
+                        certifi: !!exp.certifi
+                    });
+                }
+            }
+            const validExperience = formattedExperience.filter(item => item.title && item.company && item.period && item.description);
             if (validExperience.length) {
                 await Experience.insertMany(validExperience);
             }
         }
         if (Array.isArray(data.education)) {
-            const validEducation = data.education.filter(item => item.institution && item.degree && item.year);
+            const formattedEducation = data.education.map(e => ({
+                institution: e.instName || e.school || e.college || e.institution || '',
+                degree: e.name || e.degree || e.course || '',
+                year: e.year || e.graduationYear || '',
+                percentage: e.perc || e.grade || e.percentage || '',
+                description: e.desc || e.description || '',
+                instLogo: e.instLogo || '',
+                instLink: e.instLink || '',
+                skills: e.skills || []
+            }));
+            const validEducation = formattedEducation.filter(item => item.institution && item.degree && item.year);
             if (validEducation.length) {
                 await Education.insertMany(validEducation);
             }

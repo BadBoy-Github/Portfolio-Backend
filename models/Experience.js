@@ -6,7 +6,11 @@ const experienceSchema = new mongoose.Schema({
   period: { type: String, required: true },
   description: { type: String, required: true },
   skills: [{ type: String }],
-  link: { type: String, default: '' }
+  link: { type: String, default: '' },
+  role: { type: String, default: '' },
+  instLogo: { type: String, default: '' },
+  imgSrc: { type: String, default: '' },
+  certifi: { type: Boolean, default: false }
 }, { timestamps: true });
 
 export default mongoose.model('Experience', experienceSchema);

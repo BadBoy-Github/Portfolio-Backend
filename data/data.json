@@ -12,33 +12,117 @@
   "skills": {
     "technical skills": {
       "languages": [
-        "React JS",
-        "Tailwind CSS",
-        "JavaScript",
-        "HTML5",
-        "CSS3",
-        "SQL",
-        "JAVA",
-        "Python"
+        {
+          "label": "React JS",
+          "desc": "Framework for UI",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435625/react_hzi0da.svg"
+        },
+        {
+          "label": "Tailwind CSS",
+          "desc": "Framework for CSS",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435627/tailwindcss_zlp4fw.svg"
+        },
+        {
+          "label": "JavaScript",
+          "desc": "Dynamic Interaction",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435618/javascript_buqo98.svg"
+        },
+        {
+          "label": "HTML5",
+          "desc": "Web Page Structure",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435616/html_bxrhnu.svg"
+        },
+        {
+          "label": "CSS3",
+          "desc": "Web Page Styling",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435614/css3_qtayvi.svg"
+        },
+        {
+          "label": "SQL",
+          "desc": "Relational DBMS",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435626/sql_ylvdii.svg"
+        },
+        {
+          "label": "JAVA",
+          "desc": "High Level Programming",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435626/java_xq1yxm.svg"
+        },
+        {
+          "label": "Python",
+          "desc": "High Level Programming",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435624/python_dzk3ku.svg"
+        }
       ],
       "frameworks": [
-        "Bootstrap"
+        {
+          "label": "Bootstrap",
+          "desc": "Framework for CSS",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435612/bootstrap_ydn80x.svg"
+        }
       ],
       "libraries": [
-        "Markdown",
-        "MongoDB",
-        "Hibernate",
-        "JSON",
-        "Postman",
-        "Adobe Express",
-        "PowerDirector",
-        "MS Office"
+        {
+          "label": "Markdown",
+          "desc": "Lightweight Markup",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1778005034/Markdown_xzuwtx.svg"
+        },
+        {
+          "label": "MongoDB",
+          "desc": "DBMS",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435619/mongodb_tvb4lg.svg"
+        },
+        {
+          "label": "Hibernate",
+          "desc": "ORM Framework",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1778005034/Hibernate_qe4xlg.svg"
+        },
+        {
+          "label": "JSON",
+          "desc": "Data Interchange Format",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1778005035/JSON_wposim.svg"
+        },
+        {
+          "label": "Postman",
+          "desc": "API Testing Tool",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1778005034/Postman_fjjcb7.svg"
+        },
+        {
+          "label": "Adobe Express",
+          "desc": "Graphic Design",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435609/adobeexpress_a0n6cr.svg"
+        },
+        {
+          "label": "PowerDirector",
+          "desc": "Video Editing",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435623/powerdirector_esivk3.svg"
+        },
+        {
+          "label": "MS Office",
+          "desc": "Productivity Suite",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435621/msoffice_jzwsvo.svg"
+        }
       ],
       "tools": [
-        "Github",
-        "Vercel",
-        "Canva",
-        "AutoCAD"
+        {
+          "label": "Github",
+          "desc": "Version Control",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435616/github_g8fa2b.svg"
+        },
+        {
+          "label": "Vercel",
+          "desc": "Deployment & Hosting",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435628/vercel_oxatpf.svg"
+        },
+        {
+          "label": "Canva",
+          "desc": "Graphic Design",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435613/canva_u6lbof.svg"
+        },
+        {
+          "label": "AutoCAD",
+          "desc": "CAD & Drafting",
+          "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435611/autocad_b4b5gc.svg"
+        }
       ]
     }
   },
@@ -1919,7 +2003,11 @@
         "Performance Optimization",
         "UI/UX Implementation"
       ],
-      "link": "https://www.theskybrisk.com/"
+      "link": "https://www.theskybrisk.com/",
+      "role": "Intern",
+      "instLogo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435128/skybrisk_logo_aladdz.webp",
+      "imgSrc": "",
+      "certifi": false
     },
     {
       "title": "Java Full Stack Developer Trainee",
@@ -1934,7 +2022,11 @@
         "JavaScript",
         "Java"
       ],
-      "link": "https://qspiders.com/"
+      "link": "https://qspiders.com/",
+      "role": "Trainee",
+      "instLogo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435128/qspider_logo_mlt2sf.webp",
+      "imgSrc": "",
+      "certifi": false
     },
     {
       "title": "Web Developer Intern",
@@ -1946,7 +2038,11 @@
         "CSS",
         "JS"
       ],
-      "link": "https://hexsoftwares.com/"
+      "link": "https://hexsoftwares.com/",
+      "role": "Intern",
+      "instLogo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435126/hex_logo_ogsl6a.webp",
+      "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435127/hex_z5eca2.webp",
+      "certifi": true
     },
     {
       "title": "React JS Developer Intern",
@@ -1957,7 +2053,11 @@
         "React JS",
         "Tailwind CSS"
       ],
-      "link": "https://codingsamurai.vercel.app/"
+      "link": "https://codingsamurai.vercel.app/",
+      "role": "Intern",
+      "instLogo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435123/csamurai_logo_a75opj.webp",
+      "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435125/csamurai_klscux.webp",
+      "certifi": true
     },
     {
       "title": "Software Developer Intern",
@@ -1968,7 +2068,11 @@
         "Java",
         "Problem Solving"
       ],
-      "link": "https://cognifyz.com/"
+      "link": "https://cognifyz.com/",
+      "role": "Intern",
+      "instLogo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435109/cognifyz_logo_v5jrfu.webp",
+      "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435110/cognifyz_nzpv1d.webp",
+      "certifi": true
     },
     {
       "title": "Full Stack Developer",
@@ -1984,7 +2088,11 @@
         "Express",
         "MongoDB"
       ],
-      "link": ""
+      "link": "",
+      "role": "Intern",
+      "instLogo": "",
+      "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435119/corizo2_y69sl5.webp",
+      "certifi": true
     },
     {
       "title": "Full Stack Developer",
@@ -1996,7 +2104,11 @@
         "CSS",
         "JavaScript"
       ],
-      "link": ""
+      "link": "",
+      "role": "Trainee",
+      "instLogo": "",
+      "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435118/corizo1_pobbjh.webp",
+      "certifi": true
     },
     {
       "title": "Applied Microbiology and Agricultural Biotechnology",
@@ -2008,7 +2120,11 @@
         "Mushroom Cultivation",
         "BSFL Rearing"
       ],
-      "link": "https://eliesbiotech.co.in/"
+      "link": "https://eliesbiotech.co.in/",
+      "role": "Intern",
+      "instLogo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435124/elies_logo_kyhgyk.webp",
+      "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435125/elies_qgr7qg.webp",
+      "certifi": true
     },
     {
       "title": "Millets Processing and Production",
@@ -2020,7 +2136,11 @@
         "Food Processing",
         "Quality Checking"
       ],
-      "link": "https://biorith.in/"
+      "link": "https://biorith.in/",
+      "role": "Intern",
+      "instLogo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435108/biorith_logo_dcxtlv.webp",
+      "imgSrc": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435109/biorith_mjahpu.webp",
+      "certifi": true
     }
   ],
   "education": [
@@ -2029,21 +2149,45 @@
       "degree": " B.Tech Biotechnology",
       "year": "2020 - 2024",
       "percentage": "88.1%",
-      "description": "Built strong foundation in biotechnology with practical lab skills. Active in extracurricular activities developing leadership and interpersonal abilities."
+      "description": "Built strong foundation in biotechnology with practical lab skills. Active in extracurricular activities developing leadership and interpersonal abilities.",
+      "instLogo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435010/ksr_logo_jej2x4.webp",
+      "instLink": "https://www.ksrct.ac.in/",
+      "skills": [
+        "Microbiology",
+        "Genetic Engineering",
+        "Nanobiotechnology",
+        "Plant Tissue Culture",
+        "Bioinformatics"
+      ]
     },
     {
       "institution": "U R C Palaniammal Matriculation Higher Secondary School",
       "degree": "HSC - Bio Math",
       "year": "2019 - 2020",
       "percentage": "76.33%",
-      "description": "Built strong academic foundation with dedicated teachers. Developed critical thinking and discipline through involvement in sports and cultural events."
+      "description": "Built strong academic foundation with dedicated teachers. Developed critical thinking and discipline through involvement in sports and cultural events.",
+      "instLogo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435015/urc_logo_x6pmem.webp",
+      "instLink": "https://urcpmhss.edu.in/",
+      "skills": [
+        "Human Anatomy",
+        "Plant Biology",
+        "Quantitative Aptitude Math"
+      ]
     },
     {
       "institution": "U R C Palaniammal Matriculation Higher Secondary School",
       "degree": "SSLC",
       "year": "2017 - 2018",
       "percentage": "90.2%",
-      "description": "Throughout my school years, I built a strong foundation in my studies. With the help of my teachers, I learned to study with discipline and think carefully."
+      "description": "Throughout my school years, I built a strong foundation in my studies. With the help of my teachers, I learned to study with discipline and think carefully.",
+      "instLogo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435015/urc_logo_x6pmem.webp",
+      "instLink": "https://urcpmhss.edu.in/",
+      "skills": [
+        "Science",
+        "Social Science",
+        "Mathematics",
+        "English"
+      ]
     }
   ],
   "certificates": [
@@ -2052,245 +2196,350 @@
       "issuer": "be10X",
       "date": "2026",
       "description": "Comprehensive certification in AI tools covering various artificial intelligence applications for productivity and creative work. This certification focuses on leveraging AI tools like ChatGPT for content creation, Midjourney for image generation, and DALL-E for design tasks.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423456/Be10X_ji6nux.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434456/ai_gqzbmi.webp",
+      "certNumber": 1
     },
     {
       "name": "Java",
       "issuer": "SimpliLearn",
       "date": "2025",
       "description": "Complete Java programming certification covering core and advanced concepts. Learned object-oriented programming principles, data structures, algorithms, and best practices for building robust Java applications.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423473/Java_palekh.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434470/java_hxpga9.webp",
+      "certNumber": 2
     },
     {
       "name": "Bootstrap",
       "issuer": "LetsUpgrade",
       "date": "2025",
       "description": "Bootstrap framework certification focusing on building responsive, mobile-first websites. Mastered the Bootstrap component library, grid system, and utility classes for rapid UI development.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423456/Bootstrap_hoigmr.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434456/bootstrap_qmwh5f.webp",
+      "certNumber": 3
     },
     {
       "name": "React JS",
       "issuer": "LetsUpgrade",
       "date": "2025",
       "description": "Comprehensive React.js certification covering modern frontend development. Learned component-based architecture, state management with hooks, and best practices for building scalable React applications.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423487/React_JS_wsmi1j.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434475/react_gnucsa.webp",
+      "certNumber": 4
     },
     {
       "name": "Tailwind CSS",
       "issuer": "LetsUpgrade",
       "date": "2025",
       "description": "Tailwind CSS certification emphasizing utility-first CSS framework for rapid styling. Mastered custom configuration, responsive design patterns, and creating beautiful UIs efficiently.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423494/Tailwind_CSS_o4iugc.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434476/tailwind_r5wge9.webp",
+      "certNumber": 5
     },
     {
       "name": "HTML",
       "issuer": "Mimo",
       "date": "2024",
       "description": "HTML5 certification covering modern markup language fundamentals. Learned semantic HTML, document structure, forms, and accessibility best practices for building web pages.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423470/HTML1_bi5gxq.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434457/html_dwujyf.webp",
+      "certNumber": 6
     },
     {
       "name": "CSS",
       "issuer": "Mimo",
       "date": "2024",
       "description": "CSS3 certification covering modern styling techniques. Mastered animations, transitions, flexbox layout, and grid system for creating responsive web designs.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423457/CSS1_c9a6qx.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434456/css_qhlggt.webp",
+      "certNumber": 7
     },
     {
       "name": "JavaScript",
       "issuer": "Learnz Development Hub",
       "date": "2025",
       "description": "JavaScript certification from Learnz Development Hub covering programming fundamentals. Learned JavaScript syntax, DOM manipulation, and modern ES6+ features.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423473/JavaScript1_mkmft4.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434470/javascript_fvnrqr.webp",
+      "certNumber": 8
     },
     {
       "name": "JavaScript",
       "issuer": "LetsUpgrade",
       "date": "2025",
       "description": "JavaScript certification from LetsUpgrade focusing on interactive web development. Covered event handling, asynchronous programming, and building dynamic web applications.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423476/js_oe777u.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434470/javascript_fvnrqr.webp",
+      "certNumber": 9
     },
     {
       "name": "JavaScript",
       "issuer": "SimpliLearn",
       "date": "2026",
       "description": "Advanced JavaScript certification from SimpliLearn covering professional development practices. Learned design patterns, testing methodologies, and performance optimization techniques.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423478/js1_yboegq.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434470/javascript_fvnrqr.webp",
+      "certNumber": 10
     },
     {
       "name": "Wordpress",
       "issuer": "Coursera",
       "date": "2024",
       "description": "WordPress certification from Coursera covering content management system development. Learned theme customization, plugin development, and building e-commerce sites with WooCommerce.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423501/Wordpress1_rxc0ie.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434481/wordpress_d5qwmo.webp",
+      "certNumber": 11
     },
     {
       "name": "MERN Stack",
       "issuer": "SimpliLearn",
       "date": "2025",
       "description": "MERN Stack certification covering full-stack web development. Mastered MongoDB database, Express.js backend, React frontend, and Node.js runtime for building complete web applications.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423479/MERN_Stack_aovxux.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434470/mern_zse1dy.webp",
+      "certNumber": 12
     },
     {
       "name": "Full Stack",
       "issuer": "SimpliLearn",
       "date": "2026",
       "description": "Full Stack development certification covering end-to-end application development. Learned frontend technologies, backend development, database management, and deployment strategies.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423463/Full_Stack_plxjrh.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434470/mern_zse1dy.webp",
+      "certNumber": 13
     },
     {
       "name": "SEO",
       "issuer": "Coursera",
       "date": "2024",
       "description": "SEO certification from Coursera covering search engine optimization techniques. Learned keyword research, on-page and off-page optimization, and analytics for improving website visibility.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423492/SEO2_wcydao.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434475/seo_hewd33.webp",
+      "certNumber": 14
     },
     {
       "name": "SEO",
       "issuer": "Programming Hub",
       "date": "2025",
       "description": "SEO certification from Programming Hub focusing on practical optimization strategies. Learned content optimization, technical SEO, and various SEO tools for better search rankings.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423491/SEO1_bfzdt6.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434475/seo_hewd33.webp",
+      "certNumber": 15
     },
     {
       "name": "Generative AI",
       "issuer": "Guvi",
       "date": "2024",
       "description": "Generative AI certification from Guvi covering large language models and AI generation. Learned prompt engineering techniques, API integration, and building AI-powered applications.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423465/Generative_AI_dlsf6d.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434456/ai_gqzbmi.webp",
+      "certNumber": 16
     },
     {
       "name": "Git & GitHub",
       "issuer": "LetsUpgrade",
       "date": "2025",
       "description": "Git & GitHub certification covering version control and collaborative development. Learned Git commands, branching strategies, pull requests, and team collaboration workflows.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423466/Git_GitHub_o0trwo.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434457/github_kbsa0m.webp",
+      "certNumber": 17
     },
     {
       "name": "Git",
       "issuer": "Programming Hub",
       "date": "2025",
       "description": "Git certification from Programming Hub focusing on version control fundamentals. Learned repository management, conflict resolution, and various Git workflows for projects.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423467/Git1_lxuyuh.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434457/git_arftg5.webp",
+      "certNumber": 18
     },
     {
       "name": "Frontend Development",
       "issuer": "SimpliLearn",
       "date": "2025",
       "description": "Frontend Development certification covering modern web technologies. Learned HTML5, CSS3, JavaScript, and best practices for building responsive, performant websites.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423462/Frontend1_t8eqcv.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434456/frontend_sobuut.webp",
+      "certNumber": 19
     },
     {
       "name": "Python",
       "issuer": "Mimo",
       "date": "2024",
       "description": "Python certification from Mimo covering programming fundamentals. Learned Python syntax, data types, functions, and basic algorithmic concepts.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423485/Python1_yiywkm.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434475/python_vcladc.webp",
+      "certNumber": 20
     },
     {
       "name": "Python Dev",
       "issuer": "Mimo",
       "date": "2024",
       "description": "Advanced Python developer certification covering practical applications. Learned web development with Python, file handling, and working with various libraries.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423484/Python_Dev_qr346w.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434475/python_vcladc.webp",
+      "certNumber": 21
     },
     {
       "name": "ChatGPT for Everyone",
       "issuer": "Guvi",
       "date": "2024",
       "description": "ChatGPT certification from Guvi covering AI assistant usage. Learned prompt engineering, productivity tips, and using AI for various personal and professional tasks.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423457/ChatGPT1_tlizxd.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434457/chatgpt_seyh9r.webp",
+      "certNumber": 22
     },
     {
       "name": "Tech Career Kickstart",
       "issuer": "SimpliLearn",
       "date": "2025",
       "description": "Tech Career certification covering professional development. Learned resume building, interview preparation, portfolio development, and staying updated with industry trends.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423499/techcareer1_tpysbj.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434476/techcareer_lbizkj.webp",
+      "certNumber": 23
     },
     {
       "name": "Canva",
       "issuer": "LetsUpgrade",
       "date": "2025",
       "description": "Canva certification covering graphic design fundamentals. Learned creating social media graphics, presentations, and brand identity materials using Canva.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423457/Canva1_zoc2lc.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434456/canva_sfewqn.webp",
+      "certNumber": 24
     },
     {
       "name": "Video Editing with Canva",
       "issuer": "Coursera",
       "date": "2024",
       "description": "Video editing certification with Canva covering visual content creation. Learned video editing techniques, motion graphics, and creating engaging video content.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423456/Canva_Video_oqng8n.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434476/videoediting_tcrm6m.webp",
+      "certNumber": 25
     },
     {
       "name": "Social Media Management",
       "issuer": "Great Learning",
       "date": "2024",
       "description": "Social Media Management certification from Great Learning covering strategic planning. Learned content strategy, analytics, community management, and building brand presence.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423492/Social_Media_Management_qz1tsn.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434475/socialmedia_cky3hq.webp",
+      "certNumber": 26
     },
     {
       "name": "Digital Marketing Fundamentals",
       "issuer": "IIDE The Digital School",
       "date": "2025",
       "description": "Digital Marketing certification covering online marketing strategies. Learned SEO, search engine marketing, email marketing, and content marketing fundamentals.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423458/Digital_Marketing_Fundamentals_grwmik.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434470/marketing_vxzddh.webp",
+      "certNumber": 27
     },
     {
       "name": "Business Analysis",
       "issuer": "Coursera",
       "date": "2025",
       "description": "Business Analysis certification from Coursera covering analytical methodologies. Learned requirements gathering, data analysis, and stakeholder management for business projects.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423456/Business_Analysis_m9axqu.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434456/analysis_zgqkjr.webp",
+      "certNumber": 28
     },
     {
       "name": "Investment Risk Management",
       "issuer": "Coursera",
       "date": "2024",
       "description": "Investment Risk Management certification covering financial risk assessment. Learned investment analysis, portfolio management, and risk evaluation techniques.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423471/IRM1_d4aboc.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434470/irm_toghhz.webp",
+      "certNumber": 29
     },
     {
       "name": "Power BI",
       "issuer": "Great Learning",
       "date": "2024",
       "description": "Power BI certification covering business intelligence and data visualization. Learned creating interactive dashboards, DAX formulas, and data analysis using Power BI.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423481/Power_BI_qe1f47.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434471/powerbi_oo0rvt.webp",
+      "certNumber": 30
     },
     {
       "name": "Introduction to Microsoft Excel",
       "issuer": "Coursera",
       "date": "2024",
       "description": "Introduction to Microsoft Excel covering spreadsheet fundamentals. Learned formulas, charts, data entry, and basic data manipulation in Excel.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423461/Excel2_zqlckt.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434456/excel_minug7.webp",
+      "certNumber": 31
     },
     {
       "name": "Excel",
       "issuer": "LetsUpgrade",
       "date": "2025",
       "description": "Excel certification from LetsUpgrade covering advanced spreadsheet skills. Learned advanced formulas, pivot tables, macros, and data analysis techniques.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423460/Excel1_vvflgu.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434456/excel_minug7.webp",
+      "certNumber": 32
     },
     {
       "name": "Excel Data Analysis",
       "issuer": "Coursera",
       "date": "2024",
       "description": "Excel Data Analysis certification covering analytical techniques. Learned statistical functions, data visualization, and creating meaningful reports from data.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423459/Excel_Data_Analysis_lpaxa4.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434456/data_analysis_jifiuv.webp",
+      "certNumber": 33
     },
     {
       "name": "Google Ads for Beginners",
       "issuer": "Coursera",
       "date": "2024",
       "description": "Google Ads certification covering pay-per-click advertising. Learned campaign setup, keyword bidding, ad optimization, and measuring advertising performance.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423468/Google_Ads_hiliee.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434457/googleads_i4ueko.webp",
+      "certNumber": 34
     },
     {
       "name": "Video Editing",
       "issuer": "Great Learning",
       "date": "2024",
       "description": "Video Editing certification covering post-production techniques. Learned transitions, color grading, sound design, and exporting videos for various platforms.",
-      "link": ""
+      "link": "",
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423500/Video_Editing_vwqkw1.webp",
+      "logo": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774434476/videoediting_tcrm6m.webp",
+      "certNumber": 35
     }
   ],
   "achievements": [
@@ -2298,90 +2547,153 @@
       "title": "SIP 2023 Coordinator",
       "description": "",
       "date": "2023",
-      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423111/sip_nrqi1f.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423111/sip_nrqi1f.webp",
+      "tags": [
+        "Leadership",
+        "Event Planning",
+        "Volunteer Coordination",
+        "Student Engagement"
+      ]
     },
     {
       "title": "Expo Stall Organizer",
       "description": "",
       "date": "2023",
-      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423106/madurai_vtzo3i.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423106/madurai_vtzo3i.webp",
+      "tags": [
+        "Leadership",
+        "Public Engagement",
+        "Trade Networking",
+        "Institute Representation",
+        "Sustainable Promotion"
+      ]
     },
     {
       "title": "Dakshaa T23 Coordinator",
       "description": "",
       "date": "2023",
-      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423101/dakshaa_w3chzb.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423101/dakshaa_w3chzb.webp",
+      "tags": [
+        "Event Coordination",
+        "Workshop Management",
+        "Team Leadership",
+        "Event Planning"
+      ]
     },
     {
       "title": "Certified Public Speaker",
       "description": "",
       "date": "2023",
-      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423104/eps_uet3ot.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423104/eps_uet3ot.webp",
+      "tags": [
+        "Public Speaking",
+        "Audience Engagement",
+        "Body Language Control",
+        "Communication",
+        "Leadership"
+      ]
     },
     {
       "title": "Logo Design - 2nd Place",
       "description": "",
       "date": "2023",
-      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423105/logo_gwwuax.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423105/logo_gwwuax.webp",
+      "tags": [
+        "Graphic Design",
+        "Visual Storytelling",
+        "Brand Identity Creation",
+        "Creative Thinking"
+      ]
     },
     {
       "title": "Short Video - 2nd Place",
       "description": "",
       "date": "2023",
-      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423107/video_nocxi5.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423107/video_nocxi5.webp",
+      "tags": [
+        "Video Editing",
+        "Cinematography",
+        "Visual Storytelling",
+        "Team Collaboration"
+      ]
     },
     {
       "title": "Joint Secretary - PMC & PAC",
       "description": "",
       "date": "2022-2023",
-      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423101/js_spt0qf.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423101/js_spt0qf.webp",
+      "tags": [
+        "Leadership",
+        "Event Coordination",
+        "Campaign Planning",
+        "Club Administration",
+        "Collaboration"
+      ]
     },
     {
       "title": "Paper Presentation - 1st Place",
       "description": "",
       "date": "2022",
-      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423101/paper_ftzuzj.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423101/paper_ftzuzj.webp",
+      "tags": [
+        "Research & Analysis",
+        "Scientific Communication",
+        "Data Interpretation",
+        "Presentation Skills"
+      ]
     },
     {
       "title": "Short Film - 1st Place",
       "description": "",
       "date": "2022",
-      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423108/film_kzphpz.webp"
+      "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774423108/film_kzphpz.webp",
+      "tags": [
+        "Film Direction",
+        "Team Collaboration",
+        "Scriptwriting",
+        "Environmental Awareness",
+        "Post-Production Editing"
+      ]
     }
   ],
   "reviews": [
     {
       "name": "Sanjay S",
       "role": "",
-      "comment": "",
+      "company": "Junior Software Developer",
+      "comment": "Skilled coder with impressive projects like CRUD app, eCommerce website, and Spotify clone. His technical prowess and creativity shine through.",
       "rating": 5,
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435439/people-2_wfqkwm.webp"
     },
     {
       "name": "Subaash Sivan N",
       "role": "",
-      "comment": "",
+      "company": "Associate Bank Manager",
+      "comment": "Outstanding individual with diverse extracurricular activities, always eager to explore and learn. His enthusiasm and versatility are remarkable.",
       "rating": 5,
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435441/people-3_l5fhti.webp"
     },
     {
       "name": "Dhil Rohith B",
       "role": "",
-      "comment": "",
+      "company": "Senior Backend Developer",
+      "comment": "Talented beginner web developer who created a basic eCommerce website. His commitment to learning and improving their skills is evident.",
       "rating": 5,
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435442/people-4_msu4pm.webp"
     },
     {
       "name": "Kishore G",
       "role": "",
-      "comment": "",
+      "company": "Freelancer",
+      "comment": "Exceptional biotechnologist who completed his B.Tech in Biotechnology with flying colors, expertise and dedication are truly commendable.",
       "rating": 5,
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435438/people-5_nbykxu.webp"
     },
     {
       "name": "Asothama Chakravarthi V",
       "role": "",
-      "comment": "",
+      "company": "Textile Business",
+      "comment": "A good learner who learns from mistakes and excels in problem-solving. His ability to adapt and overcome challenges is impressive.",
       "rating": 5,
       "image": "https://res.cloudinary.com/dz53e3szr/image/upload/v1774435439/people-1_fg2ola.webp"
     }
@@ -2491,5 +2803,5 @@
       "content": "\n        <p>Card Vault is more than just a website—it's a complete digital ecosystem designed to simplify how users discover, purchase, and manage digital gift cards. Built with performance, security, and user experience at its core, this platform represents my evolution as a full-stack developer and my ability to create real-world, scalable solutions. In this blog, I’ll take you deep into the journey behind Card Vault—from the initial idea to the technical architecture, challenges, and future vision.</p>\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774320955/cv_1_epiijo.png\" alt=\"Card Vault Trust Section\" class=\"blog-image\" />\n\n        <h2>The Idea Behind Card Vault</h2>\n        <p>The concept of Card Vault originated from a simple observation—digital gift cards are everywhere, yet the buying experience often feels fragmented, slow, or untrustworthy. Many platforms lack transparency, real-time updates, or seamless delivery. I wanted to change that.</p>\n\n        <p>The vision was clear: create a centralized platform where users can browse, purchase, and receive digital gift cards instantly, without friction. But I didn’t want to stop at functionality—I wanted personality. Card Vault was designed to feel premium, engaging, and slightly playful, with a tone that makes users feel confident while also entertained.</p>\n\n        <p>From the tagline “Pick a card. Any card.” to the subtle humor in the UI, every element was crafted to create a memorable experience. The goal wasn’t just to sell gift cards—it was to build a brand that users trust and enjoy interacting with.</p>\n\n        <h2>Design Philosophy & User Experience</h2>\n        <p>User experience played a central role in shaping Card Vault. The interface is clean, modern, and highly intuitive, allowing users to navigate effortlessly between sections like featured products, gift cards, and contact pages.</p>\n\n        <p>The homepage is structured to immediately capture attention with a bold hero section, followed by featured products that highlight limited-time deals. The layout ensures that users can quickly understand what the platform offers without feeling overwhelmed.</p>\n\n        <p>Microcopy and UI text were carefully crafted to add personality—phrases like “Faster Than Regret” and “Fort Knox Security” make the platform feel alive. These small details transform a basic e-commerce experience into something engaging and memorable.</p>\n\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1775229943/7_jmyz5p.png\" alt=\"Card Vault Featured products\" class=\"blog-image\" />\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1775229943/8_juptqq.png\" alt=\"Card Vault Gift Cards\" class=\"blog-image\" />\n\n        <h2>Core Features That Power Card Vault</h2>\n        <p>Card Vault is built around a set of powerful features that ensure a smooth and reliable user experience. The product browsing system allows users to explore various categories, including shopping, gaming, entertainment, and lifestyle gift cards.</p>\n\n        <p>The featured products section dynamically highlights exclusive deals, creating urgency with limited stock indicators like “Only 1 left” and expiration timers. This encourages faster decision-making and improves conversion rates.</p>\n\n        <p>The search functionality enables users to instantly find specific gift cards, reducing friction and improving usability. Combined with categorized listings, it ensures that users always find what they’re looking for quickly.</p>\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774320955/cv_3_h9h9ip.png\" alt=\"Card Vault Frequently Asked Questions\" class=\"blog-image\" />\n\n        <h2>Secure Payment System & UPI Integration</h2>\n        <p>One of the most critical aspects of Card Vault is its secure payment system. Since the platform deals with digital assets, ensuring safe transactions was a top priority.</p>\n\n        <p>The platform supports UPI-based transactions, making it highly accessible for Indian users. The payment flow is designed to be simple yet secure, requiring users to submit transaction details (UTR) for verification.</p>\n\n        <p>Behind the scenes, validation mechanisms ensure that each transaction is properly recorded and verified before delivering the digital product. This prevents fraud while maintaining a smooth user experience.</p>\n\n        <p>Security messaging like “Fort Knox Security” reinforces trust, assuring users that their data and purchases are protected with strong encryption practices.</p>\n\n        <h2>Real-Time Product Management</h2>\n        <p>Card Vault features a dynamic inventory system that updates product availability in real time. This ensures that users always see accurate stock information, reducing confusion and preventing overselling.</p>\n\n        <p>Each product includes detailed metadata such as price, discount, expiry date, and availability status. These details help users make informed decisions quickly.</p>\n\n        <p>The system also handles edge cases like out-of-stock items gracefully, ensuring that the user interface remains consistent and informative even when products are unavailable.</p>\n\n        <h2>Backend Architecture & Data Flow</h2>\n        <p>The backend of Card Vault is designed to handle multiple responsibilities, including product management, transaction verification, and user communication. It acts as the brain of the application, ensuring that all processes run smoothly.</p>\n\n        <p>APIs are structured to handle requests efficiently, with clear separation between frontend and backend logic. This modular approach makes the system scalable and easy to maintain.</p>\n\n        <p>Data flows seamlessly between the frontend and backend, ensuring that users receive instant updates on their purchases, stock availability, and order status.</p>\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774320957/cv_5_lwj26i.png\" alt=\"Card Vault Orders Page\" class=\"blog-image\" />\n\n        <h2>Performance Optimization</h2>\n        <p>Performance was a key focus during development. The application is optimized for fast load times, ensuring that users can browse and purchase without delays.</p>\n\n        <p>Lazy loading techniques are used for images and components, reducing initial load time and improving overall responsiveness. Efficient state management ensures that the UI updates smoothly without unnecessary re-renders.</p>\n\n        <p>The deployment on Vercel provides additional performance benefits, including global CDN distribution and automatic scaling, ensuring a consistent experience for users across different locations.</p>\n\n        <h2>Trust, Branding & User Confidence</h2>\n        <p>Building trust is essential for any e-commerce platform, especially one dealing with digital goods. Card Vault addresses this through clear communication, secure systems, and consistent branding.</p>\n\n        <p>Sections like “Why Trust the Vault?” highlight key value propositions, including authenticity, security, and fast delivery. These elements reassure users and build confidence in the platform.</p>\n\n        <p>The branding combines professionalism with personality, creating a unique identity that stands out from generic e-commerce websites.</p>\n\n        <img src=\"https://res.cloudinary.com/dz53e3szr/image/upload/v1774320956/cv_4_qikprw.png\" alt=\"Card Vault Contact Section\" class=\"blog-image\" />\n\n        <h2>Contact System & User Interaction</h2>\n        <p>Card Vault includes a comprehensive contact system that allows users to reach out بسهولة. Whether it’s a query, issue, or feedback, the platform ensures that communication is smooth and efficient.</p>\n\n        <p>Integration with email and WhatsApp provides multiple channels for user support, making it easier for users to get help when needed.</p>\n\n        <p>The contact form includes validation and structured input fields, ensuring that messages are clear and actionable.</p>\n\n        <h2>Challenges Faced During Development</h2>\n        <p>Building Card Vault came with its own set of challenges. One of the biggest hurdles was ensuring secure and reliable payment verification without introducing unnecessary complexity.</p>\n\n        <p>Managing real-time inventory updates was another challenge, especially when dealing with limited-stock items. Ensuring consistency between frontend display and backend data required careful planning.</p>\n\n        <p>Balancing performance with feature richness was also critical. Adding too many features could slow down the application, so optimization strategies were essential.</p>\n\n        <h2>Future Enhancements</h2>\n        <p>Card Vault is designed to evolve continuously. Future updates will include features like user authentication, order history tracking, and wishlist functionality.</p>\n\n        <p>I also plan to integrate automated payment verification systems, reducing manual steps and improving efficiency.</p>\n\n        <p>Additional enhancements may include personalized recommendations, advanced filtering, and analytics dashboards to improve both user experience and business insights.</p>\n\n        <h2>Conclusion</h2>\n        <p>Card Vault represents a complete end-to-end product—combining design, development, security, and user experience into a single platform. It showcases my ability to build scalable, production-ready applications that solve real problems.</p>\n\n        <p>This project is not just about selling gift cards—it’s about creating a seamless digital experience that users can trust and enjoy. As I continue to improve and expand Card Vault, it will remain a key milestone in my development journey.</p>\n\n        <p>If you haven’t explored it yet, now’s the time. Pick a card. Any card.</p>\n    "
     }
   ],
-  "lastUpdated": "2026-07-27T17:27:48.676Z"
+  "lastUpdated": "2026-07-27T18:09:34.974Z"
 }
