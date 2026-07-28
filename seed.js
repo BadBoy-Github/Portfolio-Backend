@@ -55,13 +55,8 @@ async function seed() {
   await Admin.create({ email: adminEmail, password: salt });
   console.log('Admin seeded');
 
-  if (data.skills && data.skills['technical skills']) {
-    const skills = data.skills['technical skills'];
-    for (const [category, items] of Object.entries(skills)) {
-      if (Array.isArray(items) && items.length > 0) {
-        await TechStack.create({ category, items });
-      }
-    }
+  if (Array.isArray(data.skills)) {
+    await TechStack.insertMany(data.skills);
     console.log('Tech stacks seeded');
   }
 

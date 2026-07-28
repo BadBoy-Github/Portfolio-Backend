@@ -71,46 +71,13 @@ function readJsDataFile(filename) {
 
 // Format skills for backend
 function formatSkills(skillData) {
-    if (!skillData || !Array.isArray(skillData)) return {};
+    if (!skillData || !Array.isArray(skillData)) return [];
 
-    const formattedSkills = {
-        "technical skills": {
-            "languages": [],
-            "frameworks": [],
-            "libraries": [],
-            "tools": []
-        }
-    };
-
-    skillData.forEach(skill => {
-        const skillObj = {
-            label: skill.label || '',
-            desc: skill.desc || '',
-            imgSrc: skill.imgSrc || ''
-        };
-
-        const label = skill.label?.toLowerCase() || '';
-
-        if (['react js', 'javascript', 'python', 'java', 'html', 'css', 'sql'].some(k => label.includes(k))) {
-            if (!formattedSkills["technical skills"]["languages"].find(s => s.label === skillObj.label)) {
-                formattedSkills["technical skills"]["languages"].push(skillObj);
-            }
-        } else if (['tailwind', 'bootstrap', 'flask'].some(k => label.includes(k))) {
-            if (!formattedSkills["technical skills"]["frameworks"].find(s => s.label === skillObj.label)) {
-                formattedSkills["technical skills"]["frameworks"].push(skillObj);
-            }
-        } else if (['github', 'vercel', 'canva', 'autocad'].some(k => label.includes(k))) {
-            if (!formattedSkills["technical skills"]["tools"].find(s => s.label === skillObj.label)) {
-                formattedSkills["technical skills"]["tools"].push(skillObj);
-            }
-        } else {
-            if (!formattedSkills["technical skills"]["libraries"].find(s => s.label === skillObj.label)) {
-                formattedSkills["technical skills"]["libraries"].push(skillObj);
-            }
-        }
-    });
-
-    return formattedSkills;
+    return skillData.map(skill => ({
+        label: skill.label || '',
+        desc: skill.desc || '',
+        imgSrc: skill.imgSrc || ''
+    }));
 }
 
 // Format projects for backend
@@ -347,15 +314,8 @@ function generateTrainingData(data) {
     });
 
     // Skills - prioritize web tech
-    if (data.skills) {
-        const skillsStr = Object.entries(data.skills).map(([category, items]) => {
-            if (typeof items === 'object') {
-                return `${category}: ${Object.entries(items).map(([key, vals]) =>
-                    `${key}: ${Array.isArray(vals) ? vals.join(', ') : vals}`
-                ).join(', ')}`;
-            }
-            return `${category}: ${items}`;
-        }).join('. ');
+    if (data.skills && Array.isArray(data.skills)) {
+        const skillsStr = data.skills.map(s => s.label).filter(Boolean).join(', ');
 
         trainingExamples.push({
             input: "What are your technical skills?",

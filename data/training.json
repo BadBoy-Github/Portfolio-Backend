@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "lastTrained": "2026-07-27T18:09:34.977Z",
+  "lastTrained": "2026-07-28T15:39:42.578Z",
   "examples": [
     {
       "input": "Tell me about yourself",
@@ -8,7 +8,7 @@
     },
     {
       "input": "What are your technical skills?",
-      "output": "As a Full Stack Web Developer, my core technical skills include: technical skills: languages: [object Object], [object Object], [object Object], [object Object], [object Object], [object Object], [object Object], [object Object], frameworks: [object Object], libraries: [object Object], [object Object], [object Object], [object Object], [object Object], [object Object], [object Object], [object Object], tools: [object Object], [object Object], [object Object], [object Object]"
+      "output": "As a Full Stack Web Developer, my core technical skills include: React JS, Tailwind CSS, JavaScript, HTML5, CSS3, Bootstrap, Markdown, SQL, MongoDB, JAVA, Hibernate, Python, JSON, Postman, Github, Vercel, Canva, Adobe Express, AutoCAD, PowerDirector, MS Office"
     },
     {
       "input": "What projects have you worked on?",

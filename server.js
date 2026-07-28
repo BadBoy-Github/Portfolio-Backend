@@ -679,24 +679,18 @@ app.post('/api/admin/seed', async (req, res) => {
         await Education.deleteMany({});
         await Blog.deleteMany({});
 
+        try {
+            await TechStack.collection.dropIndex('category_1');
+        } catch (e) {
+        }
+
         const adminEmail = process.env.ADMIN_EMAIL || 'elayabarathiedison@gmail.com';
         const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
         const salt = await bcrypt.hash(adminPassword, 10);
         await Admin.create({ email: adminEmail, password: salt });
 
-        if (data.skills && data.skills['technical skills']) {
-            const skills = data.skills['technical skills'];
-            for (const [category, items] of Object.entries(skills)) {
-                if (Array.isArray(items) && items.length > 0) {
-                    const skillItems = items.map(item => {
-                        if (typeof item === 'string') {
-                            return { label: item, desc: '', imgSrc: '' };
-                        }
-                        return item;
-                    });
-                    await TechStack.create({ category, items: skillItems });
-                }
-            }
+        if (Array.isArray(data.skills)) {
+            await TechStack.insertMany(data.skills);
         }
 
         if (Array.isArray(data.projects)) {
