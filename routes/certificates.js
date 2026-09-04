@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const item = await Certificate.findById(req.params.id);
+    const item = await Certificate.findOne({ id: req.params.id });
     if (!item) return res.status(404).json({ success: false, message: 'Not found' });
     res.json({ success: true, data: item });
   } catch (error) {

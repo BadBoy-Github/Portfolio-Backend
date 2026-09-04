@@ -921,24 +921,27 @@ app.post('/api/admin/seed', async (req, res) => {
         }
 
         if (Array.isArray(data.projects)) {
-            const formatted = data.projects.map(p => ({
-                id: p.id || `project-${Math.random().toString(36).slice(2, 9)}`,
-                type: p.type || '',
-                imgSrc: p.imgSrc || p.image || '',
-                title: p.title || p.name || 'Untitled Project',
-                subheading: p.subheading || '',
-                tags: Array.isArray(p.tags) ? p.tags : (Array.isArray(p.skills) ? p.skills : []),
-                sTags: Array.isArray(p.sTags) ? p.sTags : [],
-                live: String(p.live ?? ''),
-                projectLink: p.projectLink || p.link || '',
-                code: String(p.code ?? ''),
-                gitUrl: p.gitUrl || p.github || '',
-                techUsed: Array.isArray(p.techUsed) ? p.techUsed : (Array.isArray(p.skills) ? p.skills : []),
-                description: p.description || '',
-                uses: p.uses || '',
-                improvements: p.improvements || '',
-                gallery: Array.isArray(p.gallery) ? p.gallery : []
-            }));
+            const formatted = data.projects.map(p => {
+                const isFeatured = p.name === 'Dev Portfolio Hub' || p.name === 'Card Vault';
+                return {
+                    id: p.id || `project-${Math.random().toString(36).slice(2, 9)}`,
+                    type: isFeatured ? 'featured' : (p.type || ''),
+                    imgSrc: p.imgSrc || p.image || '',
+                    title: p.title || p.name || 'Untitled Project',
+                    subheading: p.subheading || '',
+                    tags: Array.isArray(p.tags) ? p.tags : (Array.isArray(p.skills) ? p.skills : []),
+                    sTags: Array.isArray(p.sTags) ? p.sTags : [],
+                    live: String(p.live ?? ''),
+                    projectLink: p.projectLink || p.link || '',
+                    code: String(p.code ?? ''),
+                    gitUrl: p.gitUrl || p.github || '',
+                    techUsed: Array.isArray(p.techUsed) ? p.techUsed : (Array.isArray(p.skills) ? p.skills : []),
+                    description: p.description || '',
+                    uses: p.uses || '',
+                    improvements: p.improvements || '',
+                    gallery: Array.isArray(p.gallery) ? p.gallery : []
+                };
+            });
             await Project.insertMany(formatted);
         }
 
@@ -972,7 +975,7 @@ app.post('/api/admin/seed', async (req, res) => {
         if (Array.isArray(data.reviews)) {
             const formatted = data.reviews.map((r, i) => ({
                 id: r.name ? `rev-${i}-${r.name.replace(/\s+/g, '-').toLowerCase()}` : `rev-${i}`,
-                content: r.content || '',
+                content: r.content || r.comment || '',
                 name: r.name || '',
                 imgSrc: r.imgSrc || '',
                 company: r.company || ''
