@@ -9,7 +9,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import nodemailer from 'nodemailer';
 import mongoose from 'mongoose';
-import { startAutoSync, stopAutoSync, syncData } from './dataSync.js';
+import { startAutoSync, stopAutoSync, syncData, generateTrainingData } from './dataSync.js';
 
 // ES Module __dirname equivalent
 const __filename = fileURLToPath(import.meta.url);
@@ -77,8 +77,159 @@ function loadData() {
     }
 }
 
+async function loadDataFromMongo() {
+    if (!mongoConnected) return null;
+    try {
+        const TechStack = (await import('./models/TechStack.js')).default;
+        const Project = (await import('./models/Project.js')).default;
+        const Experience = (await import('./models/Experience.js')).default;
+        const Education = (await import('./models/Education.js')).default;
+        const Certificate = (await import('./models/Certificate.js')).default;
+        const Achievement = (await import('./models/Achievement.js')).default;
+        const Review = (await import('./models/Review.js')).default;
+        const Blog = (await import('./models/Blog.js')).default;
+
+        const [
+            techStacks,
+            projects,
+            experiences,
+            educations,
+            certificates,
+            achievements,
+            reviews,
+            blogs
+        ] = await Promise.all([
+            TechStack.find(),
+            Project.find(),
+            Experience.find(),
+            Education.find(),
+            Certificate.find(),
+            Achievement.find(),
+            Review.find(),
+            Blog.find()
+        ]);
+
+        const featuredProjects = projects.filter(p => p.type === 'featured');
+
+        return {
+            name: "Elayabarathi M V",
+            headline: "Full Stack Web Developer & Biotechnologist",
+            about: portfolioData?.about || "Welcome! I'm Elayabarathi M V, a professional biotechnologist with expertise in microbiology, genetics, and bioinformatics. Innovated cancer treatments via nanobiotechnology. Accomplished frontend web developer. Passionate about integrating biology and technology for innovation. Strong collaborator and problem-solver, dedicated to continuous learning and interdisciplinary success.",
+            oneline: "Enthusiast in Scientific & Technological Innovations",
+            contact: portfolioData?.contact || {
+                email: "elayabarathiedison@gmail.com",
+                linkedin: "https://www.linkedin.com/in/elayabarathi/",
+                github: "https://github.com/BadBoy-Github",
+                portfolio: "https://elayabarathimv.vercel.app/"
+            },
+            skills: techStacks.map(s => ({ label: s.label, desc: s.desc, imgSrc: s.imgSrc })),
+            projects: projects.map(p => ({
+                id: p.id,
+                type: p.type,
+                imgSrc: p.imgSrc,
+                title: p.title,
+                subheading: p.subheading,
+                tags: p.tags,
+                sTags: p.sTags,
+                live: p.live,
+                projectLink: p.projectLink,
+                code: p.code,
+                gitUrl: p.gitUrl,
+                techUsed: p.techUsed,
+                description: p.description,
+                uses: p.uses,
+                improvements: p.improvements,
+                gallery: p.gallery
+            })),
+            experience: experiences.map(e => ({
+                year: e.year,
+                name: e.name,
+                role: e.role,
+                instName: e.instName,
+                instLogo: e.instLogo,
+                instLink: e.instLink,
+                desc: e.desc,
+                imgSrc: e.imgSrc,
+                certifi: e.certifi,
+                skills: e.skills,
+                compound: e.compound,
+                content: e.content
+            })),
+            education: educations.map(e => ({
+                year: e.year,
+                name: e.name,
+                perc: e.perc,
+                instName: e.instName,
+                instLogo: e.instLogo,
+                instLink: e.instLink,
+                desc: e.desc,
+                skills: e.skills
+            })),
+            certificates: certificates.map(c => ({
+                id: c.id,
+                title: c.title,
+                imgSrc: c.imgSrc,
+                company: c.company,
+                logo: c.logo,
+                year: c.year,
+                technologiesLearned: c.technologiesLearned,
+                description: c.description
+            })),
+            achievements: achievements.map(a => ({
+                id: a.id,
+                title: a.title,
+                subtitle: a.subtitle,
+                tags: a.tags,
+                date: a.date,
+                imgSrc: a.imgSrc,
+                keyPoints: a.keyPoints
+            })),
+            reviews: reviews.map(r => ({
+                content: r.content,
+                name: r.name,
+                imgSrc: r.imgSrc,
+                company: r.company
+            })),
+            featuredProjects: featuredProjects.map(fp => ({
+                name: fp.title,
+                description: fp.description,
+                link: fp.projectLink,
+                github: fp.gitUrl,
+                image: fp.imgSrc,
+                tags: fp.sTags || fp.tags
+            })),
+            blogs: blogs.map(b => ({
+                id: b.id,
+                title: b.title,
+                subtitle: b.subtitle,
+                date: b.date,
+                readTime: b.readTime,
+                tags: b.tags,
+                imageSrc: b.imageSrc,
+                link: b.link,
+                content: b.content
+            })),
+            lastUpdated: new Date().toISOString()
+        };
+    } catch (error) {
+        console.error('❌ Error loading data from MongoDB:', error.message);
+        return null;
+    }
+}
+
 // Initial data load
 loadData();
+
+// Load data from MongoDB if available
+async function initializeMongoData() {
+    const mongoData = await loadDataFromMongo();
+    if (mongoData) {
+        portfolioData = mongoData;
+        console.log('✅ Portfolio data loaded from MongoDB');
+    }
+}
+
+initializeMongoData();
 
 // Hugging Face API function
 async function queryHuggingFace(data) {
@@ -184,20 +335,23 @@ app.post('/api/chat', async (req, res) => {
         let answer;
         let source = 'local';
 
+        const data = portfolioData || {};
+        const contact = data.contact || {};
+
         let context = `
         Your name is Portfolio-GPT, let the user to interact with Elayabarathi M V's portfolio and CV. 
         You are a helpful assistant for Elayabarathi M V's portfolio. 
         Here's some information about him:
         
-        Name: ${portfolioData.name}
-        Headline: ${portfolioData.headline}
-        About: ${portfolioData.about}
+        Name: ${data.name || 'Elayabarathi M V'}
+        Headline: ${data.headline || 'Full Stack Web Developer & Biotechnologist'}
+        About: ${data.about || ''}
         
         Contact Information:
-        - Email: ${portfolioData.contact.email}
-        - LinkedIn: ${portfolioData.contact.linkedin}
-        - GitHub: ${portfolioData.contact.github}
-        - Portfolio: ${portfolioData.contact.portfolio}
+        - Email: ${contact.email || 'elayabarathiedison@gmail.com'}
+        - LinkedIn: ${contact.linkedin || 'https://www.linkedin.com/in/elayabarathi/'}
+        - GitHub: ${contact.github || 'https://github.com/BadBoy-Github'}
+        - Portfolio: ${contact.portfolio || 'https://elayabarathimv.vercel.app/'}
         
         Skills: Full-stack web development, Biotechnology, Python, React, JavaScript, Flask, etc.
         
@@ -206,16 +360,17 @@ app.post('/api/chat', async (req, res) => {
         If you don't know something specific, suggest asking about his projects, skills, or experience.
         `;
 
-        if (trainingData && trainingData.context) {
-            const featuredProjectsInfo = portfolioData.featuredProjects ?
-                portfolioData.featuredProjects.map(fp =>
-                    `- ${fp.name}: ${fp.description || 'Featured project'} - Link: ${fp.link || 'N/A'}`
-                ).join('\n') : 'No featured projects';
+        const featuredProjects = data.featuredProjects || [];
+        const blogs = data.blogs || [];
 
-            const blogsInfo = portfolioData.blogs ?
-                portfolioData.blogs.map(blog =>
-                    `- ${blog.title}: ${blog.subtitle || 'Blog post'} (${blog.readTime || 'N/A'})`
-                ).join('\n') : 'No blogs';
+        if (featuredProjects.length > 0 || blogs.length > 0) {
+            const featuredProjectsInfo = featuredProjects.map(fp =>
+                `- ${fp.name}: ${fp.description || 'Featured project'} - Link: ${fp.link || 'N/A'}`
+            ).join('\n') || 'No featured projects';
+
+            const blogsInfo = blogs.map(blog =>
+                `- ${blog.title}: ${blog.subtitle || 'Blog post'} (${blog.readTime || 'N/A'})`
+            ).join('\n') || 'No blogs';
 
             context = `
             Your name is Portfolio-GPT. You are a friendly chatbot that lets users interact with Elayabarathi M V's portfolio and CV. 
@@ -227,9 +382,9 @@ app.post('/api/chat', async (req, res) => {
             
             Here's some information about him:
             
-            Name: ${trainingData.context.name || portfolioData.name}
+            Name: ${data.name || 'Elayabarathi M V'}
             Headline: Full Stack Web Developer (This is his PRIMARY focus - always lead with this)
-            About: ${trainingData.context.about || portfolioData.about}
+            About: ${data.about || ''}
             
             Featured Projects (THESE ARE HIS BEST WORKS - mention these when asked about featured projects):
             ${featuredProjectsInfo}
@@ -238,12 +393,12 @@ app.post('/api/chat', async (req, res) => {
             ${blogsInfo}
             
             Contact Information:
-            - Email: ${portfolioData.contact.email}
-            - LinkedIn: ${portfolioData.contact.linkedin}
-            - GitHub: ${portfolioData.contact.github}
-            - Portfolio: ${portfolioData.contact.portfolio}
+            - Email: ${contact.email || 'elayabarathiedison@gmail.com'}
+            - LinkedIn: ${contact.linkedin || 'https://www.linkedin.com/in/elayabarathi/'}
+            - GitHub: ${contact.github || 'https://github.com/BadBoy-Github'}
+            - Portfolio: ${contact.portfolio || 'https://elayabarathimv.vercel.app/'}
             
-            Skills: ${trainingData.context.skills || 'Full-stack web development, Python, React, JavaScript, Flask, etc.'}
+            Skills: Full-stack web development, Python, React, JavaScript, Flask, etc.
             
             Please answer questions about Elayabarathi professionally and helpfully. 
             Use clear formatting with bullet points, headings, and proper spacing.
@@ -353,14 +508,22 @@ app.get('/api/test', (req, res) => {
             syncStatus: 'GET /api/sync-status',
             login: 'POST /api/admin/login',
             seed: 'POST /api/admin/seed',
-            techStacks: '/api/admin/tech-stacks',
-            projects: '/api/admin/projects',
-            certificates: '/api/admin/certificates',
-            achievements: '/api/admin/achievements',
-            reviews: '/api/admin/reviews',
-            experience: '/api/admin/experience',
-            education: '/api/admin/education',
-            blogs: '/api/admin/blogs'
+            techStacks: '/api/tech-stacks',
+            projects: '/api/projects',
+            certificates: '/api/certificates',
+            achievements: '/api/achievements',
+            reviews: '/api/reviews',
+            experience: '/api/experience',
+            education: '/api/education',
+            blogs: '/api/blogs',
+            adminTechStacks: '/api/admin/tech-stacks',
+            adminProjects: '/api/admin/projects',
+            adminCertificates: '/api/admin/certificates',
+            adminAchievements: '/api/admin/achievements',
+            adminReviews: '/api/admin/reviews',
+            adminExperience: '/api/admin/experience',
+            adminEducation: '/api/admin/education',
+            adminBlogs: '/api/admin/blogs'
         },
         mongoConnected
     });
@@ -370,21 +533,52 @@ app.get('/api/test', (req, res) => {
 app.post('/api/sync', async (req, res) => {
     try {
         console.log('🔄 Manual sync triggered...');
-        const success = await syncData();
-
-        if (success) {
-            loadData();
-            res.json({
-                success: true,
-                message: 'Data synchronized successfully from frontend to backend',
-                timestamp: new Date().toISOString()
-            });
+        
+        if (mongoConnected) {
+            const mongoData = await loadDataFromMongo();
+            if (mongoData) {
+                portfolioData = mongoData;
+                console.log('✅ Data synchronized from MongoDB');
+                
+                // Generate training data from MongoDB
+                trainingData = generateTrainingData(portfolioData);
+                console.log('✅ Training data generated from MongoDB');
+                
+                // Update backend data files
+                const dataPath = path.join(__dirname, "data", "data.json");
+                fs.writeFileSync(dataPath, JSON.stringify(portfolioData, null, 2), 'utf8');
+                
+                const trainingPath = path.join(__dirname, "data", "training.json");
+                fs.writeFileSync(trainingPath, JSON.stringify(trainingData, null, 2), 'utf8');
+                
+                res.json({
+                    success: true,
+                    message: 'Data synchronized successfully from MongoDB',
+                    timestamp: new Date().toISOString()
+                });
+            } else {
+                res.status(500).json({
+                    success: false,
+                    message: 'Failed to load data from MongoDB',
+                    timestamp: new Date().toISOString()
+                });
+            }
         } else {
-            res.status(500).json({
-                success: false,
-                message: 'Data sync failed',
-                timestamp: new Date().toISOString()
-            });
+            const success = await syncData();
+            if (success) {
+                loadData();
+                res.json({
+                    success: true,
+                    message: 'Data synchronized successfully from frontend to backend',
+                    timestamp: new Date().toISOString()
+                });
+            } else {
+                res.status(500).json({
+                    success: false,
+                    message: 'Data sync failed',
+                    timestamp: new Date().toISOString()
+                });
+            }
         }
     } catch (error) {
         console.error('❌ Sync error:', error);
@@ -604,14 +798,22 @@ app.get('/', (req, res) => {
             syncStatus: 'GET /api/sync-status',
             login: 'POST /api/admin/login',
             seed: 'POST /api/admin/seed',
-            techStacks: '/api/admin/tech-stacks',
-            projects: '/api/admin/projects',
-            certificates: '/api/admin/certificates',
-            achievements: '/api/admin/achievements',
-            reviews: '/api/admin/reviews',
-            experience: '/api/admin/experience',
-            education: '/api/admin/education',
-            blogs: '/api/admin/blogs'
+            techStacks: '/api/tech-stacks',
+            projects: '/api/projects',
+            certificates: '/api/certificates',
+            achievements: '/api/achievements',
+            reviews: '/api/reviews',
+            experience: '/api/experience',
+            education: '/api/education',
+            blogs: '/api/blogs',
+            adminTechStacks: '/api/admin/tech-stacks',
+            adminProjects: '/api/admin/projects',
+            adminCertificates: '/api/admin/certificates',
+            adminAchievements: '/api/admin/achievements',
+            adminReviews: '/api/admin/reviews',
+            adminExperience: '/api/admin/experience',
+            adminEducation: '/api/admin/education',
+            adminBlogs: '/api/admin/blogs'
         },
         features: {
             ai: 'Integrated Hugging Face AI model',
@@ -624,8 +826,7 @@ app.get('/', (req, res) => {
     });
 });
 
-// Admin routes
-import authRoutes from './routes/auth.js';
+// Public routes
 import techStackRoutes from './routes/techStacks.js';
 import projectRoutes from './routes/projects.js';
 import certificateRoutes from './routes/certificates.js';
@@ -635,15 +836,35 @@ import experienceRoutes from './routes/experience.js';
 import educationRoutes from './routes/education.js';
 import blogRoutes from './routes/blogs.js';
 
+app.use('/api/tech-stacks', techStackRoutes);
+app.use('/api/projects', projectRoutes);
+app.use('/api/certificates', certificateRoutes);
+app.use('/api/achievements', achievementRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/experience', experienceRoutes);
+app.use('/api/education', educationRoutes);
+app.use('/api/blogs', blogRoutes);
+
+// Admin routes
+import authRoutes from './routes/auth.js';
+import adminProjectRoutes from './routes/admin/projects.js';
+import adminCertificateRoutes from './routes/admin/certificates.js';
+import adminAchievementRoutes from './routes/admin/achievements.js';
+import adminReviewRoutes from './routes/admin/reviews.js';
+import adminExperienceRoutes from './routes/admin/experience.js';
+import adminEducationRoutes from './routes/admin/education.js';
+import adminBlogRoutes from './routes/admin/blogs.js';
+import adminTechStackRoutes from './routes/admin/techStacks.js';
+
 app.use('/api/admin', authRoutes);
-app.use('/api/admin/tech-stacks', techStackRoutes);
-app.use('/api/admin/projects', projectRoutes);
-app.use('/api/admin/certificates', certificateRoutes);
-app.use('/api/admin/achievements', achievementRoutes);
-app.use('/api/admin/reviews', reviewRoutes);
-app.use('/api/admin/experience', experienceRoutes);
-app.use('/api/admin/education', educationRoutes);
-app.use('/api/admin/blogs', blogRoutes);
+app.use('/api/admin/tech-stacks', adminTechStackRoutes);
+app.use('/api/admin/projects', adminProjectRoutes);
+app.use('/api/admin/certificates', adminCertificateRoutes);
+app.use('/api/admin/achievements', adminAchievementRoutes);
+app.use('/api/admin/reviews', adminReviewRoutes);
+app.use('/api/admin/experience', adminExperienceRoutes);
+app.use('/api/admin/education', adminEducationRoutes);
+app.use('/api/admin/blogs', adminBlogRoutes);
 
 import { authMiddleware } from './middleware/auth.js';
 
@@ -664,6 +885,7 @@ app.post('/api/admin/seed', async (req, res) => {
         const Blog = (await import('./models/Blog.js')).default;
         const bcrypt = (await import('bcryptjs')).default;
         const fs = await import('fs');
+        const path = await import('path');
 
         const dataPath = path.join(__dirname, "data", "data.json");
         const raw = fs.readFileSync(dataPath, "utf8");
@@ -681,8 +903,7 @@ app.post('/api/admin/seed', async (req, res) => {
 
         try {
             await TechStack.collection.dropIndex('category_1');
-        } catch (e) {
-        }
+        } catch (e) { }
 
         const adminEmail = process.env.ADMIN_EMAIL || 'elayabarathiedison@gmail.com';
         const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
@@ -690,105 +911,130 @@ app.post('/api/admin/seed', async (req, res) => {
         await Admin.create({ email: adminEmail, password: salt });
 
         if (Array.isArray(data.skills)) {
-            await TechStack.insertMany(data.skills);
+            const formatted = data.skills.map(s => ({
+                id: s.label || `skill-${Math.random().toString(36).slice(2, 9)}`,
+                label: s.label || '',
+                desc: s.desc || '',
+                imgSrc: s.imgSrc || ''
+            }));
+            await TechStack.insertMany(formatted);
         }
 
         if (Array.isArray(data.projects)) {
-            await Project.insertMany(data.projects);
-        }
-        if (Array.isArray(data.certificates)) {
-            const formattedCertificates = data.certificates.map((cert, index) => ({
-                name: cert.name || cert.title || '',
-                issuer: cert.issuer || cert.company || '',
-                date: cert.date || cert.year || '',
-                description: cert.desc || cert.description || '',
-                link: cert.link || cert.url || '',
-                image: cert.imgSrc || cert.image || '',
-                logo: cert.logo || '',
-                certNumber: index + 1
+            const formatted = data.projects.map(p => ({
+                id: p.id || `project-${Math.random().toString(36).slice(2, 9)}`,
+                type: p.type || '',
+                imgSrc: p.imgSrc || p.image || '',
+                title: p.title || p.name || 'Untitled Project',
+                subheading: p.subheading || '',
+                tags: Array.isArray(p.tags) ? p.tags : (Array.isArray(p.skills) ? p.skills : []),
+                sTags: Array.isArray(p.sTags) ? p.sTags : [],
+                live: String(p.live ?? ''),
+                projectLink: p.projectLink || p.link || '',
+                code: String(p.code ?? ''),
+                gitUrl: p.gitUrl || p.github || '',
+                techUsed: Array.isArray(p.techUsed) ? p.techUsed : (Array.isArray(p.skills) ? p.skills : []),
+                description: p.description || '',
+                uses: p.uses || '',
+                improvements: p.improvements || '',
+                gallery: Array.isArray(p.gallery) ? p.gallery : []
             }));
-            await Certificate.insertMany(formattedCertificates);
-        }
-        if (Array.isArray(data.achievements)) {
-            const formattedAchievements = data.achievements.map(ach => ({
-                title: ach.title || ach.name || '',
-                description: ach.desc || ach.description || '',
-                date: ach.date || ach.year || '',
-                image: ach.imgSrc || ach.image || '',
-                tags: ach.tags || []
-            }));
-            await Achievement.insertMany(formattedAchievements);
-        }
-        if (Array.isArray(data.reviews)) {
-            const formattedReviews = data.reviews.map(rev => ({
-                name: rev.name || rev.reviewerName || '',
-                role: rev.role || rev.reviewerRole || '',
-                company: rev.company || '',
-                comment: rev.comment || rev.review || '',
-                rating: rev.rating || 5,
-                image: rev.imgSrc || rev.image || ''
-            }));
-            await Review.insertMany(formattedReviews);
-        }
-        if (Array.isArray(data.experience)) {
-            const formattedExperience = [];
-            for (const exp of data.experience) {
-                if (exp.compound && Array.isArray(exp.content)) {
-                    for (const item of exp.content) {
-                        formattedExperience.push({
-                            title: item.name || item.title || '',
-                            company: item.instName || item.company || '',
-                            period: item.year || item.period || '',
-                            description: item.desc || item.description || '',
-                            skills: item.skills || [],
-                            link: item.instLink || item.link || '',
-                            role: item.role || '',
-                            instLogo: item.instLogo || '',
-                            imgSrc: item.imgSrc || '',
-                            certifi: !!item.certifi
-                        });
-                    }
-                } else {
-                    formattedExperience.push({
-                        title: exp.name || exp.title || '',
-                        company: exp.instName || exp.company || '',
-                        period: exp.year || exp.period || '',
-                        description: exp.desc || exp.description || '',
-                        skills: exp.skills || [],
-                        link: exp.instLink || exp.link || '',
-                        role: exp.role || '',
-                        instLogo: exp.instLogo || '',
-                        imgSrc: exp.imgSrc || '',
-                        certifi: !!exp.certifi
-                    });
-                }
-            }
-            const validExperience = formattedExperience.filter(item => item.title && item.company && item.period && item.description);
-            if (validExperience.length) {
-                await Experience.insertMany(validExperience);
-            }
-        }
-        if (Array.isArray(data.education)) {
-            const formattedEducation = data.education.map(e => ({
-                institution: e.instName || e.school || e.college || e.institution || '',
-                degree: e.name || e.degree || e.course || '',
-                year: e.year || e.graduationYear || '',
-                percentage: e.perc || e.grade || e.percentage || '',
-                description: e.desc || e.description || '',
-                instLogo: e.instLogo || '',
-                instLink: e.instLink || '',
-                skills: e.skills || []
-            }));
-            const validEducation = formattedEducation.filter(item => item.institution && item.degree && item.year);
-            if (validEducation.length) {
-                await Education.insertMany(validEducation);
-            }
-        }
-        if (Array.isArray(data.blogs)) {
-            await Blog.insertMany(data.blogs);
+            await Project.insertMany(formatted);
         }
 
-        res.json({ success: true, message: 'Database seeded successfully' });
+        if (Array.isArray(data.certificates)) {
+            const formatted = data.certificates.map((c, i) => ({
+                id: c.id || `cert-${i}`,
+                title: c.title || c.name || '',
+                imgSrc: c.imgSrc || c.image || '',
+                company: c.company || c.issuer || '',
+                logo: c.logo || '',
+                year: c.year || c.date || '',
+                technologiesLearned: Array.isArray(c.technologiesLearned) ? c.technologiesLearned : [],
+                description: c.description || ''
+            }));
+            await Certificate.insertMany(formatted);
+        }
+
+        if (Array.isArray(data.achievements)) {
+            const formatted = data.achievements.map(a => ({
+                id: a.id || `ach-${Math.random().toString(36).slice(2, 9)}`,
+                title: a.title || '',
+                subtitle: a.subtitle || '',
+                tags: a.tags || [],
+                date: a.date || '',
+                imgSrc: a.imgSrc || '',
+                keyPoints: a.keyPoints || []
+            }));
+            await Achievement.insertMany(formatted);
+        }
+
+        if (Array.isArray(data.reviews)) {
+            const formatted = data.reviews.map((r, i) => ({
+                id: r.name ? `rev-${i}-${r.name.replace(/\s+/g, '-').toLowerCase()}` : `rev-${i}`,
+                content: r.content || '',
+                name: r.name || '',
+                imgSrc: r.imgSrc || '',
+                company: r.company || ''
+            }));
+            await Review.insertMany(formatted);
+        }
+
+        if (Array.isArray(data.experience)) {
+            const formatted = [];
+            for (const exp of data.experience) {
+                formatted.push({
+                    id: exp.id || `exp-${Math.random().toString(36).slice(2, 9)}`,
+                    year: exp.year || exp.period || '',
+                    name: exp.name || exp.title || '',
+                    role: exp.role || '',
+                    instName: exp.instName || exp.company || '',
+                    instLogo: exp.instLogo || '',
+                    instLink: exp.instLink || exp.link || '',
+                    desc: exp.desc || exp.description || '',
+                    imgSrc: exp.imgSrc || '',
+                    certifi: !!exp.certifi,
+                    skills: Array.isArray(exp.skills) ? exp.skills : [],
+                    compound: !!exp.compound,
+                    content: Array.isArray(exp.content) ? exp.content : []
+                });
+            }
+            if (formatted.length) {
+                await Experience.insertMany(formatted);
+            }
+        }
+
+        if (Array.isArray(data.education)) {
+            const formatted = data.education.map((e, i) => ({
+                id: e.id || `edu-${i}`,
+                year: e.year || '',
+                name: e.name || e.degree || '',
+                perc: e.perc || e.percentage || '',
+                instName: e.instName || e.institution || '',
+                instLogo: e.instLogo || '',
+                instLink: e.instLink || '',
+                desc: e.desc || e.description || '',
+                skills: Array.isArray(e.skills) ? e.skills : []
+            }));
+            await Education.insertMany(formatted);
+        }
+
+        if (Array.isArray(data.blogs)) {
+            const formatted = data.blogs.map(b => ({
+                id: b.id || `blog-${Math.random().toString(36).slice(2, 9)}`,
+                title: b.title || '',
+                subtitle: b.subtitle || '',
+                date: b.date || '',
+                readTime: b.readTime || '',
+                tags: b.tags || [],
+                imageSrc: b.imageSrc || b.image || '',
+                link: b.link || '',
+                content: b.content || ''
+            }));
+            await Blog.insertMany(formatted);
+        }
+
+        res.json({ success: true, message: 'Database seeded successfully from backend data.json' });
     } catch (error) {
         console.error('Seed error:', error);
         res.status(500).json({ success: false, message: error.message });
@@ -806,12 +1052,30 @@ app.listen(PORT, () => {
 
     if (mongoConnected) {
         console.log('✅ MongoDB connected');
+        // Reload data from MongoDB
+        initializeMongoData();
     } else {
         console.log('⚠️  MongoDB not connected. Run seed endpoint after setting MONGO_URI in .env');
     }
 
-    // Start auto-sync (every 30 minutes)
+// Start auto-sync (every 30 minutes)
+if (mongoConnected) {
+    // Auto-sync from MongoDB
+    setInterval(async () => {
+        try {
+            const mongoData = await loadDataFromMongo();
+            if (mongoData) {
+                portfolioData = mongoData;
+                trainingData = generateTrainingData(portfolioData);
+                console.log(`⏰ Auto-sync from MongoDB completed at: ${new Date().toISOString()}`);
+            }
+        } catch (error) {
+            console.error('❌ Auto-sync error:', error.message);
+        }
+    }, 30 * 60 * 1000);
+} else {
     startAutoSync();
+}
 
     if (!process.env.HF_TOKEN) {
         console.warn('⚠️  HF_TOKEN not found in environment variables. AI features may not work.');

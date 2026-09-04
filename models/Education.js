@@ -1,13 +1,14 @@
 import mongoose from 'mongoose';
 
 const educationSchema = new mongoose.Schema({
-  institution: { type: String, required: true },
-  degree: { type: String, required: true },
-  year: { type: String, required: true },
-  percentage: { type: String, default: '' },
-  description: { type: String, default: '' },
+  id: { type: String, required: true, unique: true },
+  year: { type: String, default: '' },
+  name: { type: String, required: true },
+  perc: { type: String, default: '' },
+  instName: { type: String, default: '' },
   instLogo: { type: String, default: '' },
   instLink: { type: String, default: '' },
+  desc: { type: String, default: '' },
   skills: [{ type: String }]
 }, { timestamps: true });
 

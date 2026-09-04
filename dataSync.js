@@ -301,7 +301,7 @@ async function syncData() {
 }
 
 // Generate training data for the AI
-function generateTrainingData(data) {
+export function generateTrainingData(data) {
     const trainingExamples = [];
 
     // System context - instructs AI to prioritize web tech
