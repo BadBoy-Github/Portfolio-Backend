@@ -206,11 +206,6 @@ async function startServer() {
 
     app.listen(PORT, () => {
         console.log(`🚀 Server running on http://localhost:${PORT}`);
-        console.log(`💡 Health check: http://localhost:${PORT}/api/health`);
-        console.log(`💬 Chat endpoint: POST http://localhost:${PORT}/api/chat`);
-        console.log(`🤖 AI test: http://localhost:${PORT}/api/test-ai`);
-        console.log(`🎯 Test endpoint: http://localhost:${PORT}/api/test`);
-        console.log(`🔑 Admin login: POST http://localhost:${PORT}/api/admin/login`);
 
         if (mongoConnected) {
             console.log('✅ MongoDB connected');
