@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const projectSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
+  order: { type: Number, default: 0 },
   type: { type: String, default: '' },
   imgSrc: { type: String, default: '' },
   title: { type: String, required: true },
