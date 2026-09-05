@@ -44,6 +44,16 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+router.patch('/:id/order', async (req, res) => {
+  try {
+    const item = await TechStack.findByIdAndUpdate(req.params.id, { order: req.body.order }, { new: true });
+    if (!item) return res.status(404).json({ success: false, message: 'Not found' });
+    res.json({ success: true, data: item });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 router.delete('/:id', async (req, res) => {
   try {
     const item = await TechStack.findByIdAndDelete(req.params.id);
