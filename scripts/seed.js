@@ -119,7 +119,7 @@ async function seedDatabase() {
                 subtitle: a.subtitle || '',
                 tags: a.tags || [],
                 date: a.date || '',
-                imgSrc: a.imgSrc || '',
+                imgSrc: a.imgSrc || a.image || '',
                 keyPoints: a.keyPoints || []
             }));
             await Achievement.insertMany(formatted);

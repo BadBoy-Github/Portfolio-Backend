@@ -1,19 +1,11 @@
 // server.js
-import fs from 'fs';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import fetch from "node-fetch";
-import path from "path";
-import { fileURLToPath } from "url";
 import nodemailer from 'nodemailer';
 import mongoose from 'mongoose';
-import { startAutoSync, stopAutoSync, syncData, generateTrainingData } from './dataSync.js';
-
-// ES Module __dirname equivalent
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -48,34 +40,8 @@ async function connectMongo() {
     }
 }
 
-connectMongo();
-
-// Load portfolio data
-let portfolioData;
-let trainingData;
-
-function loadData() {
-    try {
-        const dataPath = path.join(__dirname, "data", "data.json");
-        const rawData = fs.readFileSync(dataPath, "utf8");
-
-        portfolioData = JSON.parse(rawData);
-        console.log('✅ Portfolio data loaded successfully');
-
-        // Also load training data
-        const trainingPath = path.join(__dirname, "data", "training.json");
-        try {
-            const trainingRaw = fs.readFileSync(trainingPath, "utf8");
-            trainingData = JSON.parse(trainingRaw);
-            console.log('✅ Training data loaded successfully');
-        } catch (e) {
-            console.log('⚠️  Training data not found, will be generated on first sync');
-        }
-    } catch (error) {
-        console.error('❌ Error loading data.json:', error.message);
-        process.exit(1);
-    }
-}
+// In-memory portfolio data loaded directly from MongoDB
+let portfolioData = null;
 
 async function loadDataFromMongo() {
     if (!mongoConnected) return null;
@@ -114,9 +80,9 @@ async function loadDataFromMongo() {
         return {
             name: "Elayabarathi M V",
             headline: "Full Stack Web Developer & Biotechnologist",
-            about: portfolioData?.about || "Welcome! I'm Elayabarathi M V, a professional biotechnologist with expertise in microbiology, genetics, and bioinformatics. Innovated cancer treatments via nanobiotechnology. Accomplished frontend web developer. Passionate about integrating biology and technology for innovation. Strong collaborator and problem-solver, dedicated to continuous learning and interdisciplinary success.",
+            about: "Welcome! I'm Elayabarathi M V, a professional biotechnologist with expertise in microbiology, genetics, and bioinformatics. Innovated cancer treatments via nanobiotechnology. Accomplished frontend web developer. Passionate about integrating biology and technology for innovation. Strong collaborator and problem-solver, dedicated to continuous learning and interdisciplinary success.",
             oneline: "Enthusiast in Scientific & Technological Innovations",
-            contact: portfolioData?.contact || {
+            contact: {
                 email: "elayabarathiedison@gmail.com",
                 linkedin: "https://www.linkedin.com/in/elayabarathi/",
                 github: "https://github.com/BadBoy-Github",
@@ -217,19 +183,50 @@ async function loadDataFromMongo() {
     }
 }
 
-// Initial data load
-loadData();
-
-// Load data from MongoDB if available
+// Initialize data from MongoDB (called after successful connection)
 async function initializeMongoData() {
+    if (!mongoConnected) {
+        console.log('⚠️  MongoDB not connected. AI training data unavailable.');
+        return;
+    }
     const mongoData = await loadDataFromMongo();
     if (mongoData) {
         portfolioData = mongoData;
-        console.log('✅ Portfolio data loaded from MongoDB');
+        console.log('✅ Portfolio data loaded from MongoDB for AI training');
     }
 }
 
-initializeMongoData();
+// Start server only after MongoDB connection is established
+async function startServer() {
+    const connected = await connectMongo();
+
+    if (connected) {
+        await initializeMongoData();
+    }
+
+    app.listen(PORT, () => {
+        console.log(`🚀 Server running on http://localhost:${PORT}`);
+        console.log(`💡 Health check: http://localhost:${PORT}/api/health`);
+        console.log(`💬 Chat endpoint: POST http://localhost:${PORT}/api/chat`);
+        console.log(`🤖 AI test: http://localhost:${PORT}/api/test-ai`);
+        console.log(`🎯 Test endpoint: http://localhost:${PORT}/api/test`);
+        console.log(`🔑 Admin login: POST http://localhost:${PORT}/api/admin/login`);
+
+        if (mongoConnected) {
+            console.log('✅ MongoDB connected');
+        } else {
+            console.log('⚠️  MongoDB not connected. AI training data unavailable.');
+        }
+
+        if (!process.env.HF_TOKEN) {
+            console.warn('⚠️  HF_TOKEN not found in environment variables. AI features may not work.');
+        } else {
+            console.log('✅ Hugging Face token loaded');
+        }
+    });
+}
+
+startServer();
 
 // Hugging Face API function
 async function queryHuggingFace(data) {
@@ -335,7 +332,13 @@ app.post('/api/chat', async (req, res) => {
         let answer;
         let source = 'local';
 
-        const data = portfolioData || {};
+        // Always load fresh data from MongoDB for AI training
+        let data = portfolioData;
+        if (!data && mongoConnected) {
+            data = await loadDataFromMongo();
+            if (data) portfolioData = data;
+        }
+        data = data || {};
         const contact = data.contact || {};
 
         let context = `
@@ -540,17 +543,6 @@ app.post('/api/sync', async (req, res) => {
                 portfolioData = mongoData;
                 console.log('✅ Data synchronized from MongoDB');
                 
-                // Generate training data from MongoDB
-                trainingData = generateTrainingData(portfolioData);
-                console.log('✅ Training data generated from MongoDB');
-                
-                // Update backend data files
-                const dataPath = path.join(__dirname, "data", "data.json");
-                fs.writeFileSync(dataPath, JSON.stringify(portfolioData, null, 2), 'utf8');
-                
-                const trainingPath = path.join(__dirname, "data", "training.json");
-                fs.writeFileSync(trainingPath, JSON.stringify(trainingData, null, 2), 'utf8');
-                
                 res.json({
                     success: true,
                     message: 'Data synchronized successfully from MongoDB',
@@ -564,21 +556,11 @@ app.post('/api/sync', async (req, res) => {
                 });
             }
         } else {
-            const success = await syncData();
-            if (success) {
-                loadData();
-                res.json({
-                    success: true,
-                    message: 'Data synchronized successfully from frontend to backend',
-                    timestamp: new Date().toISOString()
-                });
-            } else {
-                res.status(500).json({
-                    success: false,
-                    message: 'Data sync failed',
-                    timestamp: new Date().toISOString()
-                });
-            }
+            res.status(500).json({
+                success: false,
+                message: 'MongoDB not connected',
+                timestamp: new Date().toISOString()
+            });
         }
     } catch (error) {
         console.error('❌ Sync error:', error);
@@ -591,49 +573,32 @@ app.post('/api/sync', async (req, res) => {
 
 // Get sync status
 app.get('/api/sync-status', (req, res) => {
-    const dataPath = path.join(__dirname, "data", "data.json");
-    const trainingPath = path.join(__dirname, "data", "training.json");
-
-    let dataLastModified = null;
-    let trainingLastModified = null;
-
-    try {
-        const dataStats = fs.statSync(dataPath);
-        dataLastModified = dataStats.mtime.toISOString();
-    } catch (e) { }
-
-    try {
-        const trainingStats = fs.statSync(trainingPath);
-        trainingLastModified = trainingStats.mtime.toISOString();
-    } catch (e) { }
-
     res.json({
         status: 'active',
-        autoSyncEnabled: true,
-        syncIntervalMinutes: 30,
-        lastDataUpdate: portfolioData?.lastUpdated || dataLastModified,
-        lastTrainingUpdate: trainingData?.lastTrained || trainingLastModified,
-        dataFileModified: dataLastModified,
-        trainingFileModified: trainingLastModified,
+        autoSyncEnabled: false,
+        syncIntervalMinutes: 0,
+        lastDataUpdate: portfolioData?.lastUpdated || null,
+        lastTrainingUpdate: null,
+        dataFileModified: null,
+        trainingFileModified: null,
+        mongoConnected,
         timestamp: new Date().toISOString()
     });
 });
 
 // Stop auto-sync (for maintenance)
 app.post('/api/sync/stop', (req, res) => {
-    stopAutoSync();
     res.json({
         success: true,
-        message: 'Auto-sync stopped'
+        message: 'Auto-sync not applicable - data loaded directly from MongoDB'
     });
 });
 
 // Start auto-sync
 app.post('/api/sync/start', (req, res) => {
-    startAutoSync();
     res.json({
         success: true,
-        message: 'Auto-sync started (every 30 minutes)'
+        message: 'Auto-sync not applicable - data loaded directly from MongoDB'
     });
 });
 
@@ -816,9 +781,9 @@ app.get('/', (req, res) => {
             adminBlogs: '/api/admin/blogs'
         },
         features: {
-            ai: 'Integrated Hugging Face AI model',
+            ai: 'Integrated Hugging Face AI model with MongoDB data',
             fallback: 'Local response system as backup',
-            context: 'Portfolio-aware responses'
+            context: 'Portfolio-aware responses from MongoDB'
         },
         example: {
             chat: 'curl -X POST http://localhost:5000/api/chat -H "Content-Type: application/json" -d \'{"question":"What is your GitHub?"}\''
@@ -966,7 +931,7 @@ app.post('/api/admin/seed', async (req, res) => {
                 subtitle: a.subtitle || '',
                 tags: a.tags || [],
                 date: a.date || '',
-                imgSrc: a.imgSrc || '',
+                imgSrc: a.imgSrc || a.image || '',
                 keyPoints: a.keyPoints || []
             }));
             await Achievement.insertMany(formatted);
@@ -1044,45 +1009,3 @@ app.post('/api/admin/seed', async (req, res) => {
     }
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
-    console.log(`💡 Health check: http://localhost:${PORT}/api/health`);
-    console.log(`💬 Chat endpoint: POST http://localhost:${PORT}/api/chat`);
-    console.log(`🤖 AI test: http://localhost:${PORT}/api/test-ai`);
-    console.log(`🎯 Test endpoint: http://localhost:${PORT}/api/test`);
-    console.log(`🔑 Admin login: POST http://localhost:${PORT}/api/admin/login`);
-
-    if (mongoConnected) {
-        console.log('✅ MongoDB connected');
-        // Reload data from MongoDB
-        initializeMongoData();
-    } else {
-        console.log('⚠️  MongoDB not connected. Run seed endpoint after setting MONGO_URI in .env');
-    }
-
-// Start auto-sync (every 30 minutes)
-if (mongoConnected) {
-    // Auto-sync from MongoDB
-    setInterval(async () => {
-        try {
-            const mongoData = await loadDataFromMongo();
-            if (mongoData) {
-                portfolioData = mongoData;
-                trainingData = generateTrainingData(portfolioData);
-                console.log(`⏰ Auto-sync from MongoDB completed at: ${new Date().toISOString()}`);
-            }
-        } catch (error) {
-            console.error('❌ Auto-sync error:', error.message);
-        }
-    }, 30 * 60 * 1000);
-} else {
-    startAutoSync();
-}
-
-    if (!process.env.HF_TOKEN) {
-        console.warn('⚠️  HF_TOKEN not found in environment variables. AI features may not work.');
-    } else {
-        console.log('✅ Hugging Face token loaded');
-    }
-});
