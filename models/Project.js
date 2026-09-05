@@ -16,6 +16,7 @@ const projectSchema = new mongoose.Schema({
   description: { type: String, default: '' },
   uses: { type: String, default: '' },
   improvements: { type: String, default: '' },
+  displayTags: [{ type: String }],
   gallery: [{ type: String }]
 }, { timestamps: true });
 
