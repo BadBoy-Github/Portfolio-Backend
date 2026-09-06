@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const educationSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
+  order: { type: Number, default: 0 },
   year: { type: String, default: '' },
   name: { type: String, required: true },
   perc: { type: String, default: '' },
