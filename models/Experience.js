@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const experienceSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
+  order: { type: Number, default: 0 },
   year: { type: String, default: '' },
   name: { type: String, required: true },
   role: { type: String, default: '' },
@@ -13,6 +14,7 @@ const experienceSchema = new mongoose.Schema({
   certifi: { type: Boolean, default: false },
   skills: [{ type: String }],
   compound: { type: Boolean, default: false },
+  period: { type: String, default: '' },
   content: [{
     year: { type: String, default: '' },
     name: { type: String, default: '' },
