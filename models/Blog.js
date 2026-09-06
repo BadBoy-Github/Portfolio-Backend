@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const blogSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
+  order: { type: Number, default: 0 },
   title: { type: String, required: true },
   subtitle: { type: String, default: '' },
   date: { type: String, default: '' },
