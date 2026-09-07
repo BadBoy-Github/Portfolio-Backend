@@ -922,6 +922,13 @@ app.post('/api/reviews/public', async (req, res) => {
                               </div>
                             </td>
                           </tr>
+                          <tr>
+                            <td style="padding:20px 30px; background:#f9fafb; text-align:center;">
+                              <p style="margin:0; font-size:12px; color:#6b7280;">
+                                Visit my portfolio: <a href="https://elayabarathimv.vercel.app" style="color:#0284c7; text-decoration:none;">https://elayabarathimv.vercel.app</a>
+                              </p>
+                            </td>
+                          </tr>
                         </table>
                       </td>
                     </tr>
