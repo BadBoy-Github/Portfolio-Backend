@@ -598,6 +598,16 @@ app.post('/api/sync/start', (req, res) => {
 });
 
 // Contact form endpoint with nodemailer
+function escapeHtml(text) {
+    if (!text) return '';
+    return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
 app.post('/api/contact', async (req, res) => {
     try {
         const { name, email, subject, category, message } = req.body;
@@ -614,6 +624,14 @@ app.post('/api/contact', async (req, res) => {
             return res.status(400).json({
                 success: false,
                 error: 'Invalid category'
+            });
+        }
+
+        if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+            console.error('❌ Contact form error: SMTP credentials not configured');
+            return res.status(500).json({
+                success: false,
+                error: 'Email service not configured. Please try again later.'
             });
         }
 
@@ -669,28 +687,28 @@ app.post('/api/contact', async (req, res) => {
                 <tr>
                   <td style="padding-bottom:10px;">
                     <strong style="color:#0284c7;">👤 Name:</strong><br>
-                    ${name}
+                    ${escapeHtml(name)}
                   </td>
                 </tr>
 
                 <tr>
                   <td style="padding-bottom:10px;">
                     <strong style="color:#0284c7;">📧 Email:</strong><br>
-                    ${email}
+                    ${escapeHtml(email)}
                   </td>
                 </tr>
 
                 <tr>
                   <td style="padding-bottom:10px;">
                     <strong style="color:#0284c7;">📂 Category:</strong><br>
-                    ${category}
+                    ${escapeHtml(category)}
                   </td>
                 </tr>
 
                 <tr>
                   <td style="padding-bottom:10px;">
                     <strong style="color:#0284c7;">📝 Subject:</strong><br>
-                    ${subject}
+                    ${escapeHtml(subject)}
                   </td>
                 </tr>
 
@@ -700,7 +718,7 @@ app.post('/api/contact', async (req, res) => {
               <div style="margin-top:25px;">
                 <strong style="color:#0284c7; font-size:16px;">💬 Message</strong>
                 <div style="margin-top:10px; padding:15px; background:#f1f5f9; border-radius:8px; line-height:1.6;">
-                  ${message}
+                  ${escapeHtml(message).replace(/\n/g, '<br>')}
                 </div>
               </div>
 
@@ -757,6 +775,14 @@ app.post('/api/reviews/public', async (req, res) => {
             });
         }
 
+        if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+            console.error('❌ Public review error: SMTP credentials not configured');
+            return res.status(500).json({
+                success: false,
+                error: 'Email service not configured. Please try again later.'
+            });
+        }
+
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST || 'smtp.gmail.com',
             port: parseInt(process.env.SMTP_PORT) || 587,
@@ -800,32 +826,32 @@ app.post('/api/reviews/public', async (req, res) => {
                                 <tr>
                                   <td style="padding-bottom:10px;">
                                     <strong style="color:#0284c7;">👤 Name:</strong><br>
-                                    ${name}
+                    ${escapeHtml(name)}
                                   </td>
                                 </tr>
                                 <tr>
                                   <td style="padding-bottom:10px;">
                                     <strong style="color:#0284c7;">🏢 Company:</strong><br>
-                                    ${company || 'N/A'}
+                                    ${escapeHtml(company || 'N/A')}
                                   </td>
                                 </tr>
                                 <tr>
                                   <td style="padding-bottom:10px;">
                                     <strong style="color:#0284c7;">📧 Email:</strong><br>
-                                    ${email}
+                    ${escapeHtml(email)}
                                   </td>
                                 </tr>
                                 <tr>
                                   <td style="padding-bottom:10px;">
                                     <strong style="color:#0284c7;">⭐ Rating:</strong><br>
-                                    <span style="color:#f59e0b; font-size:18px;">${stars}</span> (${rating}/5)
+                                    <span style="color:#f59e0b; font-size:18px;">${stars}</span> (${escapeHtml(rating)}/5)
                                   </td>
                                 </tr>
                                 ${imgSrc ? `
                                 <tr>
                                   <td style="padding-bottom:10px;">
                                     <strong style="color:#0284c7;">🖼️ Profile Image:</strong><br>
-                                    <img src="${imgSrc}" alt="${name}" style="max-width:120px; max-height:120px; border-radius:8px; margin-top:8px; border:1px solid #e5e7eb;" onerror="this.style.display='none'" />
+                                    <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(name)}" style="max-width:120px; max-height:120px; border-radius:8px; margin-top:8px; border:1px solid #e5e7eb;" onerror="this.style.display='none'" />
                                   </td>
                                 </tr>
                                 ` : ''}
@@ -833,7 +859,7 @@ app.post('/api/reviews/public', async (req, res) => {
                               <div style="margin-top:25px;">
                                 <strong style="color:#0284c7; font-size:16px;">💬 Review Content</strong>
                                 <div style="margin-top:10px; padding:15px; background:#f1f5f9; border-radius:8px; line-height:1.6;">
-                                  ${content}
+                                  ${escapeHtml(content).replace(/\n/g, '<br>')}
                                 </div>
                               </div>
                             </td>
@@ -880,7 +906,7 @@ app.post('/api/reviews/public', async (req, res) => {
                           </tr>
                           <tr>
                             <td style="padding:30px; color:#333333;">
-                              <p style="font-size:16px; line-height:1.6;">Hello ${name},</p>
+                               <p style="font-size:16px; line-height:1.6;">Hello ${escapeHtml(name)},</p>
                               <p style="font-size:16px; line-height:1.6;">
                                 You have sent a review for me. <strong>Thank you for your time and effort.</strong>
                               </p>
@@ -894,6 +920,13 @@ app.post('/api/reviews/public', async (req, res) => {
                                   <a href="mailto:elayabarathiedison@gmail.com" style="color:#0284c7;">elayabarathiedison@gmail.com</a>
                                 </p>
                               </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:20px 30px; background:#f9fafb; text-align:center;">
+                              <p style="margin:0; font-size:12px; color:#6b7280;">
+                                Visit my portfolio: <a href="https://elayabarathimv.vercel.app" style="color:#0284c7; text-decoration:none;">https://elayabarathimv.vercel.app</a>
+                              </p>
                             </td>
                           </tr>
                         </table>
