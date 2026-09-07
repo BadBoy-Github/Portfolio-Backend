@@ -71,42 +71,13 @@ function readJsDataFile(filename) {
 
 // Format skills for backend
 function formatSkills(skillData) {
-    if (!skillData || !Array.isArray(skillData)) return {};
+    if (!skillData || !Array.isArray(skillData)) return [];
 
-    const formattedSkills = {
-        "technical skills": {
-            "languages": [],
-            "frameworks": [],
-            "libraries": [],
-            "tools": []
-        }
-    };
-
-    skillData.forEach(skill => {
-        const label = skill.label?.toLowerCase() || '';
-        const desc = skill.desc?.toLowerCase() || '';
-
-        // Categorize based on label
-        if (['react js', 'javascript', 'python', 'java', 'html', 'css', 'sql'].some(k => label.includes(k))) {
-            if (!formattedSkills["technical skills"]["languages"].includes(skill.label)) {
-                formattedSkills["technical skills"]["languages"].push(skill.label);
-            }
-        } else if (['tailwind', 'bootstrap', 'flask'].some(k => label.includes(k))) {
-            if (!formattedSkills["technical skills"]["frameworks"].includes(skill.label)) {
-                formattedSkills["technical skills"]["frameworks"].push(skill.label);
-            }
-        } else if (['github', 'vercel', 'canva', 'autocad'].some(k => label.includes(k))) {
-            if (!formattedSkills["technical skills"]["tools"].includes(skill.label)) {
-                formattedSkills["technical skills"]["tools"].push(skill.label);
-            }
-        } else {
-            if (!formattedSkills["technical skills"]["libraries"].includes(skill.label)) {
-                formattedSkills["technical skills"]["libraries"].push(skill.label);
-            }
-        }
-    });
-
-    return formattedSkills;
+    return skillData.map(skill => ({
+        label: skill.label || '',
+        desc: skill.desc || '',
+        imgSrc: skill.imgSrc || ''
+    }));
 }
 
 // Format projects for backend
@@ -127,14 +98,39 @@ function formatProjects(projectData) {
 function formatExperience(expData) {
     if (!expData || !Array.isArray(expData)) return [];
 
-    return expData.map(exp => ({
-        title: exp.name || exp.title || '',
-        company: exp.instName || exp.company || '',
-        period: exp.year || exp.period || '',
-        description: exp.desc || exp.description || '',
-        skills: exp.skills || [],
-        link: exp.instLink || exp.link || ''
-    }));
+    const result = [];
+    for (const exp of expData) {
+        if (exp.compound && Array.isArray(exp.content)) {
+            for (const item of exp.content) {
+                result.push({
+                    title: item.name || item.title || '',
+                    company: item.instName || item.company || '',
+                    period: item.year || item.period || '',
+                    description: item.desc || item.description || '',
+                    skills: item.skills || [],
+                    link: item.instLink || item.link || '',
+                    role: item.role || '',
+                    instLogo: item.instLogo || '',
+                    imgSrc: item.imgSrc || '',
+                    certifi: !!item.certifi
+                });
+            }
+        } else {
+            result.push({
+                title: exp.name || exp.title || '',
+                company: exp.instName || exp.company || '',
+                period: exp.year || exp.period || '',
+                description: exp.desc || exp.description || '',
+                skills: exp.skills || [],
+                link: exp.instLink || exp.link || '',
+                role: exp.role || '',
+                instLogo: exp.instLogo || '',
+                imgSrc: exp.imgSrc || '',
+                certifi: !!exp.certifi
+            });
+        }
+    }
+    return result;
 }
 
 // Format education for backend
@@ -142,11 +138,14 @@ function formatEducation(eduData) {
     if (!eduData || !Array.isArray(eduData)) return [];
 
     return eduData.map(e => ({
-        institution: e.school || e.college || e.institution || '',
-        degree: e.degree || e.course || '',
+        institution: e.instName || e.school || e.college || e.institution || '',
+        degree: e.name || e.degree || e.course || '',
         year: e.year || e.graduationYear || '',
-        percentage: e.grade || e.percentage || '',
-        description: e.desc || e.description || ''
+        percentage: e.perc || e.grade || e.percentage || '',
+        description: e.desc || e.description || '',
+        instLogo: e.instLogo || '',
+        instLink: e.instLink || '',
+        skills: e.skills || []
     }));
 }
 
@@ -154,12 +153,15 @@ function formatEducation(eduData) {
 function formatCertificates(certData) {
     if (!certData || !Array.isArray(certData)) return [];
 
-    return certData.map(cert => ({
+    return certData.map((cert, index) => ({
         name: cert.name || cert.title || '',
         issuer: cert.issuer || cert.company || '',
         date: cert.date || cert.year || '',
         description: cert.desc || cert.description || '',
-        link: cert.link || cert.url || ''
+        link: cert.link || cert.url || '',
+        image: cert.imgSrc || cert.image || '',
+        logo: cert.logo || '',
+        certNumber: index + 1
     }));
 }
 
@@ -171,7 +173,8 @@ function formatAchievements(achievementData) {
         title: ach.title || ach.name || '',
         description: ach.desc || ach.description || '',
         date: ach.date || ach.year || '',
-        image: ach.imgSrc || ach.image || ''
+        image: ach.imgSrc || ach.image || '',
+        tags: ach.tags || []
     }));
 }
 
@@ -182,7 +185,8 @@ function formatReviews(reviewData) {
     return reviewData.map(rev => ({
         name: rev.name || rev.reviewerName || '',
         role: rev.role || rev.reviewerRole || '',
-        comment: rev.comment || rev.review || '',
+        company: rev.company || '',
+        comment: rev.content || rev.comment || rev.review || '',
         rating: rev.rating || 5,
         image: rev.imgSrc || rev.image || ''
     }));
@@ -297,7 +301,7 @@ async function syncData() {
 }
 
 // Generate training data for the AI
-function generateTrainingData(data) {
+export function generateTrainingData(data) {
     const trainingExamples = [];
 
     // System context - instructs AI to prioritize web tech
@@ -310,15 +314,8 @@ function generateTrainingData(data) {
     });
 
     // Skills - prioritize web tech
-    if (data.skills) {
-        const skillsStr = Object.entries(data.skills).map(([category, items]) => {
-            if (typeof items === 'object') {
-                return `${category}: ${Object.entries(items).map(([key, vals]) =>
-                    `${key}: ${Array.isArray(vals) ? vals.join(', ') : vals}`
-                ).join(', ')}`;
-            }
-            return `${category}: ${items}`;
-        }).join('. ');
+    if (data.skills && Array.isArray(data.skills)) {
+        const skillsStr = data.skills.map(s => s.label).filter(Boolean).join(', ');
 
         trainingExamples.push({
             input: "What are your technical skills?",
