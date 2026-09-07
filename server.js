@@ -745,6 +745,185 @@ app.post('/api/contact', async (req, res) => {
     }
 });
 
+// Public review submission endpoint (sends emails, does not store in DB)
+app.post('/api/reviews/public', async (req, res) => {
+    try {
+        const { name, email, company, content, rating, imgSrc } = req.body;
+
+        if (!name || !email || !content || !rating) {
+            return res.status(400).json({
+                success: false,
+                error: 'Name, email, content and rating are required'
+            });
+        }
+
+        const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST || 'smtp.gmail.com',
+            port: parseInt(process.env.SMTP_PORT) || 587,
+            secure: false,
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS
+            }
+        });
+
+        const stars = '★'.repeat(Math.min(5, Math.max(1, parseInt(rating) || 5))) + '☆'.repeat(5 - Math.min(5, Math.max(1, parseInt(rating) || 5)));
+
+        // Email to admin with full review content and image preview
+        const adminMailOptions = {
+            from: process.env.SMTP_USER,
+            to: process.env.TO_EMAIL || process.env.SMTP_USER,
+            subject: `⭐ New Review from ${name}`,
+            html: `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                  <meta charset="UTF-8">
+                  <title>New Review Submission</title>
+                </head>
+                <body style="margin:0; padding:0; background-color:#f4f7fb; font-family: Arial, sans-serif;">
+                  <table width="100%" cellpadding="0" cellspacing="0" style="padding: 30px 0;">
+                    <tr>
+                      <td align="center">
+                        <table width="600" cellpadding="0" cellspacing="0"
+                          style="background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 8px 25px rgba(0,0,0,0.08);">
+                          <tr>
+                            <td style="background:#0284c7; padding:20px 30px; color:#ffffff;">
+                              <h2 style="margin:0; font-size:22px;">⭐ New Review Submission</h2>
+                              <p style="margin:5px 0 0; font-size:14px; opacity:0.9;">You've received a new review from your portfolio</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:30px; color:#333333;">
+                              <table width="100%" cellpadding="0" cellspacing="0"
+                                style="border:1px solid #e5e7eb; border-radius:10px; padding:20px; background:#f9fbfd;">
+                                <tr>
+                                  <td style="padding-bottom:10px;">
+                                    <strong style="color:#0284c7;">👤 Name:</strong><br>
+                                    ${name}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td style="padding-bottom:10px;">
+                                    <strong style="color:#0284c7;">🏢 Company:</strong><br>
+                                    ${company || 'N/A'}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td style="padding-bottom:10px;">
+                                    <strong style="color:#0284c7;">📧 Email:</strong><br>
+                                    ${email}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td style="padding-bottom:10px;">
+                                    <strong style="color:#0284c7;">⭐ Rating:</strong><br>
+                                    <span style="color:#f59e0b; font-size:18px;">${stars}</span> (${rating}/5)
+                                  </td>
+                                </tr>
+                                ${imgSrc ? `
+                                <tr>
+                                  <td style="padding-bottom:10px;">
+                                    <strong style="color:#0284c7;">🖼️ Profile Image:</strong><br>
+                                    <img src="${imgSrc}" alt="${name}" style="max-width:120px; max-height:120px; border-radius:8px; margin-top:8px; border:1px solid #e5e7eb;" onerror="this.style.display='none'" />
+                                  </td>
+                                </tr>
+                                ` : ''}
+                              </table>
+                              <div style="margin-top:25px;">
+                                <strong style="color:#0284c7; font-size:16px;">💬 Review Content</strong>
+                                <div style="margin-top:10px; padding:15px; background:#f1f5f9; border-radius:8px; line-height:1.6;">
+                                  ${content}
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:20px 30px; background:#f9fafb; text-align:center;">
+                              <p style="margin:0; font-size:12px; color:#6b7280;">
+                                This review was submitted through your portfolio contact page.
+                              </p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </body>
+                </html>
+            `
+        };
+
+        // Thank you email to the user
+        const userMailOptions = {
+            from: process.env.SMTP_USER,
+            to: email,
+            subject: 'Thank you for your review!',
+            html: `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                  <meta charset="UTF-8">
+                  <title>Thank You for Your Review</title>
+                </head>
+                <body style="margin:0; padding:0; background-color:#f4f7fb; font-family: Arial, sans-serif;">
+                  <table width="100%" cellpadding="0" cellspacing="0" style="padding: 30px 0;">
+                    <tr>
+                      <td align="center">
+                        <table width="600" cellpadding="0" cellspacing="0"
+                          style="background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 8px 25px rgba(0,0,0,0.08);">
+                          <tr>
+                            <td style="background:#0284c7; padding:20px 30px; color:#ffffff;">
+                              <h2 style="margin:0; font-size:22px;">Thank You! 🙏</h2>
+                              <p style="margin:5px 0 0; font-size:14px; opacity:0.9;">We appreciate your time and effort</p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:30px; color:#333333;">
+                              <p style="font-size:16px; line-height:1.6;">Hello ${name},</p>
+                              <p style="font-size:16px; line-height:1.6;">
+                                You have sent a review for me. <strong>Thank you for your time and effort.</strong>
+                              </p>
+                              <p style="font-size:16px; line-height:1.6;">
+                                Your feedback means a lot and helps me improve. I'll be in touch if needed!
+                              </p>
+                              <div style="margin-top:25px; padding:15px; background:#f1f5f9; border-radius:8px;">
+                                <p style="margin:0; font-size:14px; color:#6b7280;">
+                                  Best regards,<br>
+                                  <strong>Elayabarathi M V</strong><br>
+                                  <a href="mailto:elayabarathiedison@gmail.com" style="color:#0284c7;">elayabarathiedison@gmail.com</a>
+                                </p>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </body>
+                </html>
+            `
+        };
+
+        await transporter.sendMail(adminMailOptions);
+        await transporter.sendMail(userMailOptions);
+
+        console.log(`📧 Public review submitted: ${name} (${email}) - Rating: ${rating}`);
+
+        res.json({
+            success: true,
+            message: 'Review sent successfully!'
+        });
+
+    } catch (error) {
+        console.error('❌ Public review error:', error.message);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to send review. Please try again later.'
+        });
+    }
+});
+
 // Root endpoint
 app.get('/', (req, res) => {
     res.json({
