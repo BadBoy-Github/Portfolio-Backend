@@ -645,6 +645,16 @@ app.post('/api/contact', async (req, res) => {
             }
         });
 
+        try {
+            await transporter.verify();
+        } catch (verifyError) {
+            console.error('❌ Contact form error: SMTP connection failed:', verifyError.message);
+            return res.status(500).json({
+                success: false,
+                error: 'Email service connection failed. Please try again later.'
+            });
+        }
+
         const mailOptions = {
             from: process.env.SMTP_USER,
             to: process.env.TO_EMAIL || process.env.SMTP_USER,
@@ -758,7 +768,7 @@ app.post('/api/contact', async (req, res) => {
         console.error('❌ Contact form error:', error.message);
         res.status(500).json({
             success: false,
-            error: 'Failed to send message. Please try again later.'
+            error: error.message || 'Failed to send message. Please try again later.'
         });
     }
 });
@@ -792,6 +802,16 @@ app.post('/api/reviews/public', async (req, res) => {
                 pass: process.env.SMTP_PASS
             }
         });
+
+        try {
+            await transporter.verify();
+        } catch (verifyError) {
+            console.error('❌ Public review error: SMTP connection failed:', verifyError.message);
+            return res.status(500).json({
+                success: false,
+                error: 'Email service connection failed. Please try again later.'
+            });
+        }
 
         const stars = '★'.repeat(Math.min(5, Math.max(1, parseInt(rating) || 5))) + '☆'.repeat(5 - Math.min(5, Math.max(1, parseInt(rating) || 5)));
 
@@ -952,7 +972,7 @@ app.post('/api/reviews/public', async (req, res) => {
         console.error('❌ Public review error:', error.message);
         res.status(500).json({
             success: false,
-            error: 'Failed to send review. Please try again later.'
+            error: error.message || 'Failed to send review. Please try again later.'
         });
     }
 });
