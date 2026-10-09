@@ -1002,6 +1002,129 @@ app.post('/api/contact', async (req, res) => {
     }
 });
 
+// Sticky notes submission endpoint (Welcome section improvements/changes)
+app.post('/api/notes', async (req, res) => {
+    try {
+        const { noteType, notes, email, name } = req.body;
+
+        if (!notes || !notes.trim()) {
+            return res.status(400).json({
+                success: false,
+                error: 'Note content cannot be empty'
+            });
+        }
+
+        const cleanNotes = notes.replace(/[•\s-]/g, '').trim();
+        if (!cleanNotes) {
+            return res.status(400).json({
+                success: false,
+                error: 'Please add at least one bullet point item'
+            });
+        }
+
+        const typeLabel = noteType || 'Things i need to improve';
+
+        if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+            console.error('❌ Sticky note error: SMTP credentials not configured');
+            return res.status(500).json({
+                success: false,
+                error: 'Email service not configured. Please try again later.'
+            });
+        }
+
+        const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST || 'smtp.gmail.com',
+            port: parseInt(process.env.SMTP_PORT) || 587,
+            secure: false,
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS
+            }
+        });
+
+        try {
+            await transporter.verify();
+        } catch (verifyError) {
+            console.error('❌ Sticky note error: SMTP connection failed:', verifyError.message);
+            return res.status(500).json({
+                success: false,
+                error: 'Email service connection failed. Please try again later.'
+            });
+        }
+
+        const senderName = (name && name.trim()) || 'Portfolio Visitor';
+        const senderEmail = (email && email.trim()) || 'visitor@portfolio.dev';
+
+        const mailOptions = {
+            from: process.env.SMTP_USER,
+            to: process.env.TO_EMAIL || process.env.SMTP_USER,
+            subject: `📌 [Sticky Note] ${typeLabel} - ${senderName}`,
+            html: `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                  <meta charset="UTF-8">
+                  <title>New Sticky Note Submission</title>
+                </head>
+                <body style="margin:0; padding:0; background-color:#f4f7fb; font-family: Arial, sans-serif;">
+                  <table width="100%" cellpadding="0" cellspacing="0" style="padding: 30px 0;">
+                    <tr>
+                      <td align="center">
+                        <table width="600" cellpadding="0" cellspacing="0"
+                          style="background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 8px 25px rgba(0,0,0,0.08); border: 2px solid #2d2d2d;">
+                          <tr>
+                            <td style="background:#fff9c4; padding:24px 30px; border-bottom:2px dashed #2d2d2d; color:#2d2d2d;">
+                              <span style="display:inline-block; background:#ff4d4d; color:#ffffff; padding:4px 10px; border-radius:6px; font-weight:bold; font-size:12px; text-transform:uppercase; margin-bottom:8px;">About Page Note</span>
+                              <h2 style="margin:4px 0 0; font-size:22px; color:#2d2d2d;">📌 ${escapeHtml(typeLabel)}</h2>
+                              <p style="margin:6px 0 0; font-size:14px; color:#5a5751;">
+                                Submitted from the Welcome section sticky notes
+                              </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:30px; color:#333333;">
+                              <div style="background:#fffde7; border:2px solid #2d2d2d; border-radius:8px; padding:20px; font-size:16px; line-height:1.7; color:#2d2d2d; white-space:pre-wrap; font-family: Arial, sans-serif;">
+${escapeHtml(notes)}
+                              </div>
+                              <div style="margin-top:20px; font-size:13px; color:#6b7280; line-height:1.6;">
+                                <strong>Sender:</strong> ${escapeHtml(senderName)}<br>
+                                <strong>Contact:</strong> ${escapeHtml(senderEmail)}<br>
+                                <strong>Date:</strong> ${new Date().toLocaleString()}
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:16px 30px; background:#f9fafb; border-top:1px solid #e5e7eb; text-align:center;">
+                              <p style="margin:0; font-size:12px; color:#6b7280;">
+                                This note was sent directly from your portfolio's About Page (Welcome section).
+                              </p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </body>
+                </html>
+            `
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log(`📌 Sticky note submitted: [${typeLabel}] from ${senderName}`);
+
+        res.json({
+            success: true,
+            message: 'Note sent successfully!'
+        });
+    } catch (error) {
+        console.error('❌ Sticky note error:', error.message);
+        res.status(500).json({
+            success: false,
+            error: error.message || 'Failed to send note. Please try again later.'
+        });
+    }
+});
+
 // Public review submission endpoint (sends emails, does not store in DB)
 app.post('/api/reviews/public', async (req, res) => {
     try {
