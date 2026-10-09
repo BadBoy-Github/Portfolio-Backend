@@ -11,6 +11,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const GEMINI_MODEL = process.env.GEMINI_MODEL;
 
 // Middleware
 app.use(cors({
@@ -213,86 +214,388 @@ async function startServer() {
             console.log('⚠️  MongoDB not connected. AI training data unavailable.');
         }
 
-        if (!process.env.HF_TOKEN) {
-            console.warn('⚠️  HF_TOKEN not found in environment variables. AI features may not work.');
+        if (!process.env.GOOGLE_API_KEY) {
+            console.warn('⚠️  GOOGLE_API_KEY not found. AI features will use local response.');
         } else {
-            console.log('✅ Hugging Face token loaded');
+            console.log(`✅ Google Gemini API key loaded (model: ${GEMINI_MODEL})`);
+           
         }
     });
 }
 
 startServer();
 
-// Hugging Face API function
-async function queryHuggingFace(data) {
-    try {
-        const response = await fetch(
-            "https://router.huggingface.co/v1/chat/completions",
-            {
-                headers: {
-                    Authorization: `Bearer ${process.env.HF_TOKEN}`,
-                    "Content-Type": "application/json",
-                },
-                method: "POST",
-                body: JSON.stringify(data),
-            }
-        );
+// Google Gemini API function (free tier via Google API key)
+async function queryGemini(systemPrompt, question, maxTokens = 500, temperature = 0.2) {
+    const apiKey = process.env.GOOGLE_API_KEY;
+    if (!apiKey) {
+        throw new Error('GOOGLE_API_KEY not set');
+    }
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+    const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`,
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                system_instruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+                contents: [
+                    { role: 'user', parts: [{ text: question }] }
+                ],
+                generationConfig: {
+                    maxOutputTokens: maxTokens,
+                    temperature: temperature,
+                    topP: 0.95
+                }
+            })
+        }
+    );
+
+    if (!response.ok) {
+        const errorBody = await response.text();
+        console.error('❌ Gemini API error body:', errorBody);
+        throw new Error(`Gemini API error! status: ${response.status} - ${errorBody}`);
+    }
+
+    const result = await response.json();
+    if (result.candidates && result.candidates[0] && result.candidates[0].content) {
+        return result.candidates[0].content.parts[0].text;
+    } else {
+        throw new Error('Invalid response from Gemini API');
+    }
+}
+
+// RAG: Create chunks from ALL MongoDB documents (no trimming — every document becomes a chunk)
+function createChunks(data) {
+    const chunks = [];
+
+    // Featured projects
+    (data.featuredProjects || []).forEach(fp => {
+        chunks.push({
+            id: fp.id || `fp-${chunks.length}`,
+            type: 'featuredProject',
+            text: `Project: ${fp.name}. ${fp.description || ''}. Link: ${fp.link || ''}.`
+        });
+    });
+
+    // All projects (FULL — no slicing)
+    (data.projects || []).forEach(p => {
+        const techUsed = (p.techUsed || []).join(', ');
+        chunks.push({
+            id: p.id || `proj-${chunks.length}`,
+            type: 'project',
+            text: `Project: ${p.title}${p.subheading ? ` — ${p.subheading}` : ''}. ${p.description || ''}. Tech: ${techUsed}. Live: ${p.projectLink || ''}.`
+        });
+    });
+
+    // Experience (each entry = one chunk)
+    (data.experience || []).forEach(e => {
+        chunks.push({
+            id: e._id || `exp-${chunks.length}`,
+            type: 'experience',
+            text: `Experience: ${e.name}${e.role ? ` (${e.role})` : ''} @ ${e.instName || ''}, ${e.year || ''}. ${e.desc || ''}`
+        });
+    });
+
+    // Education (each entry = one chunk)
+    (data.education || []).forEach(e => {
+        chunks.push({
+            id: e._id || `edu-${chunks.length}`,
+            type: 'education',
+            text: `Education: ${e.name}${e.instName ? ` @ ${e.instName}` : ''}, ${e.year || ''}. ${e.desc || ''}`
+        });
+    });
+
+    // Certificates (FULL — no slicing)
+    (data.certificates || []).forEach(c => {
+        chunks.push({
+            id: c.id || `cert-${chunks.length}`,
+            type: 'certificate',
+            text: `Certificate: ${c.title}${c.company ? ` by ${c.company}` : ''}, ${c.year || ''}. ${c.description || ''}`
+        });
+    });
+
+    // Achievements (FULL — no slicing)
+    (data.achievements || []).forEach(a => {
+        const keyPoints = (a.keyPoints || []).join(' ');
+        chunks.push({
+            id: a.id || `ach-${chunks.length}`,
+            type: 'achievement',
+            text: `Achievement: ${a.title}${a.subtitle ? ` — ${a.subtitle}` : ''}, ${a.date || ''}. ${keyPoints || a.desc || ''}`
+        });
+    });
+
+    // Reviews (FULL — no slicing)
+    (data.reviews || []).forEach(r => {
+        chunks.push({
+            id: r.id || `rev-${chunks.length}`,
+            type: 'review',
+            text: `Review from ${r.name || 'Anonymous'}${r.company ? ` (${r.company})` : ''}: "${r.content || ''}"`
+        });
+    });
+
+    // Blogs (FULL — no slicing)
+    (data.blogs || []).forEach(b => {
+        chunks.push({
+            id: b.id || `blog-${chunks.length}`,
+            type: 'blog',
+            text: `Blog: ${b.title} (${b.readTime || ''}). ${b.subtitle || ''}`
+        });
+    });
+
+    // Skills (one chunk)
+    if (data.skills && data.skills.length > 0) {
+        const skillText = (data.skills || []).map(s => `${s.label}${s.desc ? `: ${s.desc}` : ''}`).join('; ');
+        chunks.push({
+            id: 'skills',
+            type: 'skills',
+            text: `Skills: ${skillText}`
+        });
+    }
+
+    // Tech stacks
+    if (data.techStacks && data.techStacks.length > 0) {
+        const techText = (data.techStacks || []).map(t => `${t.name || t.label || ''}`).join(', ');
+        chunks.push({
+            id: 'techstacks',
+            type: 'techstack',
+            text: `Tech Stacks: ${techText}`
+        });
+    }
+
+    // Contact info (always included)
+    const contact = data.contact || {};
+    chunks.push({
+        id: 'contact',
+        type: 'contact',
+        text: `Contact: Email ${contact.email || ''}, LinkedIn ${contact.linkedin || ''}, GitHub ${contact.github || ''}, Portfolio ${contact.portfolio || ''}`
+    });
+
+    // About (always included)
+    if (data.about) {
+        chunks.push({
+            id: 'about',
+            type: 'about',
+            text: `About: ${data.about}`
+        });
+    }
+
+    // Stats chunk — ALWAYS included, contains exact counts from MongoDB
+    // This is the single source of truth for all "how many / total / count" questions
+    chunks.push({
+        id: 'stats',
+        type: 'stats',
+        text: [
+            `EXACT PORTFOLIO COUNTS (authoritative — do NOT guess or estimate these numbers):`,
+            `- Total projects: ${(data.projects || []).length}`,
+            `- Featured projects: ${(data.featuredProjects || []).length}`,
+            `- Work experience entries: ${(data.experience || []).length}`,
+            `- Education entries: ${(data.education || []).length}`,
+            `- Certificates: ${(data.certificates || []).length}`,
+            `- Achievements: ${(data.achievements || []).length}`,
+            `- Reviews/Testimonials: ${(data.reviews || []).length}`,
+            `- Blog posts: ${(data.blogs || []).length}`,
+            `- Skills/Tech stacks: ${(data.skills || []).length}`,
+        ].join('\n')
+    });
+
+    return chunks;
+}
+
+// RAG: Retrieve relevant chunks using keyword-based relevance scoring
+function retrieveChunks(question, chunks) {
+    const q = question.toLowerCase();
+    const stopWords = new Set(['the', 'a', 'an', 'is', 'are', 'was', 'were', 'what', 'tell', 'me', 'to', 'and', 'or', 'for', 'of', 'in', 'on', 'at', 'by', 'with', 'can', 'you', 'i', 'want', 'know', 'his', 'her', 'them', 'show', 'give', 'list']);
+    const keywords = q.split(/\W+/).filter(w => w.length > 2 && !stopWords.has(w));
+
+    const typeKeywords = {
+        featuredProject: ['project', 'portfolio'],
+        project: ['project', 'portfolio', 'build', 'develop'],
+        experience: ['experience', 'work', 'internship', 'job', 'career', 'employ', 'train'],
+        education: ['education', 'degree', 'college', 'university', 'study', 'academ'],
+        certificate: ['certificate', 'certification', 'certified', 'course'],
+        achievement: ['achievement', 'award', 'accomplishment', 'recognition'],
+        review: ['review', 'testimonial', 'people', 'feedback'],
+        blog: ['blog', 'article', 'post', 'write'],
+        skills: ['skill', 'technology', 'tech', 'stack', 'expertise'],
+        techstack: ['tech', 'stack', 'technology', 'framework'],
+        contact: ['contact', 'email', 'linkedin', 'github', 'reach'],
+        stats: ['total', 'count', 'how many', 'number', 'many', 'much', 'all'],
+    };
+
+    const scored = chunks.map(chunk => {
+        let score = 0;
+        const ct = chunk.text.toLowerCase();
+
+        keywords.forEach(kw => {
+            if (ct.includes(kw)) score += 1;
+        });
+
+        const typeKw = typeKeywords[chunk.type] || [];
+        typeKw.forEach(word => {
+            if (q.includes(word)) score += 3;
+        });
+
+        // Always pin these chunks into context
+        if (chunk.type === 'contact' || chunk.type === 'about' || chunk.type === 'skills' || chunk.type === 'stats') {
+            score += 2;
         }
 
-        const result = await response.json();
-        return result;
-    } catch (error) {
-        console.error('❌ Hugging Face API error:', error.message);
-        throw error;
+        return { ...chunk, score };
+    });
+
+    scored.sort((a, b) => b.score - a.score);
+
+    let relevant = scored.filter(c => c.score > 0);
+    if (relevant.length === 0) {
+        relevant = scored.filter(c => ['contact', 'about', 'skills'].includes(c.type));
     }
+
+    const seen = new Set();
+    return relevant.filter(c => {
+        if (seen.has(c.id)) return false;
+        seen.add(c.id);
+        return true;
+    });
+}
+
+// RAG: Build context string from retrieved chunks
+function buildRAGContext(retrievedChunks, data, question) {
+    const name = data.name || 'Elayabarathi M V';
+    const about = data.about || '';
+
+    const typeLabels = {
+        stats: 'PORTFOLIO STATISTICS (EXACT COUNTS — USE THESE, DO NOT ESTIMATE)',
+        featuredProject: 'FEATURED PROJECTS',
+        project: 'PROJECTS',
+        experience: 'PROFESSIONAL EXPERIENCE',
+        education: 'EDUCATION',
+        certificate: 'CERTIFICATES',
+        achievement: 'ACHIEVEMENTS',
+        review: 'REVIEWS & TESTIMONIALS',
+        blog: 'BLOG POSTS',
+        skills: 'TECHNICAL SKILLS',
+        techstack: 'TECH STACKS',
+        contact: 'CONTACT INFORMATION',
+        about: 'ABOUT'
+    };
+
+    const sectionOrder = ['stats', 'featuredProject', 'project', 'experience', 'skills', 'techstack', 'education', 'certificate', 'achievement', 'review', 'blog', 'contact', 'about'];
+
+    const sections = {};
+    retrievedChunks.forEach(chunk => {
+        if (!sections[chunk.type]) sections[chunk.type] = [];
+        sections[chunk.type].push(chunk.text);
+    });
+
+    const sectionsText = sectionOrder
+        .filter(type => sections[type] && sections[type].length > 0)
+        .map(type => `=== ${typeLabels[type]} ===\n${sections[type].join('\n')}`)
+        .join('\n\n');
+
+    return `You are Portfolio-GPT, a chatbot for ${name}'s portfolio. ` +
+        `${name} is a Full Stack Web Developer who builds modern web apps with React, Tailwind, Node.js, MongoDB. ` +
+        `Answer based ONLY on the retrieved data below. If the data doesn't cover the question, say you don't know. ` +
+        `Use bullet points, keep answers concise.\n\n` +
+        `Name: ${name}\nAbout: ${about}\n\n` +
+        `RAG-RETRIEVED DATA (from MongoDB):\n\n${sectionsText}\n\n` +
+        `RULES:\n` +
+        `- COUNTS: For ANY question about totals, counts, or "how many" — use ONLY the exact numbers from the PORTFOLIO STATISTICS section above. NEVER guess or estimate counts.\n` +
+        `- "featured projects" or "best projects" → ONLY Featured Projects\n` +
+        `- "experience" / "work" / "jobs" → Professional Experience\n` +
+        `- "projects" → ALL PROJECTS\n` +
+        `- "certificates" → Certificates\n` +
+        `- "education" → Education\n` +
+        `- "achievements" → Achievements\n` +
+        `- "reviews" / "testimonials" → Reviews\n` +
+        `- "blogs" → Blog Posts\n` +
+        `- Prioritize tech/web development info over biotech.`;
 }
 
 // Enhanced response generator (local fallback)
 function generateLocalResponse(question) {
     const q = question.toLowerCase().trim();
-    const data = portfolioData;
+    const data = portfolioData || {};
+
+    const projects = data.projects || [];
+    const experiences = data.experience || [];
+    const education = data.education || [];
+    const certificates = data.certificates || [];
+    const achievements = data.achievements || [];
+    const reviews = data.reviews || [];
+    const blogs = data.blogs || [];
+    const skills = data.skills || [];
 
     if (q.includes('github') || q.includes('git') || q.includes('code') || q.includes('repository')) {
-        return `🔗 Elayabarathi's GitHub: ${data.contact.github}\n\nHere you'll find all his projects including:\n• Portfolio Website (React + Tailwind)\n• Bamboo Blogs (Flask blog platform)\n• Spotify Clone (with React)\n• eCommerce applications\n• AI Chatbots\n• And many more with complete source code!\n\nFeel free to explore and star his repositories!`;
+        const projList = projects.map(p => `• ${p.title}${p.projectLink ? ` - ${p.projectLink}` : ''}`).join('\n') || '• No projects listed';
+        return `🔗 Elayabarathi's GitHub: ${data.contact?.github || 'https://github.com/BadBoy-Github'}\n\nHere you'll find all his projects:\n${projList}\n\nFeel free to explore and star his repositories!`;
     }
 
-    if (/(hello|hi|hey|greetings|good morning|good afternoon)/i.test(q)) {
-        return "Hello! 👋 I'm Elayabarathi's portfolio assistant. He's a passionate full-stack developer and biotechnologist. I can tell you about his projects, skills, experience, or how to contact him. What would you like to know?";
+    if (/\b(hello|hi|hey|greetings|good morning|good afternoon)\b/i.test(q)) {
+        return "Hello! 👋 I'm Elayabarathi's portfolio assistant. He's a passionate full-stack developer and biotechnologist. I can tell you about his projects, skills, experience, education, certificates, achievements, or how to contact him. What would you like to know?";
     }
 
-    if (q.includes('project') || q.includes('portfolio') || q.includes('work')) {
-        const projects = data.projects.slice(0, 4).map(proj =>
-            `• ${proj.name}: ${proj.description.substring(0, 80)}...`
-        ).join('\n');
-
-        return `🚀 Elayabarathi's Projects:\n\n${projects}\n\nCheck out his portfolio for live demos: ${data.contact.portfolio}`;
+    if (q.includes('project') || q.includes('portfolio') || q.includes('projects')) {
+        const projList = projects.map(p =>
+            `• ${p.title}${p.subheading ? ` — ${p.subheading}` : ''}: ${(p.description || '').substring(0, 100)}${p.projectLink ? ` [${p.projectLink}]` : ''}`
+        ).join('\n') || '• No projects listed';
+        return `🚀 Elayabarathi's Projects:\n\n${projList}\n\nCheck out his portfolio for live demos: ${data.contact?.portfolio || 'https://elayabarathimv.vercel.app/'}`;
     }
 
     if (q.includes('skill') || q.includes('technology') || q.includes('tech') || q.includes('stack')) {
-        return `💻 Technical Skills:\n\nFRONTEND: React, JavaScript, HTML, CSS, Tailwind\nBACKEND: Python, Flask, Node.js, Express\nDATABASES: MongoDB, PostgreSQL, SQLite\nTOOLS: Git, VS Code, Postman, Docker\n\n🧬 Biotechnology:\nMicrobiology, Genetic Engineering, Nanobiotechnology, Bioinformatic\n\nHe's always learning new technologies!`;
+        const skillList = skills.map(s => `• ${s.label}${s.desc ? `: ${s.desc}` : ''}`).join('\n') || '• No skills listed';
+        return `💻 Technical Skills:\n\n${skillList}\n\nHe's always learning new technologies!`;
     }
 
-    if (q.includes('experience') || q.includes('work') || q.includes('intern') || q.includes('job')) {
-        return `💼 Professional Experience:\n\n• Fullstack Web Developer Intern @ Corizo Edutech\n• Java Fullstack Trainee @ QSpider\n• Biotechnology Intern @ Elies Biotech\n• Research in Nanobiotechnology & Antimicrobial Solutions\n\nHe has practical experience in both software development and biotech research.`;
+    if (q.includes('experience') || q.includes('work') || q.includes('intern') || q.includes('job') || q.includes('career') || q.includes('work history')) {
+        const exp = experiences.map(e =>
+            `• ${e.name}${e.role ? ` — ${e.role}` : ''}${e.instName ? ` @ ${e.instName}` : ''}${e.year ? ` (${e.year})` : ''}`
+        ).join('\n') || '• No experience listed';
+        return `💼 Professional Experience:\n\n${exp}\n\nHe has practical experience in both software development and biotech research.`;
     }
 
     if (q.includes('contact') || q.includes('email') || q.includes('linkedin') || q.includes('reach') || q.includes('connect')) {
-        return `📞 Contact Elayabarathi:\n\n📧 Email: ${data.contact.email}\n💼 LinkedIn: ${data.contact.linkedin}\n🔗 GitHub: ${data.contact.github}\n🌐 Portfolio: ${data.contact.portfolio}\n\nHe's open to collaborations and new opportunities!`;
+        return `📞 Contact Elayabarathi:\n\n📧 Email: ${data.contact?.email || 'elayabarathiedison@gmail.com'}\n💼 LinkedIn: ${data.contact?.linkedin || 'https://www.linkedin.com/in/elayabarathi/'}\n🔗 GitHub: ${data.contact?.github || 'https://github.com/BadBoy-Github'}\n🌐 Portfolio: ${data.contact?.portfolio || 'https://elayabarathimv.vercel.app/'}\n\nHe's open to collaborations and new opportunities!`;
     }
 
-    if (q.includes('about') || q.includes('who are you') || q.includes('yourself') || q.includes('introduce')) {
-        return `👨‍💻 About Elayabarathi:\n\n${data.about}\n\nHe's passionate about integrating technology and biology to create innovative solutions that make a difference.`;
+    if (q.includes('review') || q.includes('testimonial') || q.includes('people') || q.includes('say about') || q.includes('what others say')) {
+        const rev = reviews.map(r => `• "${r.content || ''}" — ${r.name || 'Anonymous'}${r.company ? `, ${r.company}` : ''}`).join('\n') || '• No reviews listed';
+        return `⭐ Reviews & Testimonials:\n\n${rev}`;
     }
 
-    if (q.includes('education') || q.includes('degree') || q.includes('study') || q.includes('college')) {
-        const edu = data.education[0];
-        return `🎓 Education:\n\n${edu.education}\n${edu.institution} (${edu.year})\nGrade: ${edu.percentage}\n\n${edu.description}`;
+    if (q.includes('education') || q.includes('degree') || q.includes('study') || q.includes('college') || q.includes('university')) {
+        const edu = education.map(e =>
+            `• ${e.name}${e.instName ? ` @ ${e.instName}` : ''}${e.year ? ` (${e.year})` : ''}${e.perc ? ` — ${e.perc}` : ''}`
+        ).join('\n') || '• No education listed';
+        return `🎓 Education:\n\n${edu}`;
     }
 
-    return `🤖 I can help you learn about Elayabarathi M V! Here's what I can tell you about:\n\n• His projects and portfolio 🚀\n• Technical skills and technologies 💻\n• Professional experience 💼\n• Education background 🎓\n• Contact information 📞\n• GitHub repositories 🔗\n\nWhat would you like to know specifically?`;
+    if (q.includes('certificate') || q.includes('certification') || q.includes('certified')) {
+        const certs = certificates.map(c =>
+            `• ${c.title}${c.company ? ` by ${c.company}` : ''}${c.year ? ` (${c.year})` : ''}`
+        ).join('\n') || '• No certificates listed';
+        return `📜 Certificates:\n\n${certs}`;
+    }
+
+    if (q.includes('achievement') || q.includes('award') || q.includes('accomplishment')) {
+        const ach = achievements.map(a =>
+            `• ${a.title}${a.subtitle ? ` — ${a.subtitle}` : ''}${a.date ? ` (${a.date})` : ''}`
+        ).join('\n') || '• No achievements listed';
+        return `🏆 Achievements:\n\n${ach}`;
+    }
+
+    if (q.includes('blog') || q.includes('article') || q.includes('writing') || q.includes('post')) {
+        const blg = blogs.map(b => `• ${b.title}${b.subtitle ? ` — ${b.subtitle}` : ''} (${b.readTime || 'N/A'})`).join('\n') || '• No blogs listed';
+        return `📝 Blog Posts:\n\n${blg}`;
+    }
+
+    if (q.includes('about') || q.includes('who are you') || q.includes('who is') || q.includes('yourself') || q.includes('introduce')) {
+        return `👨‍💻 About Elayabarathi:\n\n${data.about || ''}\n\nHe's passionate about integrating technology and biology to create innovative solutions that make a difference.`;
+    }
+
+    return `🤖 I can help you learn about Elayabarathi M V! Here's what I can tell you about:\n\n• His projects and portfolio 🚀\n• Technical skills and technologies 💻\n• Professional experience 💼\n• Education background 🎓\n• Certificates 📜\n• Achievements 🏆\n• Reviews & testimonials ⭐\n• Blog posts 📝\n• Contact information 📞\n• GitHub repositories 🔗\n\nWhat would you like to know specifically?`;
 }
 
 // Enhanced chat endpoint with AI integration
@@ -334,103 +637,27 @@ app.post('/api/chat', async (req, res) => {
             if (data) portfolioData = data;
         }
         data = data || {};
-        const contact = data.contact || {};
+        // RAG: Create chunks from ALL MongoDB documents, retrieve relevant ones
+        const chunks = createChunks(data);
+        const retrievedChunks = retrieveChunks(question, chunks);
+        const context = buildRAGContext(retrievedChunks, data, question);
 
-        let context = `
-        Your name is Portfolio-GPT, let the user to interact with Elayabarathi M V's portfolio and CV. 
-        You are a helpful assistant for Elayabarathi M V's portfolio. 
-        Here's some information about him:
-        
-        Name: ${data.name || 'Elayabarathi M V'}
-        Headline: ${data.headline || 'Full Stack Web Developer & Biotechnologist'}
-        About: ${data.about || ''}
-        
-        Contact Information:
-        - Email: ${contact.email || 'elayabarathiedison@gmail.com'}
-        - LinkedIn: ${contact.linkedin || 'https://www.linkedin.com/in/elayabarathi/'}
-        - GitHub: ${contact.github || 'https://github.com/BadBoy-Github'}
-        - Portfolio: ${contact.portfolio || 'https://elayabarathimv.vercel.app/'}
-        
-        Skills: Full-stack web development, Biotechnology, Python, React, JavaScript, Flask, etc.
-        
-        Please answer questions about Elayabarathi professionally and helpfully. 
-        Use clear formatting with bullet points, headings, and proper spacing.
-        If you don't know something specific, suggest asking about his projects, skills, or experience.
-        `;
+        console.log(`📏 RAG: ${chunks.length} chunks created, ${retrievedChunks.length} retrieved, context: ${context.length} chars`);
 
-        const featuredProjects = data.featuredProjects || [];
-        const blogs = data.blogs || [];
+        let aiUsed = false;
 
-        if (featuredProjects.length > 0 || blogs.length > 0) {
-            const featuredProjectsInfo = featuredProjects.map(fp =>
-                `- ${fp.name}: ${fp.description || 'Featured project'} - Link: ${fp.link || 'N/A'}`
-            ).join('\n') || 'No featured projects';
-
-            const blogsInfo = blogs.map(blog =>
-                `- ${blog.title}: ${blog.subtitle || 'Blog post'} (${blog.readTime || 'N/A'})`
-            ).join('\n') || 'No blogs';
-
-            context = `
-            Your name is Portfolio-GPT. You are a friendly chatbot that lets users interact with Elayabarathi M V's portfolio and CV. 
-            You are a helpful assistant for Elayabarathi M V's portfolio. 
-            
-            STRICT INSTRUCTIONS: When answering questions, you MUST prioritize web technology, software development, and tech-related information by default. 
-            Only mention biotech, bioinformatics, or other non-tech backgrounds if the user explicitly asks for that. 
-            Focus on web development skills, projects, and technologies. Do not give long explanations about biotech unless asked.
-            
-            Here's some information about him:
-            
-            Name: ${data.name || 'Elayabarathi M V'}
-            Headline: Full Stack Web Developer (This is his PRIMARY focus - always lead with this)
-            About: ${data.about || ''}
-            
-            Featured Projects (THESE ARE HIS BEST WORKS - mention these when asked about featured projects):
-            ${featuredProjectsInfo}
-            
-            Blog Posts (He writes technical articles - mention when asked about blogs):
-            ${blogsInfo}
-            
-            Contact Information:
-            - Email: ${contact.email || 'elayabarathiedison@gmail.com'}
-            - LinkedIn: ${contact.linkedin || 'https://www.linkedin.com/in/elayabarathi/'}
-            - GitHub: ${contact.github || 'https://github.com/BadBoy-Github'}
-            - Portfolio: ${contact.portfolio || 'https://elayabarathimv.vercel.app/'}
-            
-            Skills: Full-stack web development, Python, React, JavaScript, Flask, etc.
-            
-            Please answer questions about Elayabarathi professionally and helpfully. 
-            Use clear formatting with bullet points, headings, and proper spacing.
-            When asked about "featured projects" or "best projects", ONLY mention the 2 featured projects: Portfolio Website and Card Vault.
-            If you don't know something specific, suggest asking about his projects, skills, or experience.
-            `;
+        // Try Google Gemini API first (free tier)
+        try {
+            const aiResponse = await queryGemini(context, question, 500, 0.7);
+            answer = formatAIResponse(aiResponse);
+            source = 'ai';
+            aiUsed = true;
+            console.log('🤖 Gemini API response used');
+        } catch (geminiError) {
+            console.error('❌ Gemini API failed, using local response:', geminiError.message);
         }
 
-        try {
-            const aiResponse = await queryHuggingFace({
-                messages: [
-                    {
-                        role: "system",
-                        content: context
-                    },
-                    {
-                        role: "user",
-                        content: question,
-                    },
-                ],
-                model: "CohereLabs/command-a-translate-08-2025:cohere",
-                max_tokens: 500,
-                temperature: 0.7,
-            });
-
-            if (aiResponse.choices && aiResponse.choices[0] && aiResponse.choices[0].message) {
-                answer = formatAIResponse(aiResponse.choices[0].message.content);
-                source = 'ai';
-                console.log('🤖 AI model response used');
-            } else {
-                throw new Error('Invalid response from AI model');
-            }
-        } catch (aiError) {
-            console.log('❌ AI model failed, using local response:', aiError.message);
+        if (!aiUsed) {
             answer = generateLocalResponse(question);
             source = 'local';
         }
@@ -465,24 +692,26 @@ app.get('/api/health', (req, res) => {
 app.get('/api/test-ai', async (req, res) => {
     try {
         const testQuestion = "What can you tell me about Elayabarathi's skills?";
-        const aiResponse = await queryHuggingFace({
-            messages: [
-                {
-                    role: "system",
-                    content: "You are a helpful assistant for Elayabarathi M V's portfolio. He is a full-stack developer and biotechnologist."
-                },
-                {
-                    role: "user",
-                    content: testQuestion,
-                },
-            ],
-            model: "CohereLabs/command-a-translate-08-2025:cohere",
-        });
+        const data = portfolioData || {};
+        const chunks = createChunks(data);
+        const retrievedChunks = retrieveChunks(testQuestion, chunks);
+        const context = buildRAGContext(retrievedChunks, data, testQuestion);
+
+        let aiResponse, source = 'local';
+        try {
+            aiResponse = await queryGemini(context, testQuestion, 500, 0.7);
+            source = 'gemini';
+        } catch (geminiError) {
+            aiResponse = generateLocalResponse(testQuestion);
+        }
 
         res.json({
             test: 'AI model test',
             question: testQuestion,
             aiResponse: aiResponse,
+            source: source,
+            contextLength: context.length,
+            chunksRetrieved: retrievedChunks.length,
             success: true
         });
     } catch (error) {
@@ -1008,7 +1237,7 @@ app.get('/', (req, res) => {
             adminBlogs: '/api/admin/blogs'
         },
         features: {
-            ai: 'Integrated Hugging Face AI model with MongoDB data',
+            ai: 'Integrated Google Gemini with RAG from MongoDB data',
             fallback: 'Local response system as backup',
             context: 'Portfolio-aware responses from MongoDB'
         },
