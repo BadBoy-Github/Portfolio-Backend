@@ -4,6 +4,8 @@ const experienceSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
   order: { type: Number, default: 0 },
   year: { type: String, default: '' },
+  startDate: { type: String, default: '' },
+  endDate: { type: String, default: '' },
   name: { type: String, required: true },
   role: { type: String, default: '' },
   instName: { type: String, default: '' },
@@ -17,6 +19,8 @@ const experienceSchema = new mongoose.Schema({
   period: { type: String, default: '' },
   content: [{
     year: { type: String, default: '' },
+    startDate: { type: String, default: '' },
+    endDate: { type: String, default: '' },
     name: { type: String, default: '' },
     role: { type: String, default: '' },
     desc: { type: String, default: '' },
