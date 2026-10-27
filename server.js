@@ -748,6 +748,7 @@ app.get('/api/test', (req, res) => {
             experience: '/api/experience',
             education: '/api/education',
             blogs: '/api/blogs',
+            learningBasket: '/api/learning-basket',
             adminTechStacks: '/api/admin/tech-stacks',
             adminProjects: '/api/admin/projects',
             adminCertificates: '/api/admin/certificates',
@@ -755,7 +756,8 @@ app.get('/api/test', (req, res) => {
             adminReviews: '/api/admin/reviews',
             adminExperience: '/api/admin/experience',
             adminEducation: '/api/admin/education',
-            adminBlogs: '/api/admin/blogs'
+            adminBlogs: '/api/admin/blogs',
+            adminLearningBasket: '/api/admin/learning-basket'
         },
         mongoConnected
     });
@@ -1232,6 +1234,7 @@ app.get('/', (req, res) => {
             experience: '/api/experience',
             education: '/api/education',
             blogs: '/api/blogs',
+            learningBasket: '/api/learning-basket',
             adminTechStacks: '/api/admin/tech-stacks',
             adminProjects: '/api/admin/projects',
             adminCertificates: '/api/admin/certificates',
@@ -1239,7 +1242,8 @@ app.get('/', (req, res) => {
             adminReviews: '/api/admin/reviews',
             adminExperience: '/api/admin/experience',
             adminEducation: '/api/admin/education',
-            adminBlogs: '/api/admin/blogs'
+            adminBlogs: '/api/admin/blogs',
+            adminLearningBasket: '/api/admin/learning-basket'
         },
         features: {
             ai: 'Integrated Google Gemini with RAG from MongoDB data',
@@ -1261,6 +1265,7 @@ import reviewRoutes from './routes/reviews.js';
 import experienceRoutes from './routes/experience.js';
 import educationRoutes from './routes/education.js';
 import blogRoutes from './routes/blogs.js';
+import learningBasketRoutes from './routes/learningBasket.js';
 
 app.use('/api/tech-stacks', techStackRoutes);
 app.use('/api/projects', projectRoutes);
@@ -1270,6 +1275,7 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/experience', experienceRoutes);
 app.use('/api/education', educationRoutes);
 app.use('/api/blogs', blogRoutes);
+app.use('/api/learning-basket', learningBasketRoutes);
 
 // Admin routes
 import authRoutes from './routes/auth.js';
@@ -1281,6 +1287,7 @@ import adminExperienceRoutes from './routes/admin/experience.js';
 import adminEducationRoutes from './routes/admin/education.js';
 import adminBlogRoutes from './routes/admin/blogs.js';
 import adminTechStackRoutes from './routes/admin/techStacks.js';
+import adminLearningBasketRoutes from './routes/admin/learningBasket.js';
 
 app.use('/api/admin', authRoutes);
 app.use('/api/admin/tech-stacks', adminTechStackRoutes);
@@ -1291,6 +1298,7 @@ app.use('/api/admin/reviews', adminReviewRoutes);
 app.use('/api/admin/experience', adminExperienceRoutes);
 app.use('/api/admin/education', adminEducationRoutes);
 app.use('/api/admin/blogs', adminBlogRoutes);
+app.use('/api/admin/learning-basket', adminLearningBasketRoutes);
 
 import { authMiddleware } from './middleware/auth.js';
 
