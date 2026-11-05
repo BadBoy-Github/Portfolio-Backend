@@ -3,6 +3,11 @@ import mongoose from 'mongoose';
 const learningBasketItemSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
   value: { type: String, required: true, trim: true },
+  status: {
+    type: String,
+    enum: ['dormant', 'learning', 'completed'],
+    default: 'learning'
+  },
   order: { type: Number, default: 0 }
 }, { timestamps: true });
 

@@ -18,10 +18,17 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   const value = typeof req.body.value === 'string' ? req.body.value.trim() : '';
   const id = typeof req.body.id === 'string' ? req.body.id.trim() : '';
+  const status = req.body.status ?? 'learning';
   if (!value || !id) {
     return res.status(400).json({
       success: false,
       message: 'A learning item value and id are required.'
+    });
+  }
+  if (!['dormant', 'learning', 'completed'].includes(status)) {
+    return res.status(400).json({
+      success: false,
+      message: 'Status must be dormant, learning, or completed.'
     });
   }
 
@@ -29,6 +36,7 @@ router.post('/', async (req, res) => {
     const item = await LearningBasketItem.create({
       id,
       value,
+      status,
       order: Number.isInteger(req.body.order) ? req.body.order : 0
     });
     res.status(201).json({ success: true, data: item });
@@ -96,6 +104,47 @@ router.patch('/:id/order', async (req, res) => {
     res.json({ success: true, data: item });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
+  }
+});
+
+router.patch('/:id', async (req, res) => {
+  const updates = {};
+  if (typeof req.body.value === 'string') {
+    updates.value = req.body.value.trim();
+    if (!updates.value) {
+      return res.status(400).json({
+        success: false,
+        message: 'A learning item value is required.'
+      });
+    }
+  }
+  if (req.body.status !== undefined) {
+    if (!['dormant', 'learning', 'completed'].includes(req.body.status)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Status must be dormant, learning, or completed.'
+      });
+    }
+    updates.status = req.body.status;
+  }
+  if (!Object.keys(updates).length) {
+    return res.status(400).json({
+      success: false,
+      message: 'A learning item value or status is required.'
+    });
+  }
+
+  try {
+    const item = await LearningBasketItem.findByIdAndUpdate(
+      req.params.id,
+      { $set: updates },
+      { new: true, runValidators: true }
+    );
+    if (!item) return res.status(404).json({ success: false, message: 'Not found' });
+    res.json({ success: true, data: item });
+  } catch (error) {
+    const status = error.name === 'ValidationError' ? 400 : 500;
+    res.status(status).json({ success: false, message: error.message });
   }
 });
 
