@@ -144,6 +144,9 @@ async function seedDatabase() {
                 formatted.push({
                     id: exp.id || `exp-${Math.random().toString(36).slice(2, 9)}`,
                     year: exp.year || exp.period || '',
+                    startDate: exp.startDate || '',
+                    endDate: exp.endDate || '',
+                    period: exp.period || '',
                     name: exp.name || exp.title || '',
                     role: exp.role || '',
                     instName: exp.instName || exp.company || '',
@@ -167,6 +170,8 @@ async function seedDatabase() {
             const formatted = data.education.map((e, i) => ({
                 id: e.id || `edu-${i}`,
                 year: e.year || '',
+                startDate: e.startDate || '',
+                endDate: e.endDate || '',
                 name: e.name || e.degree || '',
                 perc: e.perc || e.percentage || '',
                 instName: e.instName || e.institution || '',
