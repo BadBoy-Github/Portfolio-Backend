@@ -1,7 +1,10 @@
 import express from 'express';
+import { authMiddleware } from '../middleware/auth.js';
 import LearningBasketItem from '../models/LearningBasketItem.js';
 
 const router = express.Router();
+
+router.use(authMiddleware);
 
 router.get('/', async (req, res) => {
   try {
