@@ -12,10 +12,16 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 const GEMINI_MODEL = process.env.GEMINI_MODEL;
+const allowedOrigins = new Set([
+    ...(process.env.FRONTEND_URL || '').split(',').map(origin => origin.trim()).filter(Boolean),
+    'https://elayabarathimv.vercel.app'
+]);
 
 // Middleware
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: (origin, callback) => {
+        callback(null, !origin || allowedOrigins.has(origin));
+    },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     credentials: true
 }));
