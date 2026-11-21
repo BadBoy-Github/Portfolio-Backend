@@ -15,6 +15,55 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.patch('/order', async (req, res) => {
+  const { items } = req.body;
+  if (
+    !Array.isArray(items) ||
+    items.length === 0 ||
+    items.some((item) =>
+      !item ||
+      typeof item.id !== 'string' ||
+      !Number.isInteger(item.order) ||
+      item.order < 0
+    )
+  ) {
+    return res.status(400).json({
+      success: false,
+      message: 'A list of project IDs and non-negative order values is required.'
+    });
+  }
+
+  const ids = items.map((item) => item.id);
+  if (new Set(ids).size !== ids.length) {
+    return res.status(400).json({
+      success: false,
+      message: 'Project IDs must be unique.'
+    });
+  }
+
+  try {
+    const existingProjects = await Project.find({ _id: { $in: ids } }).select('_id');
+    if (existingProjects.length !== ids.length) {
+      return res.status(400).json({
+        success: false,
+        message: 'The submitted project list is out of date.'
+      });
+    }
+
+    await Project.bulkWrite(
+      items.map(({ id, order }) => ({
+        updateOne: {
+          filter: { _id: id },
+          update: { $set: { order } }
+        }
+      }))
+    );
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 router.get('/:id', async (req, res) => {
   try {
     const item = await Project.findById(req.params.id);
